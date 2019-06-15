@@ -1,0 +1,103 @@
+<!--pages/traceOrigin/traceOrigin.wxml-->
+<title title="溯源信息"></title>
+<view class='origin-info'>
+  <image class='bg' src='/resources/images/bg1.png'></image>
+  <view class='info'>
+    <view class='left'>
+      <view class='name'>水果溯源信息</view>
+      <text>该二维码真实有效</text>
+      <view class='tags clearfix'>
+        <view class='item'>
+          <icon class='mainColor ' iconClass="icon-oricon1"></icon>
+          <text>一物一码</text>
+        </view>
+        <view class='item'>
+        <icon class='mainColor ' iconClass="icon-oricon2"></icon>
+        <text>扫码溯源</text>
+        </view>
+        <view class='item'>
+        <icon class='mainColor ' iconClass="icon-oricon3"></icon>
+        <text>拒绝假货</text>
+        </view>
+      </view>
+    </view>
+    <view class='right mainColor'>
+      <view class='line'>
+        <view class='dot'></view>
+        <view class='cir-line'></view>
+      </view>
+      <view class='circle'>
+        <view class='count'>
+          <text>{{originInfo.trackCount}}</text> 次</view>
+        <view>扫描次数</view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class='part goods'>
+  <view class='stit'>产品：{{originInfo.produceInfo.type}}</view>
+  <view class='state' wx:if="{{originInfo.isOk==true}}">
+    <icon class='mainColor' iconClass="icon-ok"></icon>
+    经检测，该二维码正常，此商品为真实赣南脐橙！
+  </view>
+  <view class='state' wx:if="{{originInfo.isOk==false}}">
+    <icon class='err' iconClass="icon-warn"></icon>
+    此二维码出现异常，请查询该产品的真实性！
+  </view>
+  <view class='actions mainColor'>
+    <view class='border' bindtap='openModal' wx:if="{{originInfo.isOk==false}}">
+      <icon iconClass="icon-file"></icon> 异常反馈</view>
+    <button wx:if="{{allow}}" class='mainColor' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">
+      <icon iconClass="icon-scan"></icon> 再次扫码
+    </button>
+     <view wx:if="{{!allow}}" class='mainColor' bindtap='handelsScanCode'>
+      <icon iconClass="icon-scan"></icon> 再次扫码
+    </view>
+  </view>
+</view>
+<view class='part clearfix'>
+  <view wx:for="{{originInfo.orisechList}}" wx:key="index" class='item clearfix'>
+    <view class='order mainColor'>{{item.rownum}}</view>
+    <view class='info'>
+      <view class='address'>{{item.addr}}</view>
+      <view class='date'>扫码时间:{{item.date}} {{item.time}}</view>
+    </view>
+  </view>
+  <view class='fore-more mainColor ' wx:if="{{originInfo.orisechList.length>=6&&nomore==false}}" bindtap='getMoreOriginInfo'>查看更多
+    <icon iconClass="icon-morer"></icon>
+  </view>
+  <view class='nomore ' wx:if="{{nomore==true}}">—————— 我是有底线的 ——————</view>
+</view>
+<!-- 异常反馈 -->
+<view class='warn-modal' wx:if="{{modalHidden}}" catchtouchmove="ture">
+  <view class='modal-inner'>
+    <image src='/resources/images/warnbg.png' catchtouchmove="ture" />
+    <form bindsubmit='saveFeedback' report-submit="{{true}}">
+      <view class='form-inner clearfix'>
+        <view class="section {{nameEmpty==0?'active':''}}">
+          <view class="section__title">姓名：</view>
+          <input name="name" value='{{name}}' data-name="nameEmpty" bindfocus='handelInputFocus' bindblur='handelInputBlur' />
+        </view>
+        <view class="section {{phoneEmpty==0?'active':''}}">
+          <view class="section__title">电话：</view>
+          <input name="phone" value='{{phone}}' data-name="phoneEmpty" bindfocus='handelInputFocus' bindblur='handelInputBlur' />
+        </view>
+        <view class="advice {{contextEmpty==0?'active':''}}">
+          <view class="label">反馈内容：</view>
+          <view bindtap='handelviewFocus' class="adviceview {{isFocus?'hide':''}}">
+            <text wx:if="{{advice.length==0}}">请输入您需要反馈的问题..... </text>
+            <text wx:if="{{advice.length>0}}">{{advice}}</text>
+          </view>
+          <textarea class="adviceInput {{isFocus?'show':''}}" name="advice" data-name="contextEmpty" value='{{advice}}' auto-focus='{{isFocus}}' focus="{{isFocus}}" placeholder-style="color:#ccc;" bindfocus='handelInputFocus' bindblur='handelInputBlur' />
+        </view>
+      </view>
+      <view class='topage'>
+      
+        <navigator hover-class='none' class='mainColor'  url='/pages/feedback/feedback'>查看历史反馈</navigator>
+      </view>
+      <button class='submit mainbg' form-type='submit'>提交</button>
+    </form>
+    <icon bindtap='closeModal' class='close' iconClass="icon-close"></icon>
+  </view>
+</view>
+<Loading wx:if="{{loading}}"></Loading>

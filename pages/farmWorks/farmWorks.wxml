@@ -1,0 +1,40 @@
+<!--pages/farmWorks/farmWorks.wxml-->
+<title title="农事信息"></title>
+<view class='goods-info clearfix'>
+  <image src="{{productInfo.productInfo.url||'/resources/images/default.png'}}"></image>
+  <view class='info'>
+    <view class='name'>{{productInfo.productInfo.type}}</view>
+    <view class='desc'>{{productInfo.productInfo.remark}}</view>
+    <view class='date clearfix'><icon class='mainColor' iconClass="icon-clock"></icon> {{productInfo.plantInfo.plantYears}}年{{productInfo.plantInfo.plantMonths}}个月  <text>{{productInfo.plantInfo.blockName}}</text></view>
+  </view>
+</view>
+<view class='part'>
+  <view class='stit'>农事信息</view>
+  <view class='origin'>
+    <view class='item' wx:for="{{farmWorkList}}" wx:key="index">
+     <view wx:if="{{index==0}}" class='circle'></view>
+      <view class='date'>
+        <text>{{item.yearStr}}</text>{{item.dateStr}} {{item.week}}</view>
+      <view class='info'>
+        <view class='img-box'>
+          <image src='{{item.imgUrl}}'></image>
+        </view>
+        <text> {{item.farmType}}</text>
+        <view class='todetail'>
+          <view>
+            <view class='inner'>
+              <icon class='mainColor ' iconClass="icon-clock"></icon>
+              {{item.timeStr}} {{item.apm}}</view>
+          </view>
+          <view>
+            <view class='inner'>
+              <icon class='mainColor ' iconClass="icon-file"></icon>
+              成长第<text>{{item.plantDays}}</text>天</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<Loading wx:if="{{loading}}"></Loading>
+<tabbar tabbar="{{tabbar}}"></tabbar>

@@ -1,0 +1,151 @@
+/* components/icon.wxss */
+
+@font-face {
+  font-family: 'iconfont';  /* project id 1182703 */
+  src: url('//at.alicdn.com/t/font_1182703_3auap0ao41y.eot');
+  src: url('//at.alicdn.com/t/font_1182703_3auap0ao41y.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1182703_3auap0ao41y.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1182703_3auap0ao41y.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1182703_3auap0ao41y.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1182703_3auap0ao41y.svg#iconfont') format('svg');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-style: normal;
+  font-size: 26rpx;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-scan:before {
+  content: "\e617";
+}
+
+.icon-star:before {
+  content: "\e6d5";
+}
+
+.icon-address:before {
+  content: "\e62e";
+}
+
+.icon-address1:before {
+  content: "\e657";
+}
+
+.icon-play:before {
+  content: "\e601";
+}
+
+.icon-close:before {
+  content: "\e664";
+}
+
+.icon-more:before {
+  content: "\e625";
+}
+
+.icon-morer:before {
+  content: "\e618";
+}
+
+.icon-camera:before {
+  content: "\e672";
+}
+
+.icon-ballcamera:before {
+  content: "\e602";
+}
+
+.icon-boxcamera:before {
+  content: "\e6e0";
+}
+
+.icon-user:before {
+  content: "\e68f";
+}
+
+.icon-ok:before {
+  content: "\e68b";
+}
+
+.icon-orange:before {
+  content: "\e60c";
+}
+
+.icon-news:before {
+  content: "\e6ec";
+}
+
+.icon-tips:before {
+  content: "\e6eb";
+}
+
+.icon-file:before {
+  content: "\e61f";
+}
+
+.icon-clock:before {
+  content: "\e61d";
+}
+
+.icon-warn:before {
+  content: "\e605";
+}
+
+.icon-chart1:before {
+  content: "\e62f";
+}
+
+.icon-chart2:before {
+  content: "\e619";
+}
+
+.icon-chart3:before {
+  content: "\e607";
+}
+
+.icon-chart4:before {
+  content: "\e610";
+}
+
+.icon-chart5:before {
+  content: "\e611";
+}
+
+.icon-chart6:before {
+  content: "\e608";
+}
+
+.icon-oricon1:before {
+  content: "\e606";
+}
+
+.icon-oricon2:before {
+  content: "\e603";
+}
+
+.icon-oricon3:before {
+  content: "\e604";
+}
+
+.icon-plant:before {
+  content: "\e60a";
+}
+
+.icon-record:before {
+  content: "\e600";
+}
+
+.icon-origin:before {
+  content: "\e6a6";
+}
+
+.icon-outstock:before {
+  content: "\e744";
+}
+
+.icon-instock:before {
+  content: "\e609";
+}

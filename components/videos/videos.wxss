@@ -1,0 +1,99 @@
+/* components/videos/videos.wxss */
+@import '/app.wxss';
+.item {
+  margin-bottom: 24rpx;
+  padding-bottom: 20rpx;
+  position: relative;
+  background: #fff;
+  border-radius: 20rpx;
+  overflow: hidden;
+}
+
+.item>view {
+  padding: 0 20rpx;
+}
+.item .text{
+  width: 100%;
+  position: absolute;
+  z-index: 99;
+  top: 100rpx;
+  text-align: center;
+  color: #fff
+}
+.item .text.text1{
+  top: 140rpx;
+}
+.item .text .refresh{
+  text-align: center;
+  width: 150rpx;
+  height: 40rpx;
+  margin: 50rpx auto;
+  line-height: 40rpx;
+  border-radius: 20rpx;
+}
+.item .text text{
+  display: block
+}
+ video {
+  width:100%;
+  height: 387rpx;
+}
+
+ image {
+  width: 100%;
+  height: 387rpx;
+}
+ .nodate image {
+width:394rpx;
+height:225rpx;
+display:block;
+margin:0 auto;
+
+}
+
+ .name {
+  text-align: right;
+  height: 50rpx;
+  line-height: 50rpx;
+}
+
+.name text {
+  font-size: 28rpx;
+  color: #333;
+  float: left;
+}
+
+.item>view.address {
+  position: relative;
+  padding-left: 50rpx;
+}
+
+.address text {
+  font-size: 36rpx;
+  position: absolute;
+  left: 10rpx;
+  top: 0;
+}
+
+ .camera {
+  color: #fff;
+  height: 80rpx;
+  line-height: 80rpx;
+  position: absolute;
+  top: 140rpx;
+  left: 252rpx;
+  font-size: 35rpx;
+  z-index: 99;
+  width: 220rpx;
+  text-align: center;
+}
+
+ .camera>text {
+  position: relative;
+  top: -10rpx;
+  left: 10rpx;
+}
+
+ .play text {
+  font-size: 80rpx;
+}

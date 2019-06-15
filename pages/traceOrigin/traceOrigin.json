@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "溯源信息",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "icon": "../../components/icon/icon",
+    "title": "../../components/title/title",
+    "Loading": "../../components/loading/loading"
+  }
+}

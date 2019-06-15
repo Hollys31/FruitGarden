@@ -1,0 +1,204 @@
+/* components/circle/circle.wxss */
+
+.circle-wrap {
+  width: 400rpx;
+  position: relative;
+  margin: 0 auto;
+  z-index: 999;
+}
+
+.circle-inner {
+  width: 410rpx;
+  height: 410rpx;
+  position: relative;
+}
+
+.circle-inner .line {
+  width: 384rpx;
+  height: 384rpx;
+  position: relative;
+  animation: spin 2s infinite linear;
+}
+
+.circle-inner .dot {
+  position: absolute;
+  left: 50%;
+  top: -7rpx;
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+  background: #fff;
+  transform-origin: 3rpx 202rpx;
+  box-shadow: 0 0 40rpx 10rpx rgba(255, 255, 255, 1);
+}
+
+.circle-inner .cir-line {
+  width: 196rpx;
+  height: 372rpx;
+  border: 6rpx solid rgba(255, 255, 255, 0.9);
+  border-radius: 100% 0 0 100%/50%;
+  border-right: none;
+}
+
+.circle-inner .circle {
+  width: 384rpx;
+  height: 384rpx;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+}
+
+.circle-inner .circle1 {
+  position: absolute;
+  z-index: 99;
+  transform: scale(1);
+  -webkit-transform: scale(1);
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.33);
+  left: 0;
+  top: 0;
+}
+
+.circle-inner .circle1:after {
+  content: ' ';
+  display: block;
+  background-image: linear-gradient(44deg, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.8) 100%);
+  width: 50%;
+  height: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: radar-beam 2s infinite;
+  animation-timing-function: linear;
+  transform-origin: bottom right;
+  border-radius: 100% 0 0 0;
+}
+
+.circle-inner .circle2 {
+  width: 372rpx;
+  height: 372rpx;
+  border: 6rpx solid rgba(255, 255, 255, 0.3);
+}
+
+.circle-inner .circle3 {
+  transform: scale(0.5);
+  -webkit-transform: scale(0.5);
+}
+
+.circle-inner .circle4 {
+  transform: scale(0.4);
+  -webkit-transform: scale(0.4);
+}
+
+.percent {
+  height: 100rpx;
+  line-height: 100rpx;
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  font-size: 44rpx;
+  position: absolute;
+  top: 430rpx;
+}
+
+.percent text {
+  font-size: 136rpx;
+}
+
+.circle-wrap .text {
+  margin-top: 192rpx;
+}
+
+.circle-wrap .text>view {
+  font-size: 26rpx;
+  line-height: 1.6em;
+  opacity: 0;
+}
+.circle-wrap .text .tips text{
+   opacity: 0;
+   font-weight: bold;
+}
+.circle-wrap .text .tips1 {
+  animation: mymove 1.5s infinite;
+  -webkit-animation: mymove 1.5s infinite;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards; /*让动画停留在最后一帧 */
+}
+.circle-wrap .text .tips1 text{
+   animation: mymove .3s infinite;
+  -webkit-animation: mymove .3s infinite;
+   animation-delay: .5s;
+  -webkit-animation-delay: .5s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards; 
+}
+.circle-wrap .text .tips2 {
+  animation: mymove 1.5s infinite;
+  -webkit-animation: mymove 1.5s infinite;
+  animation-delay: 1s;
+  -webkit-animation-delay: 1s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards; /*让动画停留在最后一帧 */
+}
+.circle-wrap .text .tips2 text{
+  animation: mymove .3s infinite;
+  -webkit-animation: mymove .3s infinite;
+  animation-delay: 1.5s;
+  -webkit-animation-delay: 1.5s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards; /*让动画停留在最后一帧 */
+}
+.circle-wrap .text .tips3 {
+  animation: mymove 1.5s infinite;
+  -webkit-animation: mymove 1.5s infinite;
+  animation-delay: 1.7s;
+  -webkit-animation-delay: 1.7s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards; /*让动画停留在最后一帧 */
+}
+.circle-wrap .text .tips3 text{
+  animation: mymove .3s infinite;
+  -webkit-animation: mymove .3s infinite;
+  animation-delay: 1.9s;
+  -webkit-animation-delay: 1.9s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards; /*让动画停留在最后一帧 */
+}
+.circle-wrap image {
+  z-index: 1;
+  position: absolute;
+  top: 90rpx;
+  left: 100rpx;
+  width: 200rpx;
+  height: 200rpx;
+}
+
+@keyframes radar-beam {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(-45deg);
+  }
+
+  100% {
+    transform: rotate(315deg);
+  }
+}
+
+@keyframes mymove {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

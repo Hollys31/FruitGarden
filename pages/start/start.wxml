@@ -1,0 +1,9 @@
+<!--pages/start/start.wxml-->
+<view class='empower' wx:if="{{allow}}">
+  <view class='title'>温馨提示</view>
+  <image src='/resources/images/tips.png'></image>
+  <text>请允许授权</text>
+  <text>便于您查看该水果信息哦！</text>
+  <button   open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">允许授权</button>
+</view>   
+<Loading wx:if="{{!allow}}"></Loading>

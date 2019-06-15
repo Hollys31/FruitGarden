@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "环境信息",
+  "usingComponents": {
+    "icon": "../../components/icon/icon",
+    "title": "../../components/title/title",
+    "ff-canvas": "../../f2-canvas/f2-canvas",
+    "tabbar": "../../components/tabbarBottom/tabbarBottom",
+    "Loading": "../../components/loading/loading"
+  }
+}

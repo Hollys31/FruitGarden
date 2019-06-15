@@ -1,0 +1,58 @@
+/* pages/video/video.wxss */
+page{
+   background: #f7f7f7 !important
+}
+.video {
+  color: #999999;
+  background: #f7f7f7
+}
+.video.iphoneX{
+   padding-bottom: 120rpx;
+}
+.video .tab {
+  height: 90rpx;
+  line-height: 90rpx;
+  text-align: center;
+
+}
+
+.video .tab text {
+  margin: 0 35rpx;
+  padding-bottom: 6rpx;
+  font-size: 30rpx;
+}
+
+.video .tab text.mainColor {
+  border-bottom: 4rpx solid #06caac;
+}
+.video swiper{
+  min-height: 800rpx;
+}
+.pagenation {
+  width: 40rpx;
+  height: 670rpx;
+  padding-top: 30rpx;
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  position: fixed;
+  right: 10rpx;
+  top: 50%;
+  margin-top: -340rpx;
+  border-radius: 20rpx;
+  z-index: 100;
+  text-align: center;
+}
+
+.pagenation text {
+  display: block;
+  width: 34rpx;
+  height: 34rpx;
+  line-height: 34rpx;
+  border-radius: 50%;
+  margin: 15rpx auto;
+}
+
+.pagenation text.active {
+  background-color: #0aa666;
+}
+

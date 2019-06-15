@@ -1,0 +1,45 @@
+<!--pages/ teaPlantation/ teaPlantation.wxml-->
+<title title="果园信息"></title>
+<view class="teaPlantation {{isIphoneX?'iphoneX':''}}">
+  <view class='part  garden'>
+    <image class='img' src="{{coverImg}}" lazy-load='true' />
+    <image class='identifystate' src='/resources/images/identifystate.png' />
+    <view class='name'>{{gardenInfo.gardenInfo.gardenName}}</view>
+    <view class='charge'>
+      <icon iconClass='icon-user' class='mainColor'></icon> 负责人：{{gardenInfo.gardenInfo.gardenOwner}}</view>
+    <view class='address'>
+    <scroll-view scroll-x>
+    <icon iconClass='icon-address1' class='mainColor'></icon> {{gardenInfo.gardenInfo.addressProv}}{{gardenInfo.gardenInfo.addressCity}}{{gardenInfo.gardenInfo.addressCounty}}{{gardenInfo.gardenInfo.addressTown}}{{gardenInfo.gardenInfo.addressVillage}}{{gardenInfo.gardenInfo.addressInfo}}
+    </scroll-view>
+      </view>
+  </view>
+  <view class='part desc'>
+    <view class='stit'>果园简介</view>
+    {{gardenInfo.gardenInfo.summary}}
+  </view>
+
+  <block wx:for="{{gardenInfo.blockList}}" wx:key="index" wx:for-item="items">
+    <view class='part'>
+      <view class='stit clearfix'>{{items.blockName}}
+        <view class='tips' wx:if="{{index==0}}">
+           <icon class='icon mainColor' iconClass="icon-ok"></icon>当前果品产地
+        </view>
+      </view>
+      <view class='sorts'>
+        <block wx:for="{{items.list}}" wx:key="index1" wx:for-item="item">
+          <view class='item clearfix'>
+            <view class='sort-name mainColor'>
+              <icon class='mainColor' iconClass="icon-orange"></icon>
+          {{item.plantName}}
+            </view>
+            <view class='area'>占地{{item.plantArea}}亩</view>
+          </view>
+        </block>
+    <!--  <view wx:if="{{items.list.length>3}}" class='more-sort'>查看更多品种
+        <icon class='icon' iconClass='icon-more'></icon>
+      </view>  -->
+      </view>
+    </view>
+  </block>
+</view>
+<Loading wx:if="{{loading}}"></Loading>

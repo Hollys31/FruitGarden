@@ -1,0 +1,195 @@
+<!--pages/index/index.wxml-->
+<title title="首页"></title>
+<view class='brief'>
+  <navigator hover-class='none' url='/pages/garden/garden'>
+    <image class='bg' src='/resources/images/bg1.png'></image>
+    <view class='brief-inner clearfix'>
+      <view class='text'>
+        <view class='title'>{{mainInfo.gardenInfo.gardenName}}</view>
+        <view>负责人：{{mainInfo.gardenInfo.gardenOwner}}</view>
+        <view>
+          <icon class='mainColor' iconClass="icon-address"></icon> {{mainInfo.gardenInfo.addressProv}}{{mainInfo.gardenInfo.address.City}}{{mainInfo.gardenInfo.addressCounty}}{{mainInfo.gardenInfo.addressTown}}{{mainInfo.gardenInfo.addressVillage}}{{mainInfo.gardenInfo.addressInfo}}
+        </view>
+      </view>
+      <image class='pic' src="{{mainInfo.gardenInfo.imgUrl||'/resources/images/default.png'}}"></image>
+      <icon class='icon ' iconClass='icon-more'></icon>
+    </view>
+  </navigator>
+</view>
+
+<view class='part'>
+  <view class='stit'>商品信息</view>
+  <view class='product clearfix'>
+    <image src="{{mainInfo.produceInfo.url||'/resources/images/default.png'}}"></image>
+    <view class='text-info'>
+      <view class='name'>{{mainInfo.produceInfo.type}}</view>
+      <view class='grade mainColor clearfix'>
+        <view>
+          <text class='mainbg'></text>甜度{{mainInfo.produceInfo.sweet}}级</view>
+        <view>
+          <text class='mainbg'></text>{{mainInfo.produceInfo.grade}}商品</view>
+      </view>
+      <view class='desc'>{{mainInfo.produceInfo.remark}}</view>
+    </view>
+  </view>
+</view>
+
+<view class='part environment'>
+  <view class='stit'>生长环境</view>
+  <view class='item'>
+    <image src='/resources/images/site1.png'></image> 累计监控守护时长{{mainInfo.weather.monTime}}小时</view>
+  <view class='item'>
+    <image src='/resources/images/site2.png'></image>年平均气温{{mainInfo.weather.temp}}℃昼夜温差最大{{mainInfo.weather.tempDiff}}℃</view>
+  <view class='item'>
+    <image src='/resources/images/site3.png'></image>年平均光照{{mainInfo.weather.sunlux}}hr平均降雨量{{mainInfo.weather.avgRain}}mm</view>
+  <view class='item'>
+    <image src='/resources/images/site4.png'></image>年平均湿度{{mainInfo.weather.humid}}% </view>
+  <view class='item'>
+    <image src='/resources/images/site5.png'></image>气压{{mainInfo.weather.pa}}pa</view>
+</view>
+<view class='part'>
+  <view class='stit'>溯源流程</view>
+  <view class='origin'>
+    <view class='item'>
+      <navigator url='/pages/traceOrigin/traceOrigin' hover-class='none'>
+        <view class='circle'></view>
+        <view class='date'>
+          <text>{{originInfo.latestTrace.yearStr}}</text>{{originInfo.latestTrace.dateStr}} {{originInfo.latestTrace.week}}</view>
+        <view class='info'>
+          <view class='product-num clearfix'>
+            <scroll-view scroll-x>
+              <icon class='mainColor' iconClass="icon-camera"></icon> 产品编号：{{originInfo.latestTrace.qrCode}}</scroll-view>
+          </view>
+          <view class='img-box'>
+            <image src='{{coverImg1}}'></image>
+            <view class='place'>
+              <text>{{originInfo.latestTrace.fromCity}}</text>
+              <text>{{originInfo.latestTrace.traceCity}}</text>
+            </view>
+          </view>
+          <view class='todetail'>
+            <view>
+              <view class='inner'>
+                <icon class='mainColor ' iconClass="icon-origin"></icon>
+                溯源记录
+              </view>
+            </view>
+            <view>
+              <view class='inner'>
+                <icon class='mainColor ' iconClass="icon-file"></icon>
+                查看详情
+              </view>
+            </view>
+          </view>
+        </view>
+      </navigator>
+    </view>
+ <!--    <view class='item'>
+      <view class='date'>
+        <text>{{originInfo.outStock.yearStr}}</text>{{originInfo.outStock.dateStr}} {{originInfo.outStock.week}}</view>
+      <view class='info'>
+        <view class='img-box'>
+          <image src='{{coverImg2}}'></image>
+        </view>
+        <view class='address'>
+          <scroll-view scroll-x>
+            <icon class='mainColor' iconClass="icon-address"></icon>{{originInfo.outStock.addressProv}}{{originInfo.outStock.addressCity}}{{originInfo.outStock.addressCounty}}{{originInfo.ioutStock.addressVillage}}{{originInfo.inStock.addressInfo}}{{originInfo.outStock.addressInfo}}
+          </scroll-view>
+        </view>
+        <view class='todetail'>
+          <view>
+            <view class='inner'>
+              <icon class='mainColor ' iconClass="icon-outstock"></icon>
+              出库作业</view>
+          </view>
+          <view>
+            <view class='inner'>
+              <icon class='mainColor ' iconClass="icon-clock"></icon>
+              {{originInfo.outStock.timeStr}} {{originInfo.outStock.apm}}</view>
+          </view>
+        </view>
+      </view>
+    </view> -->
+    <view class='item'>
+      <view class='date'>
+        <text>{{originInfo.inStock.yearStr}}</text>{{originInfo.inStock.dateStr}} {{originInfo.inStock.week}}</view>
+      <view class='info'>
+        <view class='img-box'>
+          <image src='{{coverImg3}}'></image>
+        </view>
+        <view class='address'>
+          <scroll-view scroll-x>
+            <icon class='mainColor ' iconClass="icon-address"></icon>{{originInfo.inStock.addressProv}}{{originInfo.inStock.addressCity}}{{originInfo.inStock.addressCounty}}{{originInfo.inStock.addressVillage}}{{originInfo.inStock.addressInfo}}</scroll-view>
+        </view>
+        <view class='todetail'>
+          <view>
+            <view class='inner'>
+              <icon class='mainColor instock' iconClass="icon-instock"></icon>
+              库存记录</view>
+          </view>
+          <view>
+            <view class='inner'>
+              <icon class='mainColor ' iconClass="icon-clock"></icon>
+              {{originInfo.inStock.timeStr}} {{originInfo.inStock.apm}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='item'>
+      <view class='date'>
+        <text>{{originInfo.farmWork.startDate}}</text>至 {{originInfo.farmWork.endDate}} </view>
+      <view class='info'>
+        <view class='img-box'>
+          <image src='{{coverImg4}}'></image>
+        </view>
+        <view class='address'>
+          <scroll-view scroll-x>
+            <icon class='mainColor ' iconClass="icon-address"></icon>{{originInfo.farmWork.addressProv}}{{originInfo.farmWork.addressCity}}{{originInfo.farmWork.addressCounty}}{{originInfo.farmWork.addressVillage}}{{originInfo.farmWork.addressInfo}}{{originInfo.farmWork.gardenName}}</scroll-view>
+        </view>
+        <view class='todetail'>
+          <view>
+            <view class='inner'>
+              <icon class='mainColor farm' iconClass="icon-record"></icon>
+              农事作业
+            </view>
+          </view>
+          <view>
+            <view class='inner'>
+              <icon class='mainColor ' iconClass="icon-clock"></icon>
+              生长第{{originInfo.farmWork.plantDays}}天</view>
+          </view>
+
+        </view>
+      </view>
+    </view>
+    <view class='item'>
+      <view class='date'>
+        <text>{{originInfo.plant.yearStr}}</text>{{originInfo.plant.dateStr}} {{originInfo.plant.week}}</view>
+      <view class='info'>
+        <view class='img-box'>
+          <image src='{{coverImg5}}'></image>
+        </view>
+        <view class='address'>
+          <scroll-view scroll-x>
+            <icon class='mainColor ' iconClass="icon-address"></icon>{{originInfo.plant.addressProv}}{{originInfo.plant.addressCity}}{{originInfo.plant.addressCounty}}{{originInfo.plant.addressVillage}}{{originInfo.plant.addressInfo}}{{originInfo.plant.gardenName}}</scroll-view>
+        </view>
+        <view class='todetail'>
+          <view>
+            <view class='inner'>
+              <icon class='mainColor plant' iconClass="icon-plant"></icon>
+              种植作业</view>
+          </view>
+          <view>
+            <view class='inner'>
+              <icon class='mainColor ' iconClass="icon-clock"></icon>
+              {{originInfo.plant.yearStr}}.{{originInfo.plant.dateStr}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+<Loading wx:if="{{loading}}"></Loading>
+<tabbar tabbar="{{tabbar}}"></tabbar>

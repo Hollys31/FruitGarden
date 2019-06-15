@@ -1,0 +1,9 @@
+<!--components/tabbarBottom/tabbarBottom.wxml-->
+<view class="tabbar_box {{isIphoneX?'iphoneX-height':''}}">
+  <block wx:for="{{tabbar.list}}" wx:key="{{item.pagePath}}">
+     <view  class="tabbar_nav" data-url="{{item.pagePath}}" bindtap='handelTopage'>
+      <image class="tabbar_icon" src="{{item.selected ? item.selectedIconPath : item.iconPath}}"></image>
+      <view style="color:{{item.selected ? tabbar.selectedColor : tabbar.color}}" >{{item.text}}</view>
+    </view >
+  </block>
+</view>

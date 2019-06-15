@@ -1,0 +1,57 @@
+/* pages/checkfail/checkfail.wxss */
+@import '/pages/checking/checking';
+
+.modal_wrap {
+  width: 100%;
+  position: fixed;
+  z-index: 1001;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-inner {
+  background: #fff;
+  border-radius: 20rpx;
+  width: 440rpx;
+  height: 588rpx;
+  margin: 0 auto;
+  padding: 20rpx 40rpx;
+  margin-top: 300rpx;
+  text-align: center;
+}
+
+.modal-inner .stit {
+  font-size: 36rpx;
+  color: #333;
+  font-weight: bold;
+  height: 100rpx;
+  line-height: 100rpx;
+}
+
+.modal-inner image {
+  width: 232rpx;
+  height: 206rpx;
+  display: block;
+  margin: 35rpx auto;
+}
+
+.modal-inner text {
+  display: block;
+  color: #666;
+  height: 40rpx;
+  line-height: 40rpx;
+}
+
+.modal-inner .backScan {
+  width: 198rpx;
+  height: 62rpx;
+  line-height: 62rpx;
+  color: #fff;
+  background-image: linear-gradient(-90deg, #06caac 0%, #71f4df 100%);
+  border-radius: 30rpx;
+  font-size: 32rpx;
+  margin: 45rpx auto
+}

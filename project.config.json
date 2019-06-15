@@ -1,0 +1,147 @@
+{
+	"description": "项目配置文件",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"nodeModules": false,
+		"autoAudits": false,
+		"uglifyFileName": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.6.1",
+	"appid": "wx748194974cd03430",
+	"projectname": "fruitGarden",
+	"debugOptions": {
+		"hidedInDevtools": []
+	},
+	"isGameTourist": false,
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 13,
+			"list": [
+				{
+					"id": -1,
+					"name": "视频",
+					"pathName": "pages/video/video",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 2,
+					"name": "首页",
+					"pathName": "pages/index/index",
+					"query": "",
+					"scene": 1011
+				},
+				{
+					"id": -1,
+					"name": "历史反馈",
+					"pathName": "pages/feedback/feedback",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "网络异常",
+					"pathName": "pages/network/network",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 4,
+					"name": "start",
+					"pathName": "pages/start/start",
+					"query": "",
+					"scene": 1011
+				},
+				{
+					"id": 7,
+					"name": "扫码",
+					"pathName": "pages/scanQRCode/scanQRCode",
+					"query": "",
+					"scene": 1025
+				},
+				{
+					"id": 6,
+					"name": "检测",
+					"pathName": "pages/checking/checking",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "果园",
+					"pathName": "pages/garden/garden",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "溯源",
+					"pathName": "pages/traceOrigin/traceOrigin",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "农事",
+					"pathName": "pages/farmWorks/farmWorks",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "环境",
+					"pathName": "pages/environmentChart/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "扫码失败",
+					"pathName": "pages/checkfail/checkfail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "getphone",
+					"pathName": "pages/getphone/getphone",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "网络异常",
+					"pathName": "pages/network/network",
+					"query": "",
+					"scene": null
+				}
+			]
+		}
+	}
+}

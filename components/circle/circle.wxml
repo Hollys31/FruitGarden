@@ -1,0 +1,25 @@
+<!--components/circle/circle.wxml-->
+<view class='circle-wrap'>
+  <image src='{{imgUrl}}'/>
+  <view class='circle-inner'>
+    <view class='line'>
+      <view class='dot'></view>
+      <view class='cir-line'></view>
+    </view>
+    <view class='circle circle1'>
+      <view class='circle circle2'>
+        <view class='circle circle3'>
+          <view class='circle circle4'></view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='percent'>
+    <text>{{count}}</text>%
+  </view>
+   <view class='text'>
+      <view class='tips tips1'>信息分析中... <text>Complete !</text></view>
+      <view class='tips tips2'>产品获取中... <text>Complete !</text></view>
+      <view class='tips tips3'>溯源检测中... <text>Complete !</text></view>
+    </view>
+</view>

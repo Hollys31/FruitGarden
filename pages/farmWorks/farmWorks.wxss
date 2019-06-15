@@ -1,0 +1,53 @@
+/* pages/farmWorks/farmWorks.wxss */
+@import '/pages/index/index.wxss';
+page{
+  background: #f7f7f7
+}
+.part .stit {
+  padding-left: 0;
+}
+.goods-info{
+  background: #fff;
+  padding:25rpx 40rpx;
+}
+.goods-info image{
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 50%;
+  float: left;
+  margin-right: 30rpx;
+}
+.goods-info .info{
+  float:left;
+  width: 460rpx;
+  color: #666;
+}
+.goods-info .info .name{
+  font-size: 28rpx;
+  font-weight: bold;
+  margin-bottom: 16rpx
+}
+
+.goods-info .info .date{
+ margin-top: 16rpx
+}
+.goods-info .mainColor text{
+  font-size: 30rpx;
+}
+.goods-info .info .date>text{
+  color: #999;
+  float: right
+}
+.origin .item:first-child .img-box {
+  height:266rpx;
+  margin-top: 12rpx;
+  margin-bottom: 0
+}
+.origin .item:first-child .img-box image {
+width:599rpx;
+height:266rpx;
+border-radius:10rpx
+}
+.origin .item .circle{
+  background: #f7f7f7
+}

@@ -1,0 +1,33 @@
+<!--pages/feedback/feedback.wxml-->
+<title title="异常反馈"></title>
+<view class='feedback' wx:if="{{feedbackData.length>0}}">
+  <block  wx:for="{{feedbackData}}" wx:key="index">
+    <view class='item'>
+      <view class='title' data-index="{{index}}" bindtap='slideToggle'>
+        {{index+1}}. {{item.title}}
+        <text class="date {{slideDownInd==index?'show':''}}">{{item.createTime}}</text>
+        <text wx:if="{{item.status=='A'}}" class="{{slideDownInd==index?'':'show'}}">待处理</text>
+        <text wx:if="{{item.status=='C'}}" class="{{slideDownInd==index?'':'show'}}">正在处理中</text>
+        <text wx:if="{{item.status=='D'}}" class="finish {{slideDownInd==index?'':'show'}}">已完成</text>
+        <icon class="icon  {{slideDownInd==index?'down':''}}" iconClass="icon-more"></icon>
+      </view>
+      <view class='info' wx:if="{{slideDownInd==index}}">
+        反馈内容：
+        <text>{{item.content}}</text>
+        <view class='result clearfix'>
+          处理结果:
+          <text wx:if="{{item.status=='A'}}">待处理</text>
+          <text wx:if="{{item.status=='C'}}">处理中</text>
+          <text wx:if="{{item.status=='D'}}">已完成</text>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>
+<block wx:if="{{feedbackData.length==0}}">
+  <view class='nodate'>
+    <image src='/resources/images/nodata.png' />
+    <text>暂无问题反馈</text>
+  </view>
+</block>
+<Loading wx:if="{{loading}}"></Loading>

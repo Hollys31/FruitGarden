@@ -1,0 +1,12 @@
+/* pages/network/network.wxss */
+.network{
+  color: #999;
+  font-size: 32rpx;
+  text-align: center
+}
+.network image{
+  width: 394rpx;
+  height: 225rpx;
+  display: block;
+  margin: 345rpx auto 40rpx
+}

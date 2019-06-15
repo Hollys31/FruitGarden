@@ -1,0 +1,316 @@
+/* pages/index/index.wxss */
+page{
+  width: 100%;
+}
+.brief {
+  width: 100%;
+  height: 227rpx;
+  position: relative;
+}
+
+navigator {
+  display: inline;
+}
+
+.brief .bg {
+  position: absolute;
+  width: 100%;
+  height: 227rpx;
+  right: 0;
+  top: 0;
+  z-index: 1;
+}
+
+.brief-inner {
+  padding: 35rpx 20rpx 20rpx;
+  height: 172rpx;
+  position: absolute;
+  z-index: 2;
+}
+
+.brief-inner>view, .brief-inner >.pic, .brief-inner .icon {
+  float: left;
+}
+
+.brief-inner .text {
+  width: 475rpx;
+  padding-left: 23rpx;
+  line-height: 1.8em;
+}
+
+.brief-inner >.pic {
+  width: 122rpx;
+  height: 122rpx;
+  margin-top: 15rpx;
+  border-radius: 50%;
+  border: 1rpx solid #ddd;
+  box-shadow: 0px 0px 27rpx 0px #e7e7e7;
+}
+
+.brief-inner .icon {
+  margin-top: 55rpx;
+  margin-left: 20rpx;
+}
+
+.brief-inner .icon text {
+  font-size: 60rpx;
+}
+
+.brief-inner .title {
+  font-size: 38rpx;
+  font-weight: bold;
+  line-height: 1.8em;
+}
+
+.brief-inner .text .mainColor text {
+  font-size: 34rpx;
+}
+
+.part {
+  padding: 0 32rpx;
+}
+
+.part .stit {
+  height: 110rpx;
+  line-height: 110rpx;
+  font-size: 32rpx;
+  color: #333;
+  font-weight: bold;
+  padding-left: 20rpx;
+}
+
+.product {
+  padding: 30rpx;
+  width: 618rpx;
+  height: 192rpx;
+  margin: 0 auto;
+  box-shadow: 0px 0px 27rpx 0px #e7e7e7;
+  border-radius: 10rpx;
+  border: 1px solid #e7e7e7;
+  overflow: hidden;
+}
+
+.product>image {
+  width: 183rpx;
+  height: 183rpx;
+  float: left;
+  border-radius: 50%;
+}
+
+.product .text-info {
+  width: 394rpx;
+  padding-left: 20px;
+  float: left;
+  line-height: 1.4em;
+}
+
+.product .text-info .name {
+  font-size: 30rpx;
+}
+
+
+.product .grade>view {
+  float: left;
+  width: 45%;
+  height: 80rpx;
+  line-height: 80rpx;
+  position: relative;
+  padding-left: 18rpx;
+}
+
+.product .grade text {
+  position: absolute;
+  width:10rpx;
+  height:10rpx;
+  display: block;
+  border-radius: 50%;
+  left: 0;
+  top: 35rpx;
+}
+
+.product .text-info .desc {
+  color: #666;
+  font-size: 26rpx;
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.environment .item {
+  height: 66rpx;
+  line-height: 66rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.environment .item image {
+  width: 36rpx;
+  height: 36rpx;
+  margin: 15rpx 20rpx 0 10rpx;
+  float: left;
+}
+
+.look-record {
+  text-align: center;
+  height: 80rpx;
+  line-height: 80rpx;
+}
+
+.look-record text {
+  font-size: 30rpx;
+}
+.origin{
+padding-left: 13rpx;
+overflow: hidden
+}
+.origin .item {
+  border-left: 2rpx solid #06caac;
+  padding: 0 20rpx;
+  position: relative;
+  padding-bottom: 25rpx;
+}
+
+.origin .item .circle {
+  width: 20rpx;
+  height: 20rpx;
+  position: absolute;
+  top: -9rpx;
+  left: -10rpx;
+  border-radius: 50%;
+  background: #fff;
+  z-index: 4;
+}
+
+.origin .item:first-child .img-box {
+  height: 260rpx;
+  margin-top: 0;
+  margin-bottom: 20rpx;
+}
+
+.origin .item:first-child .img-box image {
+  width: 598rpx;
+  height: 260rpx;
+  border-radius: 10rpx;
+}
+
+.origin .item:before {
+  content: "";
+  width: 26rpx;
+  height: 26rpx;
+  border-radius: 50%;
+  background: #06caac;
+  position: absolute;
+  left: -13rpx;
+  top: 10rpx;
+  z-index: 99;
+}
+.origin .item .address{
+  width: 100%;
+  overflow: hidden;
+  height: 64rpx;
+  line-height: 64rpx;
+  white-space: nowrap
+}
+.origin .item .address scroll-view{
+   height: 64rpx;
+  line-height: 64rpx;
+}
+.item .date {
+  padding-left: 10px;
+  margin-bottom: 10rpx;
+}
+
+.item .date text {
+  color: #999;
+  display: block;
+}
+
+.item .info {
+  height: 419rpx;
+  box-shadow: 0px 0px 27rpx 0px #e7e7e7;
+  border-radius: 10rpx;
+  border: 1px solid #e7e7e7;
+  padding: 15rpx;
+  padding-bottom:10rpx;
+  position: relative;
+}
+
+.item .info>text {
+  line-height: 2.4em;
+  padding-left: 15rpx;
+}
+
+.item .product-num {
+  white-space: nowrap;
+  width: 100%;
+  overflow: hidden;
+  height: 50rpx;
+  line-height: 50rpx;
+  margin-bottom: 15rpx;
+}
+
+.item .mainColor text {
+  font-size: 32rpx;
+}
+.item .mainColor.farm text{
+  font-size: 38rpx;
+}
+.item .mainColor.instock text{
+  font-size: 30rpx;
+}
+.item  .product-num .mainColor text {
+  font-size: 36rpx;
+}
+
+.item .product-num scroll-view {
+  height: 50rpx;
+  line-height: 50rpx;
+}
+
+.item .img-box {
+  position: relative;
+  margin: 12rpx auto 0;
+  width: 599rpx;
+  height: 266rpx;
+}
+
+.item .img-box  image, .item .img-box  .place {
+  position: absolute;
+}
+
+.item .img-box  image {
+  width: 597rpx;
+  height: 266rpx;
+}
+
+.item .place {
+  top: 106rpx;
+  left: 108rpx;
+}
+
+.item .place text {
+  margin-right: 245rpx;
+}
+
+.item .todetail {
+  border-top: 1px dashed #dadada;
+  display: flex;
+  padding: 20rpx 0;
+}
+
+.item .todetail>view {
+  flex: 1;
+  text-align: center;
+}
+
+.item .todetail>view:first-child .inner {
+  border-right: 1rpx solid #cfcfcf;
+}
+@media screen and (max-width: 320px) {
+  .product .text-info {
+    width: 380rpx;
+  }
+}

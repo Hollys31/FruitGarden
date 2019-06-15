@@ -1,0 +1,2 @@
+<!--components/icon.wxml-->
+<text class='iconfont {{iconClass}}' style='color:{{color}};'></text>

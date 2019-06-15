@@ -1,0 +1,40 @@
+<!--index.wxml-->
+<title title="环境信息"></title>
+<view class='enviroment-info'>
+  <view class='stit clearfix'>果品环境
+    <navigator url="/pages/feedback/feedback">历史反馈？</navigator>
+  </view>
+  <view class='text'>恭喜！您所查询的水果
+    <text>是在最好的环境下生长的！</text>
+  </view>
+  <image src='/resources/images/env.png'></image>
+</view>
+<view class="menu"> <!-- {{hideIdx==index?'hide':''}} -->
+  <view class="item {{currType==index?'active':'' }}" data-index="{{index}}" data-type="{{item.type}}" wx:for="{{sorts}}" wx:key="{{index}}"  bindtap='handeltype'>
+    <view class='icons mainColor '>
+      <icon class='{{item.iconClass}}' iconClass="{{item.iconClass}}"></icon>
+    </view>
+    {{item.name}}
+  </view>
+</view>
+<swiper interval="{{true}}" class='charts' duration="100" current="{{currType}}" circular bindchange="switchTabPage">
+  <block wx:for="{{sorts1}}" wx:key="{{index}}">
+    <swiper-item>
+      <view class='chart-wrap' wx:if="{{currType==index}}">
+        <view class='tips'>近六个月{{item.name}}趋势</view>
+        <view class='no-device' wx:if="{{nodata}}">
+          <image src='/resources/images/nodevice.png'></image>
+          暂无{{item.name}}设备
+        </view>
+        <ff-canvas class='chart' wx:if="{{!nodata}}" id="{{item.type}}"></ff-canvas>
+      </view>
+      <view class='data-info' wx:if="{{!nodata}}">
+          {{latestInfo.info}}
+          <text>实时数据更新  {{latestInfo.date}}</text>
+        </view>
+    </swiper-item>
+  </block>
+
+</swiper>
+<tabbar tabbar="{{tabbar}}"></tabbar>
+<Loading wx:if="{{loading}}"></Loading>

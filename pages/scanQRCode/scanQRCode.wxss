@@ -1,0 +1,102 @@
+/**index.wxss**/
+
+page {
+  height: 100%;
+  overflow: hidden;
+}
+
+.slogan {
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+  color: #fff;
+  font-stretch: normal;
+  font-family: AdobeHeitiStd-Regular;
+  top: 110rpx;
+  text-align: center;
+  font-size: 64rpx;
+  line-height: 1.8em;
+}
+
+.slogan text {
+  display: block;
+  font-size: 30rpx;
+  line-height: 1.4em;
+}
+
+.scan {
+  width: 100%;
+  text-align: center;
+  position: fixed;
+  bottom: 20rpx;
+  z-index: 1;
+}
+
+.img {
+  width: 750rpx;
+  height: 868rpx;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.scan .scan-code {
+  width: 250rpx;
+  height: 180rpx;
+  color: #fff;
+  background: -webkit-linear-gradient(top left, #d0f5f0, #1dcfb4);
+  border-radius: 50%;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 40rpx;
+  margin-bottom: 50rpx;
+  padding: 0;
+  padding-top: 70rpx;
+  line-height: 40rpx;
+  box-sizing: content-box;
+  outline: line;
+}
+
+.scan .scan-code>text {
+  display: block;
+  line-height: 1.4em;
+}
+
+.scan .scan-code .icon {
+  display: block;
+}
+
+.scan .scan-code .icon text {
+  font-size: 74rpx;
+}
+
+.icons {
+  padding: 0 20rpx;
+  display: flex;
+  height: 60rpx;
+  line-height: 60rpx;
+}
+
+.icons .icon {
+  flex: 1;
+  text-align: right;
+}
+
+.icons .icon text {
+  font-size: 62rpx;
+}
+
+.icons .icon:first-child {
+  text-align: left;
+}
+
+.icons .icon:first-child text {
+  font-size: 44rpx;
+}
+
+.toFeedback {
+  line-height: 3em;
+  font-size: 30rpx;
+  color: #999;
+}

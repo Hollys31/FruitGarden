@@ -1,0 +1,11 @@
+<!--components/tabBar/tabBar.wxml-->
+<cover-view class="tabbar_box {{isIphoneX?'iphoneX-height':''}}">
+  <block wx:for="{{tabbar.list}}" wx:key="{{item.pagePath}}">
+     <cover-view  class="tabbar_nav" data-url="{{item.pagePath}}" bindtap='handelTopage'>
+      <cover-image class="tabbar_icon" src="{{item.selected ? item.selectedIconPath : item.iconPath}}"></cover-image>
+      <cover-view style="color:{{item.selected ? tabbar.selectedColor : tabbar.color}}" >{{item.text}}</cover-view>
+    </cover-view >
+  </block>
+</cover-view>
+
+

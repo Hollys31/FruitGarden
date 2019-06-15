@@ -1,0 +1,48 @@
+<!--pages/checking/checking.wxml-->
+<block wx:if="{{fistPart}}">
+  <view class='check-bg'>
+    <view class='state'>检测中...</view>
+    <circle class="cir-animate"></circle>
+  </view>
+  <image class='image-bg ' src='/resources/images/checkbg.png' />
+</block>
+<view class='map-wrap {{className}}' wx:if="{{!fistPart}}">
+  <image src='/resources/images/earth.png' wx:if="{{!mapPart}}"></image>
+  <map class="map {{mapPart?'show':''}}" id="map" animation="{{animationData}}" longitude="{{longitude}}" latitude="{{latitude}}" scale="{{scale}}" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" bindregionchange="regionchange"
+    show-location  enable-scroll="{{false}}">
+    <cover-view class='address-wrap' wx:if="{{showProduct}}">
+      <cover-view class='item clearfix'>
+        <cover-image src='/resources/images/apple.png'></cover-image>
+        <cover-view class='text'>{{productInfo.gardenInfo.gardenName}}</cover-view>
+      </cover-view>
+      <cover-view class='item clearfix'>
+        <cover-image src='/resources/images/address.png'></cover-image>
+        <cover-view class='text'>{{productInfo.gardenInfo.prov}}{{productInfo.gardenInfo.city}}{{productInfo.gardenInfo.county}}{{productInfo.gardenInfo.town}}{{productInfo.gardenInfo.village}}{{productInfo.gardenInfo.info}}</cover-view>
+      </cover-view>
+    </cover-view>
+    <cover-image class='coverbg' wx:if="{{showProduct}}" src='/resources/images/bg2.png'></cover-image>
+    <cover-view class='product' wx:if="{{showProduct}}">
+      <cover-view class='info clearfix'>
+        <cover-image class='proimg' src="{{productInfo.varieties.url||'/resources/images/default.png'}}"></cover-image>
+        <cover-view class=' text'>
+          <cover-view class='name'>{{productInfo.varieties.type}}</cover-view>
+          <cover-view>采摘日期：{{productInfo.pluckDate.pluckDate}}</cover-view>
+          <cover-view>生产果园：{{productInfo.gardenInfo.gardenName}}</cover-view>
+        </cover-view>
+      </cover-view>
+      <cover-view class='desc'>第{{productInfo.trackCount}}次查询{{productInfo.varieties.type}}，请您注意该产品的真实性！</cover-view>
+      <cover-view class='state-info'>
+        <cover-view class='left'>
+          <cover-view class='green'>{{productInfo.trackCount}}次</cover-view>
+          <cover-view> 已扫描次数</cover-view>
+        </cover-view>
+        <cover-view class='right'>
+          <cover-view class='red' wx:if="{{productInfo.isOk==false}}">异常</cover-view>
+          <cover-view class='green' wx:if="{{productInfo.isOk==true}}">正常</cover-view>
+          <cover-view>该商品状态</cover-view>
+        </cover-view>
+      </cover-view>
+      <cover-view class='lookmore' bindtap='lookDetail'>查看详情</cover-view>
+    </cover-view>
+  </map>
+</view>

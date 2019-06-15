@@ -1,0 +1,17 @@
+<!--pages/checkfail/checkfail.wxml-->
+<block wx:if="{{fistPart}}">
+  <view class='check-bg'>
+    <view class='state'>检测中...</view>
+    <circle imgUrl="{{imgUrl}}" class="cir-animate"></circle>
+  </view>
+  <image class='image-bg ' src='/resources/images/checkbg.png' />
+</block>
+<view class='modal_wrap' wx:if="{{modalShow}}">
+  <view class='modal-inner'>
+    <view class='stit'>扫码错误</view>
+   <image src='/resources/images/err.png'></image>
+   <text>未能识别您的二维码</text>
+   <text>请您选择正确的二维码扫描</text>
+   <view class='backScan'><navigator hover-class='none' url='/pages/scanQRCode/scanQRCode'>返回扫码</navigator> </view>
+  </view>
+</view>

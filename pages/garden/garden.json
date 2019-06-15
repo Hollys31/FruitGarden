@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "果园信息",
+  "usingComponents": {
+    "icon": "../../components/icon/icon",
+    "title": "../../components/title/title",
+    "Loading": "../../components/loading/loading"
+  }
+}

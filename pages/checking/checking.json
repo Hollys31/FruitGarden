@@ -1,0 +1,6 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "circle": "../../components/circle/circle"
+  }
+}

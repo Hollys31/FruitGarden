@@ -1,0 +1,40 @@
+/* components/title/title.wxss */
+.page-title{
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 100rpx;
+  line-height: 100rpx;
+  color: #333;
+  font-size: 30rpx;
+  text-align: center;
+  background: #fff;
+  position: fixed;
+  z-index: 10001;
+  border-bottom:1px solid #ececec;
+}
+.get-height{
+  height: 100rpx;
+  line-height: 100rpx;
+  background: none;
+}
+.back{
+  position: fixed;
+  left: 30rpx;
+  transform: rotate(180deg)  translateY(10rpx);
+  color: #999;
+}
+.back text{
+  font-size: 36rpx;
+}
+.clearfix:after {
+  display: block;
+  clear: both;
+  content: "";
+  visibility: hidden;
+  height: 0;
+}
+
+.clearfix{
+  zoom: 1;
+}

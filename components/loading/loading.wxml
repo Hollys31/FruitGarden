@@ -1,0 +1,10 @@
+<!--components/loading/loading.wxml-->
+ <view class="loader">
+        <view class="loader-inner ball-triangle-path">
+          <image src='/resources/images/fruit1.png'></image>
+          <image src='/resources/images/fruit2.png'></image>
+          <image src='/resources/images/fruit3.png'></image>
+        </view>
+      </view>
+
+

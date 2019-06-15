@@ -1,0 +1,53 @@
+/* pages/start/start.wxss */
+
+.empower {
+  position: fixed;
+  z-index: 99;
+  top: 50%;
+  margin-top: -300rpx;
+  text-align: center;
+  width: 520rpx;
+  height: 500rpx;
+  left: 50%;
+  margin-left: -260rpx;
+}
+
+.empower .title {
+  font-size: 36rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  font-weight: bold
+}
+
+.empower image {
+  width: 248rpx;
+  height: 164rpx;
+  display: block;
+  margin: 50rpx auto;
+}
+
+.empower text {
+  display: block;
+  color: #666;
+  font-size: 28rpx;
+}
+
+.empower button {
+  border: 0;
+  color: #fff;
+  outline: none;
+  background: none;
+  padding: 0;
+  width: 198rpx;
+  height: 62rpx;
+  line-height: 62rpx;
+  box-sizing: content-box;
+  background-image: linear-gradient(-90deg, #06caac 0%, #71f4df 100%);
+  border-radius: 30px;
+  font-size: 32rpx;
+  margin: 40rpx auto;
+}
+button::after{
+    border: 0;
+}

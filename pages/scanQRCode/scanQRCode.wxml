@@ -1,0 +1,20 @@
+<!--index.wxml-->
+<view class='slogan'>
+  智慧果园溯源
+  <text decode="{{true}}">我从田间来 &nbsp;&nbsp;将到餐桌去</text>
+  <text decode="{{true}}">你若不放心 &nbsp;&nbsp;扫码看一看</text>
+</view>
+<view class="scan">
+  <button wx:if="{{allow}}" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumbers" class='scan-code mainbg clearfix'>
+    <icon class='icon' iconClass="icon-scan"></icon>
+    <text> 溯源扫码</text>
+  </button>
+   <view wx:if="{{!allow}}"  class='scan-code mainbg clearfix' bindtap='handelsScanCode'>
+    <icon class='icon' iconClass="icon-scan"></icon>
+    <text> 溯源扫码</text>
+  </view>
+  <navigator class='toFeedback' hover-class='none' url='/pages/feedback/feedback'>异常反馈</navigator>
+</view>
+
+<image class='img {{className}}' src='/resources/images/start.png'/>
+<Loading wx:if="{{loading}}"> </Loading>

@@ -1,0 +1,70 @@
+/* pages/feedback/feedback.wxss */
+.feedback{
+  width:670rpx;
+  border-radius: 20rpx;
+  background: #fff;
+  margin: 30rpx auto;
+  color: #333;
+  padding: 20rpx;
+  padding-bottom: 0
+}
+.feedback .item{
+  border-bottom: 1rpx solid #eee;
+}
+.feedback .item .info{
+  margin: 0 20rpx;
+}
+.feedback .item:last-child{
+  border:none
+}
+.feedback .item .title{
+  position: relative;
+  font-size: 30rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+}
+.feedback .item .title text{
+  float: right;
+  margin-right: 40rpx;
+  font-size: 26rpx;
+  color: #999;
+  display: none;
+}
+
+.feedback  .title .icon{
+ position: absolute;
+ font-size: 30rpx;
+ color: #666;
+ right: 0;
+}
+.feedback  .title .icon.down{
+  transform: rotate(90deg)
+}
+.feedback  .title .icon text{
+ display: inline;
+  margin-right: 0
+}
+.feedback  .title text.finish{
+ color:#0aa666
+}
+.feedback .item .title text.show{
+  display: inline;
+}
+.feedback  .title text.date{
+  color: #e54c4c
+}
+.feedback .info>text{
+ display: block;
+ font-size: 24rpx;
+ color: #999;
+ padding: 20rpx;
+ line-height: 1.6em;
+}
+.feedback .result{
+  height: 90rpx;
+  line-height: 90rpx;
+}
+.feedback .result text{
+  float: right;
+  color: #999
+}

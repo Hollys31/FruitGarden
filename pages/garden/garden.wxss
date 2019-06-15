@@ -1,0 +1,162 @@
+/* pages/ teaPlantation/ teaPlantation.wxss */
+
+.teaPlantation {
+  border-top: 1px solid #e8e8e8
+}
+
+.teaPlantation.iphoneX {
+  padding-bottom: 144rpx;
+}
+
+.part{
+  margin:0 40rpx;
+  padding: 15rpx 0;
+  border-top: 1px solid #e8e8e8
+}
+
+.lastpart {
+  margin-bottom: 110rpx;
+}
+
+.part.nopadding {
+  padding: 0;
+}
+
+.part.garden {
+ margin: 24rpx 20rpx 0;
+ border-top: none;
+ padding: 0;
+}
+
+.part.garden>view {
+  padding: 0 20rpx;
+}
+
+.part .img {
+  width: 100%;
+  height: 320rpx;
+  border-top-left-radius: 20rpx;
+   border-top-right-radius: 20rpx;
+}
+
+.part  .identifystate {
+  width: 136rpx;
+  height: 118rpx;
+  position: absolute;
+  right: 26rpx;
+  top: 520rpx;
+}
+
+.part .name {
+  font-size: 38rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+}
+
+.part .charge {
+  height: 60rpx;
+  line-height: 60rpx;
+}
+
+.part .charge text {
+  font-size: 26rpx;
+  margin-left: 4rpx;
+}
+
+.part .address {
+  height: 60rpx;
+  line-height: 60rpx;
+  padding: 0 20rpx;
+  color: #333;
+  overflow: hidden;
+  white-space: nowrap
+}
+
+.part .address text {
+  font-size: 30rpx;
+}
+
+
+.part .stit {
+  font-size: 32rpx;
+  color: #222;
+  height: 80rpx;
+  line-height: 80rpx;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+}
+
+.part .stit .tips {
+  width: 188rpx;
+  height: 64rpx;
+  line-height: 64rpx;
+  color: #999;
+  font-size: 24rpx;
+  top: 10rpx;
+  right: 0;
+  position: absolute;
+}
+
+.part .stit .tips  .icon {
+  float: left;
+  margin-right: 8rpx;
+}
+
+.part .stit .tips text {
+  font-size: 36rpx;
+}
+
+.part .item {
+  text-align: right;
+  line-height: 52rpx;
+}
+.part  .desc{
+  line-height: 1.5em;
+}
+.sorts {
+  width: 100%;
+}
+
+.sorts .item {
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  color: #666;
+  font-size: 28rpx;
+  overflow: hidden;
+}
+
+.sorts .item:last-child {
+  border: none;
+}
+
+.sorts .item>view {
+  width: 50%;
+  float: left;
+  height: 80rpx;
+  line-height: 80rpx;
+}
+
+.sorts .item .sort-name {
+  text-align: left;
+
+}
+.sorts .item .sort-name  .mainColor{
+  float: left;
+  margin-top: -4rpx;
+}
+.sorts .item .sort-name  .mainColor text{
+  font-size: 48rpx;
+}
+.sorts .more-sort {
+  height: 80rpx;
+  line-height: 80rpx;
+  color: #666;
+  text-align: center;
+}
+
+.sorts .more-sort .icon {
+  transform: rotate(90deg) translateX(-4rpx);
+}

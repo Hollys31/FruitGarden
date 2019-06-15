@@ -1,0 +1,6 @@
+<!--components/title/title.wxml-->
+<view class='page-title clearfix' style="padding-top:{{statusBarHeight}}px">
+  <icon wx:if="{{hasBackIcon}}" style="top:{{statusBarHeight}}px" bindtap="handelToHistory" class='back' iconClass="icon-more"></icon>
+  {{title}}
+</view>
+<view class='get-height' style="padding-top:{{statusBarHeight}}px"></view>

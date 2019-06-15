@@ -1,0 +1,6 @@
+<!--pages/network/network.wxml-->
+<title title="网络异常"></title>
+<view class='network'>
+<image src="/resources/images/network.png"/>
+<text>网络出错</text>
+</view>
