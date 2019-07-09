@@ -1,5 +1,7 @@
 // pages/checking/checking.js
+import HTTP from '../../utils/http.js'
 var handel = require('../../utils/handel.js');
+
 const app = getApp();
 Page({
 
@@ -18,15 +20,14 @@ Page({
     scale:2,
     productInfo:{},
     markers: [],
-
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.animates()
     this.getProductInfo()
+    this.animates()
   },
   animates() {//地球放大
     const _this = this;
@@ -44,7 +45,7 @@ Page({
   },
   getProductInfo(){//获取产品信息
     const _this=this;
-    const qrcodeNum = wx.getStorageSync('qrcodeNum') || '';
+    const qrcodeNum = app.globalData.qrcodeNum;
     let Arrs =[{
       iconPath: '/resources/images/loca.png',
       id: 0,
@@ -53,18 +54,16 @@ Page({
       width: 35,
       height: 35
     }];
-    handel.handelRequest(this, {
-      url: 'report' + '?' + qrcodeNum
-    }, function (result) {
-      Arrs[0].longitude=result.gardenInfo.addressGislong;
-      Arrs[0].latitude=result.gardenInfo.addressGislatd;
+    HTTP.GET({ url: 'report', data: { qrcodeNum: qrcodeNum } }).then(result => {
+      Arrs[0].longitude = result.data.gardenInfo.addressGislong;
+      Arrs[0].latitude = result.data.gardenInfo.addressGislatd;
       _this.setData({
-        longitude: result.gardenInfo.addressGislong,
-        latitude: result.gardenInfo.addressGislatd,
-        productInfo:result,
+        longitude: result.data.gardenInfo.addressGislong,
+        latitude: result.data.gardenInfo.addressGislatd,
+        productInfo: result.data,
         markers: Arrs
       })
-    })
+    }) 
   },
   regionchange(e) {
     console.log(e.type)
@@ -95,8 +94,7 @@ Page({
       this.setData({
         mapPart: true,
       })
-    }.bind(this), 4000)
-  
+    }.bind(this), 3450)
     this.scale3= setTimeout(function () {
       animation.scale(1, 1).step()
       this.setData({
@@ -104,12 +102,12 @@ Page({
         scale:15,
         showProduct:true
       })
-    }.bind(this), 3300)
+    }.bind(this), 3500)
     this.scale4 = setTimeout(function () {
       this.setData({
         showProduct: true
       })
-    }.bind(this), 3400)
+    }.bind(this), 3500)
   },
 
   /**

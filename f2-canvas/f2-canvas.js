@@ -2,7 +2,7 @@
 import Renderer from './lib/renderer';
 import F2 from './lib/f2';
 
-// 适配小程序的事件机制
+// 适配小程序的事件机制width:100%;
 F2.Util.addEventListener = function (source, type, listener) {
   source.addListener(type, listener);
 };
@@ -81,11 +81,12 @@ Component({
       this.canvas = canvas;
 
       const query = wx.createSelectorQuery().in(this);
+      console.log(query);
       query.select('.f2-canvas').boundingClientRect(res => {
         if (typeof callback === 'function') {
-          this.chart = callback(canvas, res.width, res.height);
+          this.chart = callback(canvas, 355, 240);
         } else if (this.data.opts && this.data.opts.onInit) {
-          this.chart = this.data.opts.onInit(canvas, res.width, res.height);
+          this.chart = this.data.opts.onInit(canvas,355,240);
         }
       }).exec();
     },

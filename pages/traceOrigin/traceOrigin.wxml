@@ -38,7 +38,7 @@
   <view class='stit'>产品：{{originInfo.produceInfo.type}}</view>
   <view class='state' wx:if="{{originInfo.isOk==true}}">
     <icon class='mainColor' iconClass="icon-ok"></icon>
-    经检测，该二维码正常，此商品为真实赣南脐橙！
+    经检测，该二维码正常，此商品为真实{{originInfo.produceInfo.type}}！
   </view>
   <view class='state' wx:if="{{originInfo.isOk==false}}">
     <icon class='err' iconClass="icon-warn"></icon>
@@ -70,7 +70,7 @@
 </view>
 <!-- 异常反馈 -->
 <view class='warn-modal' wx:if="{{modalHidden}}" catchtouchmove="ture">
-  <view class='modal-inner'>
+  <view class='modal-inner' style="margin-top:{{marginTop}}">
     <image src='/resources/images/warnbg.png' catchtouchmove="ture" />
     <form bindsubmit='saveFeedback' report-submit="{{true}}">
       <view class='form-inner clearfix'>

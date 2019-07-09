@@ -1,0 +1,6 @@
+<!--pages/case/origin.wxml-->
+<title title="溯源流程"></title>
+<view class='origin'>
+  <image src='../../resources/images/originbg.png'></image>
+</view>
+

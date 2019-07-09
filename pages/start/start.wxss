@@ -21,8 +21,8 @@
 }
 
 .empower image {
-  width: 248rpx;
-  height: 164rpx;
+  width: 275rpx;
+  height: 226rpx;
   display: block;
   margin: 50rpx auto;
 }

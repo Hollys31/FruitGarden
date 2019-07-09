@@ -1,4 +1,5 @@
 import F2 from '../../f2-canvas/lib/f2';
+import HTTP from '../../utils/http.js'
 var handel = require('../../utils/handel.js');
 const app = getApp();
 Page({
@@ -6,30 +7,31 @@ Page({
     loading: true,
     tabbar: {},
     isIphoneX: app.globalData.isIphoneX,
+    dateType: "",
     sorts: [{
       'id': '1',
       'name': '土壤',
       'iconClass': 'icon-chart1',
       'type': 'soil',
-    
+
     }, {
       'id': '2',
       'name': '温度',
       'iconClass': 'icon-chart2',
       'type': 'temp',
-    
+
     }, {
       'id': '3',
       'name': '湿度',
       'iconClass': 'icon-chart3',
       'type': 'humid',
-     
+
     }, {
       'id': '4',
       'name': '光照',
       'iconClass': 'icon-chart4',
       'type': 'sunlux',
-      
+
     }, {
       'id': '5',
       'name': '雨量',
@@ -42,37 +44,12 @@ Page({
       'name': '水肥',
       'type': 'sf',
       'iconClass': 'icon-chart6',
-     
-    }],
-    sorts1: [{
-      'id': '1',
-      'name': '土壤',
-      'type': 'soil'
-    }, {
-      'id': '2',
-      'name': '温度',
-      'type': 'temp'
-    }, {
-      'id': '3',
-      'name': '湿度',
-      'type': 'humid'
-    }, {
-      'id': '4',
-      'name': '光照',
-      'type': 'sunlux'
-    }, {
-      'id': '5',
-      'name': '雨量',
-      'type': 'rain'
-    }, {
-      'id': '6',
-      'name': '水肥'
     }],
     chartData: {},
     nodata: false,
     currType: 2,
     latestInfo: {},
-    
+   
   },
   onLoad() {
     wx.hideTabBar();
@@ -81,7 +58,6 @@ Page({
     this.getChartData('humid', '%');
   },
   handeltype(e) {//点击切换
-    console.log(e);
     const ind = e.currentTarget.dataset.index;
     this.setData({
       currType: ind
@@ -94,9 +70,9 @@ Page({
     let sorts = this.data.sorts;
     this.setData({
       currType: currIdx,
-      nodata:false,
+      nodata: false,
     })
-    if (currIdx == 0) {
+    if (currIdx == 0 || currIdx == 5) {
       this.setData({
         nodata: true
       })
@@ -113,17 +89,13 @@ Page({
     if (currIdx == 4) {
       this.getChartData('rain', "mm");
     }
-    if (currIdx == 5) {
-      this.setData({
-        nodata: true
-      })
-    }
   },
   chartInit(canvas, width, height, data, obj, unit) {
     const chart = new F2.Chart({
       el: canvas,
       width,
-      height
+      height,
+      padding: ['auto', 'auto', 40, 'auto']
     });
     chart.source(data, {
       month: {
@@ -136,18 +108,6 @@ Page({
         formatter(val) {
           return val
         }
-      }
-    });
-    chart.axis(obj.propertX, {
-      label(text, index, total) {
-        const textCfg = {};
-        if (index === 0) {
-          textCfg.textAlign = 'left';
-        }
-        if (index === total - 1) {
-          textCfg.textAlign = 'right';
-        }
-        return textCfg;
       }
     });
     chart.axis(obj.propertX, {
@@ -202,50 +162,67 @@ Page({
     chart.render();
     return chart;
   },
+  chartDataRequest(type,unit){//环境数据信息请求
+    const _this = this;
+    return new Promise(function(resolve,reject){
+      HTTP.GET({
+        url: 'environment',
+        data: { gardenId: app.globalData.gardenId, type: type }
+      }).then(res => {
+        let chartList = [];
+        let latestInfo = {};
+        let dateType = "";
+        if (Object.keys(res.data).length > 0 && res.data.envDatas && res.data.envDatas.length > 0) {
+          chartList = res.data.envDatas
+          dateType = res.data.envDatas[0].dataType;
+          const type = res.data.envDatas[0].type
+          latestInfo.info = "当前" + type + " " + (res.data.latestEnvDatas.data || 0) + '' + unit
+          latestInfo.date = res.data.latestEnvDatas.updateTime;
+        }
+        if (type == 'humid' && res.data.humidEnvDatas && res.data.humidEnvDatas.length > 0) {
+          chartList = res.data.humidEnvDatas
+          dateType = res.data.humidEnvDatas[0].dataType;
+          latestInfo.info = "当前空气湿度：" + (res.data.humidLatestEnvDatas.data || 0) + "% " + "当前土壤湿度：" + (res.data.soilHumidLatestEnvDatas.data || 0) + unit;
+          latestInfo.date = res.data.humidLatestEnvDatas.updateTime || '0000-00-00'
+        }
+        if (type == 'temp' && res.data.tempEnvDatas && res.data.tempEnvDatas.length > 0) {
+          chartList = res.data.tempEnvDatas
+          dateType = res.data.tempEnvDatas[0].dataType;
+          latestInfo.info = "当前空气温度：" + (res.data.tempLatestEnvDatas.data || 0) + "% " + "当前土壤温度：" + (res.data.soilTempLatestEnvDatas.data || 0) + unit;
+          latestInfo.date = res.data.tempLatestEnvDatas.updateTime
+        }
+        if (chartList.length > 0) {
+          _this.setData({
+            nodata: false,
+            latestInfo: latestInfo,
+            dateType: dateType,
+            loading:false
+          })
+          resolve(chartList);
+        } else {
+          _this.setData({
+            nodata: true,
+            dateType: '',
+            loading: false
+          })
+        }
+      })
+    })
+  },
   getChartData(type, unit) {
     const _this = this;
-    const blockId = wx.getStorageSync('blockId') || '';
-    handel.handelRequest(this, {
-      url: 'environment' + '?' + blockId + '/' + type,
-    }, function (result) {
-      let chartList = [];
-      let latestInfo = {};
-      if (Object.keys(result).length > 0 && result.envDatas && result.envDatas.length>0) {
-        chartList = result.envDatas
-        const type = result.envDatas[0].type
-        latestInfo.info = "当前" + type+" "+ (result.latestEnvDatas.data||0) + '' + unit
-          latestInfo.date = result.latestEnvDatas.updateTime;
-      }
-      if (type == 'humid' && result.humidEnvDatas && result.humidEnvDatas.length > 0) {
-        chartList = result.humidEnvDatas
-          latestInfo.info = "当前空气湿度：" + (result.humidLatestEnvDatas.data||0) + "% " + "当前土壤湿度：" + (result.soilHumidLatestEnvDatas.data||0) + "%";
-          latestInfo.date = result.humidLatestEnvDatas.updateTime||'0000-00-00'
-      }
-      if (type == 'temp' && result.tempEnvDatas && result.tempEnvDatas.length > 0) {
-        chartList = result.tempEnvDatas
-        latestInfo.info = "当前空气温度：" + (result.tempLatestEnvDatas.data || 0) + "% " + "当前土壤温度：" + (result.soilTempLatestEnvDatas.data||0) + "℃";
-          latestInfo.date = result.tempLatestEnvDatas.updateTime
-      }
-      if (chartList.length > 0) {
-        _this.setData({
-          nodata: false,
-          latestInfo: latestInfo
-        })
-        const id = '#' + type
-        _this.chartComponent = _this.selectComponent(id);
-        _this.chartComponent.init((canvas, width, height) => {
-          _this.chartInit(canvas, width, height, chartList, {
-            'color': '#1adee2',
-            'propertX': 'updateTime',
-            'propertY': 'avgData'
-          }, unit)
-        })
-      } else {
-        _this.setData({
-          nodata: true
-        })
-      }
+    this.chartDataRequest(type,unit).then(res=>{
+      const id = '#' + type;
+      _this.chartComponent = _this.selectComponent(id);
+      _this.chartComponent.init((canvas, width, height) => {
+        _this.chartInit(canvas, width, height, res, {
+          'color': '#1adee2',
+          'propertX': 'updateTime',
+          'propertY': 'avgData'
+        }, unit)
+      })
     })
+
   },
 
 });

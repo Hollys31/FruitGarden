@@ -1,0 +1,4 @@
+<!--pages/casecode/casecode.wxml-->
+<view>
+<web-view src="{{'https://trace.yufengtek.com/orchard/applet/gardenCase/index.html?qr='+qr+'&gardenId='+gardenId}}"></web-view>
+</view>

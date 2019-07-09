@@ -1,7 +1,94 @@
 /* pages/index/index.wxss */
-page{
+
+page {
   width: 100%;
 }
+
+.warn-modal {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 99891;
+  line-height: 1.6em;
+}
+
+.warn-modal .modal-inner {
+  width: 500rpx;
+  height: 770rpx;
+  border-radius: 10rpx;
+  padding: 20rpx 40rpx;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-left: -290rpx;
+  margin-top: -470rpx;
+  background: #f7f7f7;
+  z-index: 99991;
+  transition: all 0.2s linear;
+  color: #666;
+  font-size: 26rpx;
+}
+
+.warn-modal .item {
+  margin-bottom: 6rpx;
+}
+
+.warn-modal .item>text {
+  display: block;
+}
+
+.warn-modal .pro-info .text {
+  width: 290rpx;
+  float: left;
+  margin-left: 30rpx;
+  padding-top: 10rpx;
+}
+
+.warn-modal .pro-info .text text {
+  display: block;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.warn-modal .pro-info image {
+  width: 178rpx;
+  height: 178rpx;
+  float: left;
+}
+
+.warn-modal .img-wrap image {
+  width: 100%;
+  margin-top: 10rpx;
+  max-height: 310rpx;
+  border-radius: 20rpx;
+}
+
+.warn-modal .stit {
+  font-size: 30rpx;
+  color: #333;
+  height: 2.2em;
+  line-height: 2.2em;
+}
+
+.warn-modal .close {
+  position: fixed;
+  width: 40rpx;
+  height: 40rpx;
+  color: #fff;
+  bottom: 150rpx;
+  font-size: 60rpx;
+  left: 50%;
+  margin-left: -36rpx;
+}
+
+.warn-modal .close text {
+  font-size: 60rpx;
+}
+
 .brief {
   width: 100%;
   height: 227rpx;
@@ -36,6 +123,14 @@ navigator {
   width: 475rpx;
   padding-left: 23rpx;
   line-height: 1.8em;
+}
+
+.brief-inner .text .address {
+  width: 100%;
+  height: 50rpx;
+  line-height: 50rpx;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .brief-inner >.pic {
@@ -94,7 +189,6 @@ navigator {
   width: 183rpx;
   height: 183rpx;
   float: left;
-  border-radius: 50%;
 }
 
 .product .text-info {
@@ -108,7 +202,6 @@ navigator {
   font-size: 30rpx;
 }
 
-
 .product .grade>view {
   float: left;
   width: 45%;
@@ -120,8 +213,8 @@ navigator {
 
 .product .grade text {
   position: absolute;
-  width:10rpx;
-  height:10rpx;
+  width: 10rpx;
+  height: 10rpx;
   display: block;
   border-radius: 50%;
   left: 0;
@@ -162,10 +255,12 @@ navigator {
 .look-record text {
   font-size: 30rpx;
 }
-.origin{
-padding-left: 13rpx;
-overflow: hidden
+
+.origin {
+  padding-left: 13rpx;
+  overflow: hidden;
 }
+
 .origin .item {
   border-left: 2rpx solid #06caac;
   padding: 0 20rpx;
@@ -207,17 +302,20 @@ overflow: hidden
   top: 10rpx;
   z-index: 99;
 }
-.origin .item .address{
+
+.origin .item .address {
   width: 100%;
   overflow: hidden;
   height: 64rpx;
   line-height: 64rpx;
-  white-space: nowrap
+  white-space: nowrap;
 }
-.origin .item .address scroll-view{
-   height: 64rpx;
+
+.origin .item .address scroll-view {
+  height: 64rpx;
   line-height: 64rpx;
 }
+
 .item .date {
   padding-left: 10px;
   margin-bottom: 10rpx;
@@ -234,7 +332,7 @@ overflow: hidden
   border-radius: 10rpx;
   border: 1px solid #e7e7e7;
   padding: 15rpx;
-  padding-bottom:10rpx;
+  padding-bottom: 10rpx;
   position: relative;
 }
 
@@ -255,12 +353,15 @@ overflow: hidden
 .item .mainColor text {
   font-size: 32rpx;
 }
-.item .mainColor.farm text{
+
+.item .mainColor.farm text {
   font-size: 38rpx;
 }
-.item .mainColor.instock text{
+
+.item .mainColor.instock text {
   font-size: 30rpx;
 }
+
 .item  .product-num .mainColor text {
   font-size: 36rpx;
 }
@@ -309,6 +410,7 @@ overflow: hidden
 .item .todetail>view:first-child .inner {
   border-right: 1rpx solid #cfcfcf;
 }
+
 @media screen and (max-width: 320px) {
   .product .text-info {
     width: 380rpx;

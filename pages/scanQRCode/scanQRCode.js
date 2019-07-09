@@ -7,32 +7,58 @@ Page({
   data: {
     loading: false,
     buttonClicked:false,
-    allow:false
+    allow:false,
+    params:{}//扫码验证参数
   },
 
   onLoad: function () {
+    const _this=this;
     const phoneNumber = wx.getStorageSync('phoneNumber') || '';
     if (!phoneNumber){
-      console.log(phoneNumber);
       this.setData({
         allow:true
       })
     }
-    handel.getOpenId(this);//获取openid
-    handel.getSetting(this);//地理位置授权
+    handel.getUserAddress().then(res=>{//获取地理位置
+      const params = Object.assign(_this.data.params, res);
+      app.globalData.address=res;
+      _this.setData({
+        params: params
+      });
+    });
+    handel.getOpenId().then(res => {//获取openid
+      let params=_this.data.params;
+      params.openId = res.openid;
+      _this.setData({
+        params: params
+      });
+    })
+   
   },
   onReady() {
     // 调用接口
    
   },
-  handelsScanCode(){
-    handel.handelScanCode(this, { phoneNumber: wx.getStorageSync('phoneNumber') || '', openId: wx.getStorageSync('openId') || '' });
-  },
-  getPhoneNumbers(e){
+  handelsScanCode(){//已授权手机扫码
+    const _this=this;
+    handel.scanCode().then(code => {//扫码
+      let params = _this.data.params;
+      params.qrcodepriNum = code;
+      params.phoneNumber = wx.getStorageSync('phoneNumber') || '';
+      handel.checkCode(params);//验证
+    });
+  }, 
+  getPhoneNumbers(e){//授权手机后扫码
     const _this=this;
     if(e.detail.iv){
-      console.log(e.detail.iv);
-      handel.getPhoneNumber(e, _this);
+      let params = _this.data.params;
+      handel.getPhoneNumber(e).then(phone=>{//获取手机号
+        params.phoneNumber=phone;
+        handel.scanCode().then(code=>{//扫码
+          params.qrcodepriNum=code;
+          handel.checkCode(params);//验证
+        });
+      })
     }else{
       wx.showToast({
         icon:'none',

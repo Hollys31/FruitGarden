@@ -1,5 +1,7 @@
 // pages/feedback/feedback.js
+import HTTP from '../../utils/http.js'
 var handel = require('../../utils/handel.js');
+const app = getApp();
 Page({
 
   /**
@@ -28,12 +30,13 @@ Page({
   getFeedbackInfo(){//获取反馈信息数据
     const _this = this;
     const openId = wx.getStorageSync('openId') || ''
-    handel.handelRequest(this, {
-      url: 'feedBackList' + '?' + openId,
-    }, function (result) {
-      console.log(result);
+    HTTP.GET({
+      url:'feedBackList',
+      data: { openId: app.globalData.openId}
+    }).then(res=>{
       _this.setData({
-        feedbackData: result
+        feedbackData: res.data,
+        loading:false
       })
     })
   },

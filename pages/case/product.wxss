@@ -1,0 +1,30 @@
+/* pages/case/product.wxss */
+page{
+  background: #f7a54d
+}
+.product .banner{
+  width: 100%;
+  height: 1016rpx;
+}
+.product .goods{
+  width: 670rpx;
+  height: 492rpx;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+}
+.product .goods image{
+ width: 100%;
+ height: 100%;
+}
+.product .goods .text{
+  width: 100%;
+  position: absolute;
+  top: 310rpx;
+  color: #fff;
+}
+.product .goods .comming{
+  color: #f66a1c;
+  font-size: 36rpx;
+  line-height: 3.4em;
+}

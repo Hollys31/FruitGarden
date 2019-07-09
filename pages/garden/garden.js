@@ -1,5 +1,6 @@
 // pages/teaPlantation/teaPlantation.js
 var handel = require('../../utils/handel.js');
+import HTTP from '../../utils/http.js'
 const app = getApp();
 Page({
 
@@ -8,10 +9,10 @@ Page({
    */
   data: {
     tabbar: {},
-    loading:true,
+    loading: true,
     isIphoneX: app.globalData.isIphoneX,
-    gardenInfo:{},
-    coverImg: handel.imgHeader +"/imgs/orban.png"
+    gardenInfo: {},
+    coverImg: handel.imgHeader + "/imgs/orban.png?v=13"
   },
 
   /**
@@ -20,20 +21,20 @@ Page({
   onLoad: function (options) {
     this.getGardenInfo()
   },
- getGardenInfo(){//获取果园信息
-   const _this=this;
-   const blockId = wx.getStorageSync('blockId') || '';
-   const gardenId = wx.getStorageSync('gardenId') || '';
-   console.log(blockId);
-   handel.handelRequest(this, {
-     url: 'orchard' + '?' + gardenId + '/' + blockId,
-   }, function (result) {
-     console.log(result);
-     _this.setData({
-      gardenInfo: result
-     })
-   })
- },
+  getGardenInfo() {//获取果园信息
+    const _this = this;
+    const blockId = app.globalData.blockId;
+    const gardenId = app.globalData.gardenId;
+    HTTP.GET({
+      url: 'orchard',
+      data: { gardenId: gardenId, blockId: blockId }
+    }).then(res => {
+      _this.setData({
+        gardenInfo: res.data,
+        loading:false
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

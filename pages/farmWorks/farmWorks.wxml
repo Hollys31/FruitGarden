@@ -4,7 +4,7 @@
   <image src="{{productInfo.productInfo.url||'/resources/images/default.png'}}"></image>
   <view class='info'>
     <view class='name'>{{productInfo.productInfo.type}}</view>
-    <view class='desc'>{{productInfo.productInfo.remark}}</view>
+    <view class="desc {{on?'on':''}}" bindtap='getAllDesc'>{{productInfo.productInfo.remark}}</view>
     <view class='date clearfix'><icon class='mainColor' iconClass="icon-clock"></icon> {{productInfo.plantInfo.plantYears}}年{{productInfo.plantInfo.plantMonths}}个月  <text>{{productInfo.plantInfo.blockName}}</text></view>
   </view>
 </view>

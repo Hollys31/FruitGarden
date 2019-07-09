@@ -1,6 +1,6 @@
 // pages/index/index.js
+import HTTP from '../../utils/http.js'
 var handel = require('../../utils/handel.js');
-var api = require('../../lib/api.js');
 const app = getApp();
 Page({
   /**
@@ -10,14 +10,16 @@ Page({
     loading: true,
     tabbar: {},
     isIphoneX: app.globalData.isIphoneX,
-    originIsShow: false,
     mainInfo: {},
     originInfo: {},
-    coverImg1: handel.imgHeader+'/imgs/origin.png',
-    coverImg2: handel.imgHeader+'/imgs/indck.png',
-    coverImg3: handel.imgHeader + '/imgs/indrk.png',
-    coverImg4: handel.imgHeader + '/imgs/indns.png',
-    coverImg5: handel.imgHeader + '/imgs/indzz.png'
+    modalInfo: {},
+    modalHidden: false,
+    coverImg1: handel.imgHeader + '/imgs/origin.png?v=13',
+    coverImg2: handel.imgHeader + '/imgs/indck.png?v=13',
+    coverImg3: handel.imgHeader + '/imgs/indrk.png?v=13',
+    coverImg4: handel.imgHeader + '/imgs/indns.png?v=13',
+    coverImg5: handel.imgHeader + '/imgs/indzz.png?v=13',
+    coverImg6: handel.imgHeader + '/imgs/indcz.png?v=13'
   },
 
   /**
@@ -37,33 +39,53 @@ Page({
   onReady: function () {
 
   },
-  getHomeInfo() {//获取首页信息数据
+  closeModal() {//关闭模态框
+    this.setData({
+      modalHidden: false,
+      modalInfo: {}
+    })
+  },
+  getModalOriginInfo(e) {//溯源流程弹窗信息
     const _this = this;
-    const qrcodeNum = wx.getStorageSync('qrcodeNum') || ''
-    handel.handelRequest(this, {
-      url: 'homeInfo' + '?' + qrcodeNum,
-    }, function (result) {
-    //  console.log(result);
+    const type = e.currentTarget.dataset.type;
+    _this.setData({
+      modalHidden: true
+    })
+    HTTP.GET({
+      url: 'originInfo',
+      data: { type: type, qrcodeNum: app.globalData.qrcodeNum }
+    }).then(result => {
+      let originInfo = result.data.originInfo;
+      originInfo.type = type;
       _this.setData({
-        mainInfo: result
+        modalInfo: originInfo
       })
     })
   },
+  getHomeInfo() {//获取首页信息数据
+    const _this = this;
+    const qrcodeNum = wx.getStorageSync('qrcodeNum') || '';
+    HTTP.GET({
+      url: 'homeInfo',
+      data: { qrcodeNum: app.globalData.qrcodeNum}
+    }).then(result => {
+      _this.setData({
+        mainInfo: result.data
+      })
+    })
+  },
+  
   getOriginInfo() {//获取溯源流程数据信息
     const _this = this;
     const qrcodeNum = wx.getStorageSync('qrcodeNum') || ''
-    handel.handelRequest(this, {
-      url: 'originFlow' + '?' + qrcodeNum,
-    }, function (result) {
-      console.log(result);
+    HTTP.GET({
+      url: 'originFlow',
+      data: {qrcodeNum:app.globalData.qrcodeNum}
+    }).then(result => {
       _this.setData({
-        originInfo: result
+        originInfo: result.data,
+        loading:false
       })
-    })
-  },
-  lookProduce() {//查看产品生产环境
-    this.setData({
-      originIsShow:true
     })
   },
   /**
@@ -77,7 +99,10 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    this.setData({
+      modalHidden: false,
+      modalInfo: {}
+    })
   },
 
   /**

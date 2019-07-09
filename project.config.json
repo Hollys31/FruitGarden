@@ -11,10 +11,11 @@
 		"newFeature": true,
 		"nodeModules": false,
 		"autoAudits": false,
-		"uglifyFileName": true
+		"uglifyFileName": true,
+		"checkInvalidKey": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.6.1",
+	"libVersion": "2.6.6",
 	"appid": "wx748194974cd03430",
 	"projectname": "fruitGarden",
 	"debugOptions": {
@@ -41,7 +42,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 13,
+			"current": 17,
 			"list": [
 				{
 					"id": -1,
@@ -129,15 +130,43 @@
 				},
 				{
 					"id": -1,
-					"name": "getphone",
-					"pathName": "pages/getphone/getphone",
+					"name": "网络异常",
+					"pathName": "pages/network/network",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": -1,
-					"name": "网络异常",
-					"pathName": "pages/network/network",
+					"name": "echarts图表",
+					"pathName": "pages/environment/environment",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "箱码",
+					"pathName": "pages/casecode/casecode",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "联系我们",
+					"pathName": "pages/case/contact",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "产品信息",
+					"pathName": "pages/case/product",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "溯源流程",
+					"pathName": "pages/case/origin",
 					"query": "",
 					"scene": null
 				}

@@ -167,7 +167,7 @@ page{
 
 .chart-wrap {
   width: 710rpx;
-  height: 464rpx;
+  height: 500rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -178,11 +178,15 @@ page{
   position: relative;
   margin: 0 auto;
 }
-
+.chart-wrap .tips{
+  height: 1.em;
+  line-height: 1.6em;
+}
 .chart-wrap canvas {
   width: 710rpx;
   height: 440rpx;
   margin: 0 auto;
+  padding: 20rpx 0
 }
 
 .data-info {
@@ -190,7 +194,7 @@ page{
   color: #333;
   text-align: center;
   line-height: 1.6em;
-  margin-top: 20rpx;
+  margin-top: 40rpx;
 }
 
 .data-info text {
@@ -200,6 +204,7 @@ page{
 }
 
 .charts {
+  width: 100%;
   height: 740rpx;
 }
 
@@ -210,8 +215,8 @@ page{
 }
 
 .no-device image {
-  width: 394rpx;
-  height: 225rpx;
+  width: 347rpx;
+  height: 267rpx;
   display: block;
   margin: 15rpx auto;
 }

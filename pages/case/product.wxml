@@ -1,0 +1,12 @@
+<!--pages/case/product.wxml-->
+<title title="产品信息"></title>
+<view class='product'>
+  <image class='banner' src='../../resources/images/proban.png'></image>
+  <subhead name="购买渠道"></subhead>
+  <view class='goods'>
+    <image src='../../resources/images/nogoods.png'></image>
+    <view class='text'> 更多功能正在开发中...
+    <view class='comming'>敬请期待！</view></view>
+  </view>
+</view>
+

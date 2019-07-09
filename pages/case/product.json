@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "title": "../../components/title/title",
+    "subhead":"../../components/subhead/subhead"
+  }
+}

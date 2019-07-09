@@ -2,14 +2,14 @@
 <block wx:if="{{fistPart}}">
   <view class='check-bg'>
     <view class='state'>检测中...</view>
-    <circle class="cir-animate"></circle>
+    <circle imgUrl="{{productInfo.varieties.url}}" class="cir-animate"></circle>
   </view>
   <image class='image-bg ' src='/resources/images/checkbg.png' />
 </block>
 <view class='map-wrap {{className}}' wx:if="{{!fistPart}}">
   <image src='/resources/images/earth.png' wx:if="{{!mapPart}}"></image>
   <map class="map {{mapPart?'show':''}}" id="map" animation="{{animationData}}" longitude="{{longitude}}" latitude="{{latitude}}" scale="{{scale}}" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" bindregionchange="regionchange"
-    show-location  enable-scroll="{{false}}">
+    show-location enable-scroll="{{false}}">
     <cover-view class='address-wrap' wx:if="{{showProduct}}">
       <cover-view class='item clearfix'>
         <cover-image src='/resources/images/apple.png'></cover-image>
@@ -26,6 +26,10 @@
         <cover-image class='proimg' src="{{productInfo.varieties.url||'/resources/images/default.png'}}"></cover-image>
         <cover-view class=' text'>
           <cover-view class='name'>{{productInfo.varieties.type}}</cover-view>
+          <cover-view class='tags clearfix'>
+            <cover-view class='item'> <cover-image src='/resources/images/cIcon1.png'></cover-image><cover-view> 一物一码</cover-view></cover-view>
+           <cover-view class='item'> <cover-image src='/resources/images/cIcon2.png'></cover-image> <cover-view>拒绝假货</cover-view></cover-view>
+          </cover-view>
           <cover-view>采摘日期：{{productInfo.pluckDate.pluckDate}}</cover-view>
           <cover-view>生产果园：{{productInfo.gardenInfo.gardenName}}</cover-view>
         </cover-view>

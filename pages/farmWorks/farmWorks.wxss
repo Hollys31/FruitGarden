@@ -13,7 +13,6 @@ page{
 .goods-info image{
   width: 180rpx;
   height: 180rpx;
-  border-radius: 50%;
   float: left;
   margin-right: 30rpx;
 }
@@ -27,7 +26,22 @@ page{
   font-weight: bold;
   margin-bottom: 16rpx
 }
-
+.goods-info .info .desc {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  margin-top: 16rpx;
+  transition:all .2s linear;
+  -webkit-transition:all .2s linear;
+}
+.goods-info .info .desc.on{
+  margin-top: 0;
+  display: block;
+  overflow:unset;
+  transition:all .2s linear;
+  -webkit-transition:all .2s linear;
+}
 .goods-info .info .date{
  margin-top: 16rpx
 }

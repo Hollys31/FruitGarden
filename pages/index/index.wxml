@@ -7,8 +7,10 @@
       <view class='text'>
         <view class='title'>{{mainInfo.gardenInfo.gardenName}}</view>
         <view>负责人：{{mainInfo.gardenInfo.gardenOwner}}</view>
-        <view>
-          <icon class='mainColor' iconClass="icon-address"></icon> {{mainInfo.gardenInfo.addressProv}}{{mainInfo.gardenInfo.address.City}}{{mainInfo.gardenInfo.addressCounty}}{{mainInfo.gardenInfo.addressTown}}{{mainInfo.gardenInfo.addressVillage}}{{mainInfo.gardenInfo.addressInfo}}
+        <view class='address'>
+          <scroll-view scroll-x>
+            <icon class='mainColor' iconClass="icon-address"></icon> {{mainInfo.gardenInfo.addressProv}}{{mainInfo.gardenInfo.address.City}}{{mainInfo.gardenInfo.addressCounty}}{{mainInfo.gardenInfo.addressTown}}{{mainInfo.gardenInfo.addressVillage}}{{mainInfo.gardenInfo.addressInfo}}
+          </scroll-view>
         </view>
       </view>
       <image class='pic' src="{{mainInfo.gardenInfo.imgUrl||'/resources/images/default.png'}}"></image>
@@ -41,7 +43,7 @@
   <view class='item'>
     <image src='/resources/images/site2.png'></image>年平均气温{{mainInfo.weather.temp}}℃昼夜温差最大{{mainInfo.weather.tempDiff}}℃</view>
   <view class='item'>
-    <image src='/resources/images/site3.png'></image>年平均光照{{mainInfo.weather.sunlux}}hr平均降雨量{{mainInfo.weather.avgRain}}mm</view>
+    <image src='/resources/images/site3.png'></image>年平均光照{{mainInfo.weather.sunlux}}Lux平均降雨量{{mainInfo.weather.avgRain}}mm</view>
   <view class='item'>
     <image src='/resources/images/site4.png'></image>年平均湿度{{mainInfo.weather.humid}}% </view>
   <view class='item'>
@@ -84,7 +86,7 @@
         </view>
       </navigator>
     </view>
- <!--    <view class='item'>
+    <!--    <view class='item'>
       <view class='date'>
         <text>{{originInfo.outStock.yearStr}}</text>{{originInfo.outStock.dateStr}} {{originInfo.outStock.week}}</view>
       <view class='info'>
@@ -110,7 +112,7 @@
         </view>
       </view>
     </view> -->
-    <view class='item'>
+    <view class='item' wx:if="{{originInfo.inStock}}">
       <view class='date'>
         <text>{{originInfo.inStock.yearStr}}</text>{{originInfo.inStock.dateStr}} {{originInfo.inStock.week}}</view>
       <view class='info'>
@@ -123,7 +125,7 @@
         </view>
         <view class='todetail'>
           <view>
-            <view class='inner'>
+            <view class='inner' data-type="warehouse" bindtap='getModalOriginInfo'>
               <icon class='mainColor instock' iconClass="icon-instock"></icon>
               库存记录</view>
           </view>
@@ -135,7 +137,33 @@
         </view>
       </view>
     </view>
-    <view class='item'>
+    <view class='item' wx:if="{{originInfo.pluck}}">
+      <view class='date'>
+        <text>{{originInfo.pluck.yearStr}}</text>{{originInfo.pluck.dateStr}} {{originInfo.pluck.week}}</view>
+      <view class='info'>
+        <view class='img-box'>
+          <image src='{{coverImg6}}'></image>
+        </view>
+        <view class='address'>
+          <scroll-view scroll-x>
+            <icon class='mainColor ' iconClass="icon-address"></icon>{{originInfo.pluck.addressProv}}{{originInfo.pluck.addressCity}}{{originInfo.pluck.addressCounty}}{{originInfo.pluck.addressVillage}}{{originInfo.pluck.addressInfo}}</scroll-view>
+        </view>
+        <view class='todetail'>
+          <view>
+            <view class='inner' data-type="pluck" bindtap='getModalOriginInfo'>
+              <icon class='mainColor instock' iconClass="icon-pluck"></icon>
+              采摘作业</view>
+          </view>
+          <view>
+            <view class='inner'>
+              <icon class='mainColor ' iconClass="icon-clock"></icon>
+              生长第{{originInfo.pluck.plantDays||0}}天</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class='item' wx:if="{{originInfo.farmWork}}">
       <view class='date'>
         <text>{{originInfo.farmWork.startDate}}</text>至 {{originInfo.farmWork.endDate}} </view>
       <view class='info'>
@@ -148,7 +176,7 @@
         </view>
         <view class='todetail'>
           <view>
-            <view class='inner'>
+            <view class='inner' data-type="farm" bindtap='getModalOriginInfo'>
               <icon class='mainColor farm' iconClass="icon-record"></icon>
               农事作业
             </view>
@@ -158,11 +186,10 @@
               <icon class='mainColor ' iconClass="icon-clock"></icon>
               生长第{{originInfo.farmWork.plantDays}}天</view>
           </view>
-
         </view>
       </view>
     </view>
-    <view class='item'>
+    <view class='item' wx:if="{{originInfo.plant}}">
       <view class='date'>
         <text>{{originInfo.plant.yearStr}}</text>{{originInfo.plant.dateStr}} {{originInfo.plant.week}}</view>
       <view class='info'>
@@ -175,21 +202,51 @@
         </view>
         <view class='todetail'>
           <view>
-            <view class='inner'>
+            <view class='inner' data-type="plant" bindtap='getModalOriginInfo'>
               <icon class='mainColor plant' iconClass="icon-plant"></icon>
               种植作业</view>
           </view>
           <view>
             <view class='inner'>
               <icon class='mainColor ' iconClass="icon-clock"></icon>
-              {{originInfo.plant.yearStr}}.{{originInfo.plant.dateStr}}</view>
+              种植第1天</view>
           </view>
         </view>
       </view>
     </view>
   </view>
 </view>
+<!-- 弹窗信息 -->
+<view class='warn-modal' wx:if="{{modalHidden}}" catchtouchmove="ture">
+  <view class='modal-inner'>
+    <view class='pro-info clearfix item'>
+      <image src="{{modalInfo.cropUrl||'/resources/images/default.png'}}"></image>
+      <view class='text'>
+        <text class='stit'>{{modalInfo.cropName}}</text>
+        <text>产地：{{modalInfo.blockName}}</text>
+        <text><block wx:if="{{modalInfo.type=='warehouse'}}">库存</block><block wx:if="{{modalInfo.type=='pluck'}}">采摘</block><block wx:if="{{modalInfo.type=='farm'}}">农事</block><block wx:if="{{modalInfo.type=='plant'}}">种植</block>时间：{{modalInfo.dateTime}}</text>
+      </view>
+    </view>
+    <view class='item'>
+      <view class='stit'><block wx:if="{{modalInfo.type=='warehouse'}}">库存</block><block wx:if="{{modalInfo.type=='pluck'}}">采摘</block><block wx:if="{{modalInfo.type=='farm'}}">农事</block><block wx:if="{{modalInfo.type=='plant'}}">种植</block>信息</view>
+      <text>负责人：{{modalInfo.owner}}</text>
+      <text wx:if="{{modalInfo.type=='warehouse'}}">库存地点：{{modalInfo.otherData||'暂无'}}</text>
+       <text wx:if="{{modalInfo.type=='pluck'}}">{{modalInfo.otherData||'2019'}}年第一次采摘</text>
+       <view  wx:if="{{modalInfo.type=='farm'}}">农事类型：<navigator class='mainColor' hover-class='none' url="/pages/farmWorks/farmWorks" open-type="switchTab">查看详情</navigator></view>
+         <text wx:if="{{modalInfo.type=='plant'}}">种植面积：{{modalInfo.otherData||'0'}}亩</text>
+      <text><block wx:if="{{modalInfo.type=='warehouse'||modalInfo.type=='farm'}}">生产</block><block wx:if="{{modalInfo.type=='pluck'}}">采摘</block><block wx:if="{{modalInfo.type=='plant'}}">种植</block>果园：{{modalInfo.gardenName}}</text>
+    </view>
+    <view class='item img-wrap'>
+      <view class='stit'>水果图片</view>
+       <image  wx:if="{{modalInfo.type=='warehouse'}}" src="{{modalInfo.img||coverImg3}}"></image> 
+       <image  wx:if="{{modalInfo.type=='farm'}}" src="{{modalInfo.img||coverImg4}}"></image>
+       <image  wx:if="{{modalInfo.type=='plant'}}" src="{{modalInfo.img||coverImg5}}"></image>
+       <image  wx:if="{{modalInfo.type=='pluck'}}" src="{{modalInfo.img||coverImg6}}"></image>
+    </view>
+    <icon bindtap='closeModal' class='close' iconClass="icon-close"></icon>
+  </view>
 
+</view>
 
 <Loading wx:if="{{loading}}"></Loading>
 <tabbar tabbar="{{tabbar}}"></tabbar>

@@ -32,10 +32,10 @@
 }
 
 .modal-inner image {
-  width: 232rpx;
-  height: 206rpx;
+  width: 267rpx;
+  height: 254rpx;
   display: block;
-  margin: 35rpx auto;
+  margin:10rpx  auto 20rpx;
 }
 
 .modal-inner text {

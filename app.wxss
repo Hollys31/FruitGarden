@@ -76,8 +76,8 @@ button::after{
 }
 
 .nodate image {
-  width: 394rpx;
-  height: 225rpx;
+  width: 347rpx;
+  height: 267rpx;
   display: block;
   margin: 0 auto;
 }

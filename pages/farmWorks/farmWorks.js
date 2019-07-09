@@ -1,4 +1,5 @@
 // pages/farmWorks/farmWorks.js
+import HTTP from '../../utils/http.js'
 var handel = require('../../utils/handel.js');
 const app = getApp();
 Page({
@@ -12,7 +13,8 @@ Page({
     isIphoneX: app.globalData.isIphoneX,
     farmWorkList: [],
     productInfo: {},
-    coverImg: handel.imgHeader+'/imgs/stok.png'
+    coverImg: handel.imgHeader+'/imgs/stok.png?v=11',
+    on: false
   },
 
   /**
@@ -31,27 +33,32 @@ Page({
   onReady: function () {
 
   },
+  getAllDesc() {//查看完整产品描述
+    this.setData({
+      on: true
+    })
+  },
   getProductInfo() {//获取产品信息
     const _this = this;
     const qrcodeNum = wx.getStorageSync('qrcodeNum') || ''
-    handel.handelRequest(this, {
-      url: 'farmProduct' + '?' + qrcodeNum,
-    }, function (result) {
-      console.log(result);
+    HTTP.GET({
+      url:'farmProduct',
+      data: { qrcodeNum: app.globalData.qrcodeNum}
+    }).then(res=>{
       _this.setData({
-        productInfo: result
+        productInfo: res.data
       })
     })
   },
   getFarmWorkList() {//获取农事记录列表
     const _this = this;
-    const qrcodeNum = wx.getStorageSync('qrcodeNum') || ''
-    handel.handelRequest(this, {
-      url: 'farmWorkList' + '?' + qrcodeNum,
-    }, function (result) {
-      console.log(result);
+    HTTP.GET({
+      url:'farmWorkList',
+      data: { qrcodeNum: app.globalData.qrcodeNum }
+    }).then(res=>{
       _this.setData({
-        farmWorkList: result.farmWorks
+        farmWorkList: res.data.farmWorks,
+        loading:false
       })
     })
   },

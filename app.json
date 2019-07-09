@@ -13,7 +13,12 @@
     "pages/farmWorks/farmWorks",
     "pages/checkfail/checkfail",
     "pages/getphone/getphone",
-    "pages/network/network"
+    "pages/network/network",
+    "pages/casecode/casecode",
+    "pages/case/index",
+    "pages/case/product",
+    "pages/case/contact",
+    "pages/case/origin"
   ],
   "permission": {
     "scope.userLocation": {
@@ -60,10 +65,10 @@
     ]
   },
   "networkTimeout": {
-    "request": 20000,
-    "connectSocket": 20000,
-    "uploadFile": 20000,
-    "downloadFile": 20000
+    "request": 30000,
+    "connectSocket": 30000,
+    "uploadFile": 30000,
+    "downloadFile": 30000
   },
   "sitemapLocation": "sitemap.json"
 }

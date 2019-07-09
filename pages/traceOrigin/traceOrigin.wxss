@@ -229,8 +229,8 @@ button::after{
   right: 0;
   top: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
-  z-index: 998;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 99891;
 }
 
 .warn-modal .modal-inner {
@@ -244,6 +244,7 @@ button::after{
   margin-top: -460rpx;
   background: #f7f7f7;
   z-index: 999;
+  transition: all .2s linear
 }
 
 .warn-modal .modal-inner image {

@@ -1,12 +1,13 @@
-const api = {
+module.exports= {
   getWXUserInfo:'/getWXUserInfo',
   getOpenid:'getOpenid',//获取openId
   postCheck: '/check',//扫码验证 
 
   report:'report',//检测报告
   
-  homeInfo:'home/',//首页主要信息
-  originFlow:'process/',//溯源流程
+  homeInfo:'home',//首页主要信息
+  originFlow:'process',//溯源流程
+  originInfo:'originInfo',//溯源弹窗信息
 
   orchard: 'gardenDetail',//果园信息
   
@@ -24,4 +25,3 @@ const api = {
 
   environment:'environment',//环境
 }
-module.exports = api;

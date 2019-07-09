@@ -1,0 +1,8 @@
+/* pages/case/origin.wxss */
+page{
+  background: #f7a54d
+}
+.origin image{
+  width: 750rpx;
+  height: 2229rpx;
+}

@@ -1,5 +1,6 @@
 // pages/traceOrigin/traceOrigin.js
 const app = getApp();
+import HTTP from '../../utils/http.js'
 var handel = require('../../utils/handel.js');
 Page({
 
@@ -21,7 +22,8 @@ Page({
     nameEmpty: 1,
     phoneEmpty: 1,
     contextEmpty: 1,
-    allow: false
+    allow: false,
+    marginTop:'-460rpx'
   },
 
   /**
@@ -32,7 +34,6 @@ Page({
     _this.getOriginInfo();
     const phoneNumber = wx.getStorageSync('phoneNumber') || '';
     if (!phoneNumber) {
-      console.log(phoneNumber);
       this.setData({
         allow: true
       })
@@ -45,13 +46,29 @@ Page({
   onReady: function () {
   
   },
-  handelsScanCode() {
-    handel.handelScanCode(this, { phoneNumber: wx.getStorageSync('phoneNumber') || '', openId: wx.getStorageSync('openId') || '' });
+  handelsScanCode() {//直接扫码
+    let params = {};
+    params.openId = app.globalData.openId;
+    params.phoneNumber = wx.getStorageSync('phoneNumber') || ''; 
+    params = Object.assign(params, app.globalData.address);
+    handel.scanCode().then(code => {//扫码
+      params.qrcodepriNum = code;
+      handel.checkCode(params);//验证
+    });
   },
-  getPhoneNumber(e) {
-    const _this=this;
+  getPhoneNumber(e) {//授权手机后扫码
+    const _this = this;
+    let params={};
+    params.openId=app.globalData.openId;
+    params=Object.assign(params, app.globalData.address);
     if (e.detail.iv) {
-      handel.getPhoneNumber(e, _this);
+      handel.getPhoneNumber(e).then(phone => {//获取手机号
+        params.phoneNumber = phone;
+        handel.scanCode().then(code => {//扫码
+          params.qrcodepriNum = code;
+          handel.checkCode(params);//验证
+        });
+      })
     } else {
       wx.showToast({
         icon: 'none',
@@ -59,48 +76,54 @@ Page({
       })
     }
   },
-  getOriginInfo(){//获取溯源信息
+  getOriginInfo(){//获取溯源列表
     const _this=this;
-    const qrcodeNum = wx.getStorageSync('qrcodeNum') || ''
-    handel.handelRequest(this, {
-      url: 'origin' + '?' + qrcodeNum+"/"+_this.data.currentPage+'/6',
-    }, function (result) {
-      console.log(result);
+    HTTP.GET({
+      url:'origin',
+      data: { 
+        qrcodeNum: app.globalData.qrcodeNum,
+        currentPage: _this.data.currentPage,
+        currentSize:6
+        }
+    }).then(res=>{
       _this.setData({
-        proName: result.produceInfo.type
+        proName: res.data.produceInfo.type,
+        loading:false
       })
       let orisechList;
-      if (Object.keys(_this.data.originInfo).length==0){
-        orisechList=[]
-      }else{
+      if (Object.keys(_this.data.originInfo).length == 0) {
+        orisechList = []
+      } else {
         orisechList = _this.data.originInfo.orisechList;
-        
       }
-      orisechList = orisechList.concat(result.orisechList);
-      const orisech ="originInfo.orisechList";
-      if (_this.data.currentPage==1){
+      orisechList = orisechList.concat(res.data.orisechList);
+      const orisech = "originInfo.orisechList";
+      if (_this.data.currentPage == 1) {
         _this.setData({
-          originInfo: result
+          originInfo: res.data
         })
-      }else{
+      } else {
         _this.setData({
           [orisech]: orisechList
         })
-        if (result.orisechList.length<6){
-         _this.setData({
-           nomore: true
-         })
+        if (res.data.orisechList.length < 6) {
+          _this.setData({
+            nomore: true
+          })
         }
       }
-     
     })
+    
   },
-  getMoreOriginInfo(){//查看更多溯源信息
+  getMoreOriginInfo(){//查看更多溯源列表
     this.setData({
       currentPage: this.data.currentPage+1
     })
     this.getOriginInfo()
   },
+  /*
+  异常反馈
+  */
   openModal() {//显示模态框
     this.setData({
       modalHidden: true,
@@ -121,7 +144,8 @@ Page({
   handelInputFocus(e) {//输入框focus
     const name = e.target.dataset.name;
     this.setData({
-      [name]: 1
+      [name]: 1,
+      marginTop: '-550rpx'
     })
   },
   handelInputBlur(e) {//输入框blur
@@ -143,7 +167,8 @@ Page({
     if (name == "contextEmpty") {
       this.setData({
         isFocus: false,
-        advice: e.detail.value
+        advice: e.detail.value,
+        marginTop: '-460rpx'
       })
       if (e.detail.value.length == 0) {
         this.setData({
@@ -166,7 +191,7 @@ Page({
       })
       num = 1;
     }
-    if (e.detail.value.phone.length == 0 || !(/^1[34578]\d{9}$/.test(e.detail.value.phone))) {
+    if (e.detail.value.phone.length == 0 || !(/^1[345678]\d{9}$/.test(e.detail.value.phone))) {
       this.setData({
         phoneEmpty: 0
       })
@@ -179,21 +204,20 @@ Page({
       num = 1;
     }
     if (num < 1) {
-      handel.handelRequest(this, {
-        url: 'saveFeedback',
-        method: "POST",
-        data:{
+      HTTP.POST({
+        url:'saveFeedback',
+        data: {
           odbkContent: e.detail.value.advice,
           odbkTitle: _this.data.proName,
-          qrcodeNum: wx.getStorageSync('qrcodeNum') || '',
-          openid: wx.getStorageSync('openId') || '',
+          qrcodeNum: app.globalData.qrcodeNum,
+          openid: app.globalData.openId,
           name: e.detail.value.name,
           phone: e.detail.value.phone
         }
-      }, function (result) {
-         wx.navigateTo({
-           url: '/pages/feedback/feedback',
-         })
+      }).then(res=>{
+        wx.navigateTo({
+          url: '/pages/feedback/feedback',
+        })
       })
     }
   },

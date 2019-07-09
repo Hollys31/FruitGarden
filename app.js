@@ -5,17 +5,23 @@ App({
     wx.hideTabBar();
     this.getSystemInfo();
     /*  wx.removeStorage({key: 'qrcodepriNum'}) */
-    if (options.scene != 1011 && options.scene != 1012) {
+    /* if (options.scene != 1011 && options.scene != 1012) {
       wx.reLaunch({
         url: '/pages/scanQRCode/scanQRCode',
       })
-    }
+    } */
   },
   globalData: {
     userInfo: null,
     qrcodepri_num: '',
     systemInfo: null,
     isIphoneX: false,
+    openId:'',//openID
+    qrcodeNum:'',//二维码值
+    qrtype:'',//二维码类型
+    blockId:'',//地块ID
+    gardenId:'',//果园ID
+    address:{},//位置信息
     tabBar: {
       "color": "#494949",
       "selectedColor": "#06caac",

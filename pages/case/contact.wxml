@@ -1,0 +1,18 @@
+<!--pages/case/contact.wxml-->
+<title title="联系我们"></title>
+<view class='contact'>
+  <image class='bg' src='../../resources/images/casebg2.png'></image>
+  <image class='focus' src='../../resources/images/focus.png'></image>
+  <view class='context'>
+    <view class='tips'>如果您对我们有任何疑问或建议，请联系我们</view>
+    <view class='clearfix focusUs'>
+      <image src='../../resources/images/qrcode.png'></image>
+      <view class='text'>
+        联系电话
+        <text class='tel'>0797-2022886</text>
+        微信公众号
+        <text>鲜微镜</text>
+      </view>
+    </view>
+  </view>
+</view>
