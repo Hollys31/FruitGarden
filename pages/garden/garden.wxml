@@ -1,9 +1,9 @@
 <!--pages/ teaPlantation/ teaPlantation.wxml-->
 <title title="果园信息"></title>
-<view class="teaPlantation {{isIphoneX?'iphoneX':''}}">
+<view class="teaPlantation">
   <view class='part  garden'>
     <image class='img' src="{{coverImg}}" lazy-load='true' />
-    <image class='identifystate' src='/resources/images/identifystate.png' />
+    <image class='identifystate' src="{{IMG_URL_HEAD+'/images/identifystate.png'}}" />
     <view class='name'>{{gardenInfo.gardenInfo.gardenName}}</view>
     <view class='charge'>
       <icon iconClass='icon-user' class='mainColor'></icon> 负责人：{{gardenInfo.gardenInfo.gardenOwner}}</view>
@@ -35,9 +35,6 @@
             <view class='area'>占地{{item.plantArea}}亩</view>
           </view>
         </block>
-    <!--  <view wx:if="{{items.list.length>3}}" class='more-sort'>查看更多品种
-        <icon class='icon' iconClass='icon-more'></icon>
-      </view>  -->
       </view>
     </view>
   </block>

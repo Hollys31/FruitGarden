@@ -1,5 +1,5 @@
 <!--components/subhead/subhead.wxml-->
 <view class='ptitle'>
-  <image src='../../resources/images/titbg.png'></image>
+  <image src="{{IMG_URL_HEAD+'/images/titbg.png'}}"></image>
   <view class='text'>{{name}}</view>
 </view>

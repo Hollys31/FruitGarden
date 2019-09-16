@@ -1,11 +1,13 @@
-import F2 from '../../f2-canvas/lib/f2';
 import HTTP from '../../utils/http.js'
 var handel = require('../../utils/handel.js');
+import { chartInit } from '../../model/chartset.js'
 const app = getApp();
 Page({
   data: {
+    IMG_URL_HEAD: app.globalData.IMG_URL_HEAD,
     loading: true,
     tabbar: {},
+    opts:{},
     isIphoneX: app.globalData.isIphoneX,
     dateType: "",
     sorts: [{
@@ -49,11 +51,12 @@ Page({
     nodata: false,
     currType: 2,
     latestInfo: {},
+    swiperError: 0,
    
   },
   onLoad() {
     wx.hideTabBar();
-    handel.editTabbar();
+    handel.editTabbar(app.globalData.tabBar);
     const _this = this;
     this.getChartData('humid', '%');
   },
@@ -77,97 +80,24 @@ Page({
         nodata: true
       })
     }
-    if (currIdx == 1) {
-      this.getChartData('temp', '℃');
+    const actions = {
+      '1': ['temp', '℃'],
+      '2': ['humid', '%'],
+      '3': ['sunlux', 'Lux'],
+      '4': ['rain', 'mm'],
     }
-    if (currIdx == 2) {
-      this.getChartData('humid', "%");
-    }
-    if (currIdx == 3) {
-      this.getChartData('sunlux', "Lux");
-    }
-    if (currIdx == 4) {
-      this.getChartData('rain', "mm");
-    }
+    let action = actions[currIdx],
+      name = action[0],
+      unit=action[1];
+    this.getChartData(name, unit);
   },
-  chartInit(canvas, width, height, data, obj, unit) {
-    const chart = new F2.Chart({
-      el: canvas,
-      width,
-      height,
-      padding: ['auto', 'auto', 40, 'auto']
-    });
-    chart.source(data, {
-      month: {
-        type: 'timeCat',
-        mask: 'YY-MM'
-      },
-      value: {
-        tickCount: 6,
-        alias: '',
-        formatter(val) {
-          return val
-        }
-      }
-    });
-    chart.axis(obj.propertX, {
-      label: {
-        rotate: -Math.PI / 7,
-        textAlign: 'end',
-        textBaseline: 'middle'
-      },
-    });
 
-    chart.tooltip({
-      showCrosshairs: true,
-      custom: true, // 自定义 tooltip 内容框
-      onChange(obj) {
-        const legend = chart.get('legendController').legends.top[0];
-        const tooltipItems = obj.items;
-        const legendItems = legend.items;
-        const map = {};
-        legendItems.map(item => {
-          map[item.name] = Object.assign({}, item);
-        });
-        tooltipItems.map(item => {
-          const {
-            name,
-            value
-          } = item;
-          if (map[name]) {
-            map[name].value = value + " " + unit;
-          }
-        });
-        legend.setItems(Object.values(map));
-      },
-    });
-    chart.line().position(obj.propertX + '*' + obj.propertY).color('type', function (type) {
-      if (type == "土壤温度" || type === "土壤湿度") {
-        return '#00a0e9'
-      } else {
-        return obj.color;
-      }
-    });
-    chart.point().position(obj.propertX + '*' + obj.propertY).color(obj.color).style('type', {
-      lineWidth: 1,
-      fill: '#fff',
-      stroke: function stroke(type) {
-        if (type === "土壤温度" || type === "土壤湿度") {
-          return '#00a0e9'
-        } else {
-          return obj.color
-        }
-      }
-    });
-    chart.render();
-    return chart;
-  },
   chartDataRequest(type,unit){//环境数据信息请求
     const _this = this;
     return new Promise(function(resolve,reject){
       HTTP.GET({
         url: 'environment',
-        data: { gardenId: app.globalData.gardenId, type: type }
+        data: { gardenId: app.globalData.checkParams.gardenId, type: type }
       }).then(res => {
         let chartList = [];
         let latestInfo = {};
@@ -215,7 +145,7 @@ Page({
       const id = '#' + type;
       _this.chartComponent = _this.selectComponent(id);
       _this.chartComponent.init((canvas, width, height) => {
-        _this.chartInit(canvas, width, height, res, {
+        chartInit(canvas, width, height, res, {
           'color': '#1adee2',
           'propertX': 'updateTime',
           'propertY': 'avgData'
@@ -224,5 +154,22 @@ Page({
     })
 
   },
-
+  changeGoodsSwip: function (detail) {//swiper卡死
+    if (detail.detail.source == "touch") {
+      if (detail.detail.current == 0) {
+        let swiperError = this.data.swiperError;
+        swiperError += 1
+        this.setData({ swiperError: swiperError })
+        if (swiperError >= 3) { //在开关被触发3次以上
+          console.error(this.data.swiperError)
+          this.setData({ currType: 2 });//，重置current为正确索引
+          this.setData({ swiperError: 0 })
+        }
+      } else {//正常轮播时，记录正确页码索引
+        this.setData({ preIndex: detail.detail.current });
+        //将开关重置为0
+        this.setData({ swiperError: 0 })
+      }
+    }
+  },
 });

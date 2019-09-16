@@ -1,30 +1,89 @@
 /* pages/case/contact.wxss */
 page{
-  background: #f7a54d
+  background: #ffb15d;
 }
 .contact{
   position:relative;
 }
-.contact .tips{
-   color: #fff;
-   font-size: 24rpx;
-   text-align: center
-}
-.contact image.bg{
+.bgto{
+  width: 900rpx;
+  height: 420rpx;
   position: absolute;
-  z-index: 1;
-  width: 100%;
-  height: 1132rpx;
+  top: -80rpx;
+  left: -1rpx;
+  animation: bgto 0.6s linear forwards;
 }
-.contact .focus{
+.bgtt{
+  width: 540rpx;
+  height: 440rpx;
   position: absolute;
-  z-index: 2;
-  width: 165rpx;
-  height: 165rpx;
-  top: 600rpx;
-  left: 310rpx;
-  animation: focus .8s infinite linear;
-  animation-direction:alternate;
+  top: 240rpx;
+  left: 110rpx;
+  opacity: 0;
+  animation: bgtt 0.6s linear 0.6s forwards;
+}
+.bgimg{
+  width: 640rpx;
+  height: 400rpx;
+  position: absolute;
+  top: 440rpx;
+  left: 60rpx;
+  animation: bgimg 0.6s linear forwards;
+}
+.bgtth{
+  width: 640rpx;
+  height: 260rpx;
+  position: absolute;
+  top: 580rpx;
+  left: 60rpx;
+  z-index: 4;
+  animation: bgimg 0.6s linear forwards;
+}
+.bgtz{
+  width: 215rpx;
+  height: 360rpx;
+  position: absolute;
+  top: 740rpx;
+  left: 20rpx;
+  z-index: 5;
+  animation: bgto 0.6s linear forwards;
+}
+@keyframes bgto{
+  0% {
+    transform: translateX(30rpx);
+    opacity: 0
+  }
+
+  75% {
+    transform: translateX(-30rpx);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(0rpx);
+  }
+}
+@keyframes bgimg{
+  from {
+    transform: translateY(-60rpx);
+    opacity: 0
+  }
+
+  to {
+    transform: translateY(0rpx);
+    opacity: 1;
+  }
+}
+@keyframes bgtt{
+  from {
+    transform: translateY(100rpx);
+    opacity: 1;
+  }
+
+  to {
+    transform: translateY(0rpx);
+    opacity: 1;
+  }
 }
 .contact .context{
   width: 500rpx;
@@ -32,7 +91,14 @@ page{
   position: absolute;
   z-index: 3;
   left: 125rpx;
-  top: 300rpx
+  top: 300rpx;
+  opacity: 0;
+  animation: bgtt 0.6s linear 0.6s forwards;
+}
+.contact .tips{
+   color: #fff;
+   font-size: 24rpx;
+   text-align: center
 }
 .contact .focusUs{
  padding: 20rpx 15rpx;
@@ -56,11 +122,11 @@ page{
   height: 211rpx;
   float: left
 }
-@keyframes focus{
-  from{
-    transform: scale(1)
-  }
-  to{
- transform: scale(1.05)
-  }
+.click{
+  height: 160rpx;
+  width: 160rpx;
+  border-radius: 80rpx;
+  position: absolute;
+  top: 600rpx;
+  left: 300rpx;
 }

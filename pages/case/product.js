@@ -1,18 +1,29 @@
 // pages/case/product.js
+var handel = require('../../utils/handel.js');
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    current: 0,
+    tabbar: {},
+    IMG_URL_HEAD: app.globalData.IMG_URL_HEAD,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    wx.hideTabBar();
+    handel.editTabbar(app.globalData.caseTabbar);
+  },
+  switchSwiperItem(e) {//滑动翻页
+    const current = e.detail.current;
+    this.setData({
+      current: current
+    })
   },
 
   /**

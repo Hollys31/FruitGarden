@@ -1,0 +1,22 @@
+.title {
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 100rpx;
+  line-height: 100rpx;
+  color: #333;
+  font-size: 30rpx;
+  text-align: center;
+  background: #fff;
+  position: fixed;
+  z-index: 10001;
+  border-bottom: 1px solid #ececec;
+}
+
+.fullp {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+}

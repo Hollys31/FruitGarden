@@ -1,0 +1,53 @@
+/* components/productModal/productModal.wxss */
+.clearfix:after {
+  display: block;
+  clear: both;
+  content: "";
+  visibility: hidden;
+  height: 0;
+}
+
+.clearfix{
+  zoom: 1;
+}
+.item {
+  margin-bottom: 6rpx;
+}
+
+ .item>text {
+  display: block;
+}
+.pro-info .text {
+  width: 290rpx;
+  float: left;
+  margin-left: 30rpx;
+  padding-top: 10rpx;
+}
+
+.pro-info .text text {
+  display: block;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.pro-info image {
+  width: 178rpx;
+  height: 178rpx;
+  float: left;
+}
+ .img-wrap image {
+  margin-top: 10rpx;
+  width: 500rpx;
+  height: 257rpx;
+  border-radius: 20rpx;
+}
+
+.stit {
+  font-size: 30rpx;
+  color: #333;
+  height: 2.2em;
+  line-height: 2.2em;
+}
+
+

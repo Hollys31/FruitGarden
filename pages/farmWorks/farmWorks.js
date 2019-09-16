@@ -9,11 +9,11 @@ Page({
    */
   data: {
     tabbar: {},
+    IMG_URL_HEAD: app.globalData.IMG_URL_HEAD,
     loading: true,
     isIphoneX: app.globalData.isIphoneX,
     farmWorkList: [],
     productInfo: {},
-    coverImg: handel.imgHeader+'/imgs/stok.png?v=11',
     on: false
   },
 
@@ -22,7 +22,7 @@ Page({
    */
   onLoad: function (options) {
     wx.hideTabBar();
-    handel.editTabbar();
+    handel.editTabbar(app.globalData.tabBar);
     this.getProductInfo()
     this.getFarmWorkList()
   },
@@ -35,16 +35,15 @@ Page({
   },
   getAllDesc() {//查看完整产品描述
     this.setData({
-      on: true
+      on: !this.data.on
     })
   },
   getProductInfo() {//获取产品信息
     const _this = this;
-    const qrcodeNum = wx.getStorageSync('qrcodeNum') || ''
     HTTP.GET({
-      url:'farmProduct',
-      data: { qrcodeNum: app.globalData.qrcodeNum}
-    }).then(res=>{
+      url: 'farmProduct',
+      data: { qrcodeNum: app.globalData.checkParams.qrcodepriNum }
+    }).then(res => {
       _this.setData({
         productInfo: res.data
       })
@@ -53,12 +52,12 @@ Page({
   getFarmWorkList() {//获取农事记录列表
     const _this = this;
     HTTP.GET({
-      url:'farmWorkList',
-      data: { qrcodeNum: app.globalData.qrcodeNum }
-    }).then(res=>{
+      url: 'farmWorkList',
+      data: { qrcodeNum: app.globalData.checkParams.qrcodepriNum  }
+    }).then(res => {
       _this.setData({
         farmWorkList: res.data.farmWorks,
-        loading:false
+        loading: false
       })
     })
   },
@@ -73,7 +72,9 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    this.setData({
+      on: false
+    })
   },
 
   /**

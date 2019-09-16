@@ -1,1 +1,636 @@
 /* pages/case/index.wxss */
+
+page {
+  background: #ffb15d;
+}
+
+swiper {
+  width: 100vw;
+  height: 100vh;
+}
+
+.index {
+  position: relative;
+}
+
+.index .bg {
+  width: 100vw;
+  height: 66vh;
+}
+
+.index .fruit {
+  position: absolute;
+  top: 430rpx;
+  left: 80rpx;
+  height: 631rpx;
+  width: 626rpx;
+  z-index: 2;
+}
+
+/* @media screen and (min-height: 750px) {
+  .index .fruit {
+    top: 580rpx;
+  }
+} */
+
+.index .left {
+  position: absolute;
+  left: -200rpx;
+  top: -85rpx;
+  width: 289rpx;
+  height: 1116rpx;
+  z-index: 1;
+}
+
+.active .index .left-ani {
+  animation: mover 1s linear forwards;
+}
+
+@keyframes mover {
+  from {
+    transform: translateX(0rpx);
+  }
+
+  to {
+    transform: translateX(170rpx);
+  }
+}
+
+.index .right {
+  position: absolute;
+  right: -200rpx;
+  top: -50rpx;
+  width: 598rpx;
+  height: 929rpx;
+  z-index: 1;
+}
+
+.active .index .right-ani {
+  animation: movel 1s linear forwards;
+}
+
+@keyframes movel {
+  from {
+    transform: translateX(0rpx);
+  }
+
+  to {
+    transform: translateX(-160rpx);
+  }
+}
+
+/* .index .shadow {
+  position: absolute;
+  left: 15rpx;
+  top: -70rpx;
+  width: 750rpx;
+  height: 930rpx;
+  z-index: 0;
+} */
+
+/* .active .index .shadow-ani {
+  animation: movesh 1s linear forwards;
+}
+
+@keyframes movesh {
+  0% {
+    opacity: 0;
+  }
+  90%{
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+  }
+} */
+
+.index .std {
+  position: absolute;
+  left: 210rpx;
+  top: 460rpx;
+  width: 134rpx;
+  height: 95rpx;
+  z-index: 3;
+}
+
+.active .index .std-ani {
+  animation: movestd 1s linear forwards;
+}
+
+@keyframes movestd {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(-120rpx, -110rpx);
+  }
+}
+
+.index .xzone {
+  position: absolute;
+  left: 25rpx;
+  top: 610rpx;
+  width: 68rpx;
+  height: 132rpx;
+  z-index: 2;
+}
+
+.active .index .xzone-ani {
+  animation: movexzone 1s forwards;
+}
+
+@keyframes movexzone {
+  0% {
+    transform: rotate(40deg);
+  }
+
+  50% {
+    transform: rotate(-40deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.index .xztwo {
+  position: absolute;
+  left: 1rpx;
+  top: 735rpx;
+  width: 146rpx;
+  height: 93rpx;
+  z-index: 2;
+}
+
+.index .xzthree {
+  position: absolute;
+  right: 10rpx;
+  top: 230rpx;
+  width: 174rpx;
+  height: 151rpx;
+  z-index: 2;
+}
+
+.active .index .xzthree-ani {
+  animation: movexzthree 1s forwards;
+}
+
+@keyframes movexzthree {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(-50deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.index .fx {
+  position: absolute;
+  right: 200rpx;
+  top: 540rpx;
+  width: 84rpx;
+  height: 95rpx;
+  z-index: 3;
+}
+
+.active .index .fx-ani {
+  animation: movefx 1s linear forwards;
+}
+
+@keyframes movefx {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(115rpx, -40rpx);
+  }
+}
+
+.index .ax {
+  position: absolute;
+  left: 240rpx;
+  top: 150rpx;
+  width: 299rpx;
+  height: 258rpx;
+  z-index: 3;
+}
+
+.active .index .ax-ani {
+  animation: moveax 1s linear forwards;
+}
+
+@keyframes moveax {
+  0% {
+    transform: scale(2, 2);
+    opacity: 0.5;
+  }
+
+  50% {
+    transform: scale(0.5, 0.5);
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: scale(1, 1);
+    opacity: 1;
+  }
+}
+
+.product {
+  position: relative;
+  width: 688rpx;
+  margin: 50rpx auto 0 auto;
+  color: #fff;
+}
+
+.product .bg {
+  width: 688rpx;
+  height: 275rpx;
+  display: block;
+  margin: 0 auto;
+}
+
+.product .pro-img {
+  width: 121rpx;
+  height: 121rpx;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 1;
+  top: -40rpx;
+  left: 50%;
+  margin-left: -59rpx;
+}
+
+.product .text {
+  position: absolute;
+  z-index: 2;
+  top: 70rpx;
+  padding: 0 40rpx;
+  font-size: 24rpx;
+  line-height: 1.4em;
+}
+
+.product .text .data {
+  font-size: 26rpx;
+  height: 2.2em;
+  line-height: 2.2em;
+  display: flex;
+}
+
+.product .data>view {
+  flex: 1;
+}
+
+.product .data>view:nth-child(2) {
+  text-align: right;
+}
+
+.product .data>view text {
+  color: #f76a1c;
+}
+
+.active .info .text-ani {
+  animation: movetext 1s linear forwards;
+}
+
+@keyframes movetext {
+  from {
+    transform: translateY(-50rpx);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0rpx);
+    opacity: 1;
+  }
+}
+
+.map-wrap {
+  color: #fff;
+  position: relative;
+}
+
+.map-wrap .tit {
+  text-align: center;
+  height: 4em;
+  line-height: 4em;
+}
+
+.map-wrap .tit text {
+  color: #f66a1c;
+}
+
+.map .mapbg {
+  width: 556rpx;
+  height: 466rpx;
+  display: block;
+  margin: 0 auto;
+}
+
+.map .data {
+  position: absolute;
+  z-index: 9;
+  width: 175rpx;
+  height: 176rpx;
+  right: 70rpx;
+  top: 250rpx;
+  font-size: 18rpx;
+  line-height: 1.4em;
+}
+
+.map .data .databg {
+  width: 175rpx;
+  height: 176rpx;
+}
+
+.map .data .datatext {
+  position: absolute;
+  top: 30rpx;
+  left: 60rpx;
+}
+
+.map .data .datatext text {
+  display: block;
+  color: #ff7230;
+}
+
+.map .mark {
+  position: absolute;
+  z-index: 11;
+  right: 240rpx;
+  top: 420rpx;
+}
+
+.map .mark text {
+  padding: 6rpx 20rpx;
+  line-height: 40rpx;
+  background: rgba(197, 137, 75, 0.6);
+  border-radius: 14rpx;
+  text-align: center;
+  overflow: hidden;
+  font-size: 20rpx;
+  display: inline-block;
+}
+
+.map .mark image {
+  width: 23rpx;
+  height: 23rpx;
+  display: block;
+  position: relative;
+  top: -40rpx;
+  left: 255rpx;
+}
+
+.active .info .data-ani {
+  animation: movedata 1s linear forwards;
+}
+
+@keyframes movedata {
+  from {
+    transform: scale(0);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+.environment {
+  position: relative;
+}
+
+.environment .tab {
+  width: 555rpx;
+  height: 76rpx;
+  margin: 5rpx auto -5rpx auto;
+  display: flex;
+
+}
+
+.environment .tab>view {
+  position: relative;
+}
+
+.environment .tab text {
+  display: block;
+  text-align: center;
+  line-height: 76rpx;
+  color: #ff7f43;
+  letter-spacing: 8rpx;
+  margin: 0 auto;
+  position: absolute;
+  top: 4%;
+  left: 32%;
+}
+
+.environment .tab view image {
+  position: relative;
+  display: block;
+  z-index: -1;
+}
+
+.environment .tab .normal {
+  width: 181rpx;
+  height: 69rpx;
+}
+
+.environment .tab .active {
+  width: 193rpx;
+  height: 76rpx;
+  /* position: relative;
+  top: -5rpx; */
+  margin: -3rpx 0 3rpx 0;
+  animation: tabclick 0.3s linear forwards;
+}
+
+@keyframes tabclick {
+  from {
+    transform: translateY(40rpx);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0rpx);
+    opacity: 1;
+  }
+}
+
+.environment .envwrap {
+  position: relative;
+  margin: 0 auto;
+  width: 640rpx;
+  height: 1010rpx;
+}
+
+.environment .bg {
+  position: absolute;
+  width: 640rpx;
+  height: 1010rpx;
+}
+
+.environment .bg-short {
+  position: absolute;
+  width: 640rpx;
+  height: 750rpx;
+}
+
+.environment .part {
+  width: 100%;
+  position: relative;
+  color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 45rpx;
+  box-sizing: border-box;
+  animation: tabclick 0.3s linear forwards;
+}
+
+.environment .part>text {
+  width: 130rpx;
+  height: 130rpx;
+  font-size: 130rpx;
+  font-family: Arial;
+  font-weight: 400;
+  color: rgba(255, 255, 255);
+  line-height: 130rpx;
+  opacity: 0.15;
+  position: absolute;
+}
+.active .environment .dgr .numone {
+  animation: numone 0.4s linear forwards;
+}
+
+@keyframes numone {
+  0% {
+    transform: translateX(-40rpx);
+  }
+
+  70% {
+    transform: translateX(20rpx);
+  }
+
+  100% {
+    transform: translateX(0rpx);
+  }
+}
+.environment .part .numtwo{
+  top:320rpx;
+  right: 50rpx;
+}
+.environment .short .numtwo{
+  top:350rpx;
+  right: 50rpx;
+}
+.active .environment .dgr .numtwo{
+   animation: numtwo 0.6s linear forwards;
+}
+@keyframes numtwo {
+  0% {
+    transform: translateX(40rpx);
+  }
+
+  70% {
+    transform: translateX(-20rpx);
+  }
+
+  100% {
+    transform: translateX(0rpx);
+  }
+}
+.environment .part .numthree{
+  top:650rpx;
+}
+.active .environment .dgr .numthree{
+  animation: numone 0.7s linear forwards;
+}
+.active .environment .envwrap .dgr .one {
+  animation: dgrone 0.4s linear forwards;
+}
+
+@keyframes dgrone {
+  0% {
+    transform: translateX(-40rpx);
+    opacity: 0;
+  }
+
+  70% {
+    transform: translateX(20rpx);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(0rpx);
+  }
+}
+
+.active .environment .envwrap .dgr .three {
+  animation: dgrone 0.6s linear forwards;
+}
+
+.active .environment .envwrap .dgr .five {
+  animation: dgrone 0.7s linear forwards;
+}
+
+.active .environment .envwrap .dgr .two {
+  animation: dgrtwo 0.4s linear forwards;
+}
+
+@keyframes dgrtwo {
+  0% {
+    transform: translateX(40rpx);
+    opacity: 0;
+  }
+
+  70% {
+    transform: translateX(-20rpx);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(0rpx);
+  }
+}
+
+.active .environment .envwrap .dgr .four {
+  animation: dgrtwo 0.6s linear forwards;
+}
+.active .environment .envwrap .dgr .six {
+  animation: dgrtwo 0.7s linear forwards;
+}
+
+.environment .part image {
+  width: 310rpx;
+  height: 220rpx;
+  margin: 30rpx 0;
+}
+
+.environment .part .item {
+  width: 240rpx;
+  font-size: 24rpx;
+  margin: 30rpx 0;
+}
+
+.environment .part .margin {
+  margin: 50rpx 0;
+}
+
+.environment .part .item text {
+  color: #f66a1c;
+  font-size: 28rpx;
+}
+
+/* 短屏兼容 */
+
+@media screen and (max-height: 600px) {
+  .map-wrap .tit {
+    height: 3em;
+    line-height: 3em;
+  }
+}

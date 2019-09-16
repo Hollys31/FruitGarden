@@ -1,6 +1,58 @@
 <!--pages/case/origin.wxml-->
-<title title="溯源流程"></title>
-<view class='origin'>
-  <image src='../../resources/images/originbg.png'></image>
-</view>
-
+<swiper vertical='true' easing-function='easeInOutCubic'>
+  <swiper-item>
+    <image class="headimg" src="{{IMG_URL_HEAD+'/images/bg5.png'}}"></image>
+    <view class='item one'>
+      <image class="bgimg" src="{{IMG_URL_HEAD+'/images/bg4.png'}}"></image>
+      <view class="wrapone">
+        <view class='step'>第一步</view>
+        <view class="text">
+          <text>·</text>精准溯源产品，只需四步</view>
+        <view class="text">
+          <text>·</text>一物一码，轻松认证</view>
+      </view>
+      <image class="imgone" src="{{IMG_URL_HEAD+'/images/bg8.png'}}"></image>
+    </view>
+    <view class='item'>
+      <image class="linkimg" src="{{IMG_URL_HEAD+'/images/link.png'}}"></image>
+      <image class="bgimg" src=" {{IMG_URL_HEAD+'/images/bg4.png'}}"></image>
+      <view class="wraptwo">
+        <view class='step'>第二步</view>
+        <view class="text">
+          <text>·</text>打开箱子封装</view>
+        <view class="text">
+          <text>·</text>找到箱子内果品标签</view>
+      </view>
+      <image class="imgtwo" src="{{IMG_URL_HEAD+'/images/bg7.png'}}"></image>
+    </view>
+  </swiper-item>
+  <swiper-item>
+    <view class='item'>
+      <image class="bgimg" src="{{IMG_URL_HEAD+'/images/bg4.png'}}"></image>
+      <view class="wrapthree">
+        <view class='step'>第三步</view>
+        <view class="text">
+          <text>·</text>打开手机微信/支付宝</view>
+        <view class="text">
+          <text>·</text>扫一扫对准果品标签</view>
+      </view>
+      <image class="imgthree" src="{{IMG_URL_HEAD+'/images/bg6.png'}}"></image>
+    </view>
+    <view class='item'>
+      <image class="linkimg" src="{{IMG_URL_HEAD+'/images/link.png'}}"></image>
+      <image class="bgimg" src="{{IMG_URL_HEAD+'/images/bg4.png'}}"></image>
+      <view class="wrapfour">
+        <view class='step'>第四步</view>
+        <view class="text">
+          <text>·</text>产品认证成功</view>
+        <view class="text">
+          <text>·</text>享受果品追溯带来的健
+          <view>康，安心</view>
+        </view>
+      </view>
+      <image class="imgfour" src="{{IMG_URL_HEAD+'/images/bg9.png'}}"></image>
+    </view>
+    <image class='scanCode' src="{{IMG_URL_HEAD+'/images/sqr.png'}}" bindtap='handelsScanCode'></image>
+  </swiper-item>
+</swiper>
+<tabbar tabbar="{{tabbar}}"></tabbar>

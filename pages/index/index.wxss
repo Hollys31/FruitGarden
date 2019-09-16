@@ -2,6 +2,7 @@
 
 page {
   width: 100%;
+  padding-bottom: 150rpx;
 }
 
 .warn-modal {
@@ -16,62 +17,24 @@ page {
 }
 
 .warn-modal .modal-inner {
-  width: 500rpx;
-  height: 770rpx;
-  border-radius: 10rpx;
-  padding: 20rpx 40rpx;
+  width: 580rpx;
+  height: 775rpx;
   position: fixed;
   top: 50%;
   left: 50%;
-  margin-left: -290rpx;
+  margin-left: -285rpx;
   margin-top: -470rpx;
-  background: #f7f7f7;
   z-index: 99991;
   transition: all 0.2s linear;
   color: #666;
   font-size: 26rpx;
 }
 
-.warn-modal .item {
-  margin-bottom: 6rpx;
-}
-
-.warn-modal .item>text {
-  display: block;
-}
-
-.warn-modal .pro-info .text {
-  width: 290rpx;
-  float: left;
-  margin-left: 30rpx;
-  padding-top: 10rpx;
-}
-
-.warn-modal .pro-info .text text {
-  display: block;
-  width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.warn-modal .pro-info image {
-  width: 178rpx;
-  height: 178rpx;
-  float: left;
-}
-
-.warn-modal .img-wrap image {
-  width: 100%;
-  margin-top: 10rpx;
-  max-height: 310rpx;
-  border-radius: 20rpx;
-}
-
-.warn-modal .stit {
-  font-size: 30rpx;
-  color: #333;
-  height: 2.2em;
-  line-height: 2.2em;
+.warn-modal swiper {
+   border-radius: 10rpx;
+  padding: 20rpx 40rpx;
+  height: 735rpx;
+  background: #fff;
 }
 
 .warn-modal .close {
@@ -79,16 +42,33 @@ page {
   width: 40rpx;
   height: 40rpx;
   color: #fff;
-  bottom: 150rpx;
   font-size: 60rpx;
   left: 50%;
-  margin-left: -36rpx;
+  top: 50%;
+  margin-top: 380rpx;
+  margin-left: -46rpx;
 }
 
 .warn-modal .close text {
   font-size: 60rpx;
 }
-
+.warn-modal  .dots{
+  width: 200rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  margin: 20rpx auto 0;
+}
+.warn-modal  .dots .item{
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.5);
+  margin: 0 10rpx;
+  float: left
+}
+.warn-modal  .dots .item.active{
+background: rgba(255,255,255,0.9);
+}
 .brief {
   width: 100%;
   height: 227rpx;
@@ -203,10 +183,11 @@ navigator {
 }
 
 .product .grade>view {
-  float: left;
   width: 45%;
   height: 80rpx;
   line-height: 80rpx;
+  overflow: hidden;
+  float: left;
   position: relative;
   padding-left: 18rpx;
 }

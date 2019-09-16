@@ -13,8 +13,8 @@
     <icon class='icon' iconClass="icon-scan"></icon>
     <text> 溯源扫码</text>
   </view>
-  <navigator class='toFeedback' hover-class='none' url='/pages/feedback/feedback'>异常反馈</navigator>
+  <text class='toFeedback' bindtap='tofeedback'>异常反馈</text>
 </view>
 
-<image class='img {{className}}' src='/resources/images/start.png'/>
+<image class='img {{className}}' src="{{IMG_URL_HEAD+'/images/start.png'}}"/>
 <Loading wx:if="{{loading}}"> </Loading>

@@ -10,7 +10,8 @@ Page({
   data: {
     feedbackData: [],
     slideDownInd:0,
-    loading:true
+    loading:true,
+    IMG_URL_HEAD: app.globalData.IMG_URL_HEAD,
   },
 
   /**
@@ -29,10 +30,9 @@ Page({
   },
   getFeedbackInfo(){//获取反馈信息数据
     const _this = this;
-    const openId = wx.getStorageSync('openId') || ''
     HTTP.GET({
       url:'feedBackList',
-      data: { openId: app.globalData.openId}
+      data: { openId: app.globalData.checkParams.openId}
     }).then(res=>{
       _this.setData({
         feedbackData: res.data,

@@ -5,7 +5,6 @@ var qqmapsdk = new QQMapWX({
   key: 'XTNBZ-NZELX-5V342-T4TLG-DSLOQ-Q6FX3'
 });
 module.exports = {
-  imgHeader: 'https://trace.yufengtek.com/orchard/applet', 
   wxLogin: new Promise(function (resolve, reject) {//微信登录
     wx.login({
       success(res) {
@@ -23,8 +22,7 @@ module.exports = {
     return new Promise(function (reolve, reject) {
       _this.wxLogin.then(code => {
         HTTP.GET({ url: 'getOpenid', data: { code: code } }).then(res => {
-       
-          app.globalData.openId = res.data.openid;
+          app.globalData.checkParams.openId = res.data.openid;
           wx.setStorageSync('sessionKey', res.data.session_key);
           reolve(res.data);
         })
@@ -34,10 +32,6 @@ module.exports = {
   getSetting:function(){
     return new Promise(function (resolve, reject) {//查看设置并打开位置信息设置
       const _this = this;
-      wx.showLoading({
-        mask: true,
-        title: '定位中...',
-      })
       wx.getSetting({
         success(res) {
           if (res.authSetting['scope.userLocation'] !== undefined && res.authSetting['scope.userLocation'] != true) {
@@ -96,7 +90,6 @@ module.exports = {
         },
         success: function (LocalRes) {
           resolve(LocalRes);
-          wx.hideLoading()
         },
         fail: function (error) {
           wx.showToast({
@@ -110,6 +103,10 @@ module.exports = {
   },
   getUserAddress: function () {//获取用户位置信息
     const _this = this;
+    wx.showLoading({
+      mask: true,
+      title: '定位中...',
+    })
     return new Promise(function(resolve,reject){
       _this.getSetting().then(() => {//设置
         _this.getLocation.then(Local => {//经纬度
@@ -120,6 +117,8 @@ module.exports = {
             params.orisechProv = res.result.ad_info.province;
             params.orisechCity = res.result.ad_info.city;
             params.orisechAddr = params.orisechProv + params.orisechCity + res.result.formatted_addresses.recommend;
+            app.globalData.checkParams = Object.assign(app.globalData.checkParams, params);
+            wx.hideLoading()
             resolve(params);
           })
         })
@@ -137,6 +136,7 @@ module.exports = {
           iv: e.detail.iv,
         }
       }).then((result) => {
+        app.globalData.checkParams.phoneNumber = result.data.phoneNumber;
         wx.setStorageSync('phoneNumber', result.data.phoneNumber);//判断是否授权手机号依据
         resolve(result.data.phoneNumber);
       })
@@ -146,14 +146,29 @@ module.exports = {
     HTTP.POST({
       url: 'postCheck',
       data: data
-    }).then((res)=>{
-      app.globalData.qrcodeNum = res.data.qrcodeNum;
-      app.globalData.qrtype = res.data.qr_type;
-      app.globalData.gardenId = res.data.gardenInfo.gardenId;
-      app.globalData.blockId = res.data.gardenInfo.blockId;
-      wx.reLaunch({
-        url: '/pages/checking/checking',
-      })
+    },'ok').then((res)=>{
+      if(res.status==200){
+        let obj={
+          qrcodepriNum: res.data.qrcodeNum,
+          qrtype: res.data.qr_type,
+          gardenId:res.data.gardenInfo.gardenId,
+          blockId:res.data.gardenInfo.blockId
+        }
+        app.globalData.checkParams = Object.assign(app.globalData.checkParams, obj);
+        if (res.data.qr_type == 0) {
+          wx.reLaunch({
+            url: '/pages/case/index',
+          })
+        } else {
+          wx.reLaunch({
+            url: '/pages/checking/checking',
+          })
+        }
+      }else{
+        wx.reLaunch({
+          url: '/pages/checkfail/checkfail',
+        })
+      } 
     })
   },
   scanCode: function () {
@@ -173,8 +188,7 @@ module.exports = {
       })
     })
   },
- editTabbar: function () { //底部自定义tabbar
-    let tabbar = app.globalData.tabBar;
+  editTabbar: function (tabbar) { //底部自定义tabbar
     let currentPages = getCurrentPages();
     let _this = currentPages[currentPages.length - 1];
     let pagePath = _this.route;

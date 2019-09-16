@@ -26,7 +26,7 @@
 </view>
 <block wx:if="{{feedbackData.length==0}}">
   <view class='nodate'>
-    <image src='/resources/images/nodevice.png' />
+    <image src="{{IMG_URL_HEAD+'/images/nodevice.png'}}" />
     <text>暂无问题反馈</text>
   </view>
 </block>

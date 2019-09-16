@@ -1,6 +1,7 @@
 /* pages/video/video.wxss */
 page{
-   background: #f7f7f7 !important
+   background: #f7f7f7 !important;
+   padding-bottom: 100rpx;
 }
 .video {
   color: #999999;

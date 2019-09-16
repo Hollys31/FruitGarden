@@ -1,0 +1,31 @@
+<!--components/productModal/productModal.wxml-->
+<view class='pro-info clearfix item'>
+  <image src="{{modalInfo.cropUrl||IMG_URL_HEAD+'/images/default.png'}}"></image>
+  <view class='text'>
+    <text class='stit'>{{modalInfo.cropName}}</text>
+    <text>产地：{{modalInfo.blockName}}</text>
+    <text><block wx:if="{{modalInfo.type=='warehouse'}}">库存</block><block wx:if="{{modalInfo.type=='pluck'}}">采摘</block><block wx:if="{{modalInfo.type=='farm'}}">农事</block><block wx:if="{{modalInfo.type=='plant'}}">种植</block>时间：{{modalInfo.dateTime}}</text>
+  </view>
+</view>
+<view class='item'>
+  <view class='stit'>
+    <block wx:if="{{modalInfo.type=='warehouse'}}">库存</block>
+    <block wx:if="{{modalInfo.type=='pluck'}}">采摘</block>
+    <block wx:if="{{modalInfo.type=='farm'}}">农事</block>
+    <block wx:if="{{modalInfo.type=='plant'}}">种植</block>信息</view>
+  <text>负责人：{{modalInfo.owner}}</text>
+  <text wx:if="{{modalInfo.type=='warehouse'}}">库存地点：{{modalInfo.otherData||'暂无'}}</text>
+  <text wx:if="{{modalInfo.type=='pluck'}}">{{modalInfo.otherData||'2019'}}年第一次采摘</text>
+  <view wx:if="{{modalInfo.type=='farm'}}">农事类型：
+    <navigator class='mainColor' hover-class='none' url="/pages/farmWorks/farmWorks" open-type="switchTab">查看详情</navigator>
+  </view>
+  <text wx:if="{{modalInfo.type=='plant'}}">种植面积：{{modalInfo.otherData||'0'}}亩</text>
+  <text><block wx:if="{{modalInfo.type=='warehouse'||modalInfo.type=='farm'}}">生产</block><block wx:if="{{modalInfo.type=='pluck'}}">采摘</block><block wx:if="{{modalInfo.type=='plant'}}">种植</block>果园：{{modalInfo.gardenName}}</text>
+</view>
+<view class='item img-wrap'>
+  <view class='stit'>水果图片</view>
+  <image wx:if="{{modalInfo.type=='warehouse'}}" src="{{modalInfo.img||IMG_URL_HEAD+'/images/no.png'}}"></image>
+  <image wx:if="{{modalInfo.type=='farm'}}" src="{{modalInfo.img||IMG_URL_HEAD+'/images/no.png'}}"></image>
+  <image wx:if="{{modalInfo.type=='plant'}}" src="{{modalInfo.img||IMG_URL_HEAD+'/images/no.png'}}"></image>
+  <image wx:if="{{modalInfo.type=='pluck'}}" src="{{modalInfo.img||IMG_URL_HEAD+'/images/no.png'}}"></image>
+</view>

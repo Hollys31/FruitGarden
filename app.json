@@ -12,13 +12,12 @@
     "pages/traceOrigin/traceOrigin",
     "pages/farmWorks/farmWorks",
     "pages/checkfail/checkfail",
-    "pages/getphone/getphone",
     "pages/network/network",
-    "pages/casecode/casecode",
     "pages/case/index",
     "pages/case/product",
     "pages/case/contact",
-    "pages/case/origin"
+    "pages/case/origin",
+    "pages/full/fullplay"
   ],
   "permission": {
     "scope.userLocation": {

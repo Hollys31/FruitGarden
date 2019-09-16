@@ -1,4 +1,5 @@
 // pages/start/start.js
+const app = getApp();
 var handel = require('../../utils/handel.js');
 Page({
 
@@ -6,41 +7,53 @@ Page({
    * 页面的初始数据
    */
   data: {
-    code:'20190316093900000011552700360949',
-    allow:false
+    allow: false,
+    IMG_URL_HEAD: app.globalData.IMG_URL_HEAD,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    handel.getSetting(this);//地理位置授权
-    handel.getOpenId(this);//获取openid
-    const _this=this;
+    const _this = this;
     if (options.q) {
       var scene = decodeURIComponent(options.q)  // 使用decodeURIComponent解析  获取当前二维码的网址
-      // scene.decodeURL()
-      console.log(scene );
       var arr1 = scene.split('=');
-      console.log(arr1);
-      const phoneNumber = wx.getStorageSync('phoneNumber') ||'';
-      const openId = wx.getStorageSync('openId') || '';
-      if (phoneNumber && openId){
-        handel.handelScanCode(_this, { phoneNumber: phoneNumber, openId: openId }, arr1[1]);
-      }else{
+      app.globalData.checkParams.qrcodepriNum = arr1[1];
+      const phoneNumber = wx.getStorageSync('phoneNumber') || '';
+      if (phoneNumber) {//手机是否授权
+        Promise.all([handel.getUserAddress(), handel.getOpenId()]).then(res => {
+          app.globalData.checkParams.phoneNumber = phoneNumber;
+          handel.checkCode(app.globalData.checkParams);//验证
+        })
+      } else {
         _this.setData({
-          code: arr1[1],
-          allow: true
+          allow: true,
         })
       }
-     
-    }else{
-     wx.reLaunch({
-       url: '/pages/scanQRCode/scanQRCode',
-     })   
+    } else {
+      wx.reLaunch({
+        url: '/pages/scanQRCode/scanQRCode',
+      })
     }
   },
-
+  
+  getPhoneNumber(e) {//授权获取手机号后扫码
+    const _this = this;
+    if (e.detail.iv) {
+      Promise.all([handel.getUserAddress(), handel.getOpenId()]).then(res => {
+        handel.getPhoneNumber(e).then(res => {
+          console.log(app.globalData.checkParams);
+          handel.checkCode(app.globalData.checkParams);//验证
+        })
+      })
+    } else {
+      wx.showToast({
+        icon: 'none',
+        title: '请先授权获取手机号',
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -75,17 +88,7 @@ Page({
   onPullDownRefresh: function () {
 
   },
-  getPhoneNumber(e) {
-    const _this=this;
-    if (e.detail.iv) {
-      handel.getPhoneNumber(e, _this,_this.data.code);
-    } else {
-      wx.showToast({
-        icon: 'none',
-        title: '请先授权获取手机号',
-      })
-    }
-  },
+
   /**
    * 页面上拉触底事件的处理函数
    */

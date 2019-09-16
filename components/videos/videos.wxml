@@ -1,8 +1,11 @@
 <!--components/videos/videos.wxml-->
 <block  wx:for="{{videoData}}" wx:if="{{videoData.length>0}}" wx:key="idx" wx:for-index="idx">
   <view class='item'>
-    <live-player wx:if='{{playIndex==idx&&currType==1&&item.status==1}}'  src="{{item.camera_url}}" mode="live" autoplay bindstatechange="statechange" binderror="error" style="width: 710rpx; height: 394rpx;" />
+    <live-player wx:if='{{playIndex==idx&&currType==1&&item.status==1}}'  src="{{item.camera_url}}" mode="live" autoplay bindstatechange="statechange" binderror="error" style="width: 710rpx; height: 394rpx;" object-fit='fillCrop'/>
       <video wx:if='{{idx==playIndex&&currType==2}}' src="{{item.video_link}}" autoplay="{{idx==playIndex}}" controls object-fit="fill" show-center-play-btn="{{false}}" controls></video>
+      <block wx:if="{{playIndex==idx&&message!=''}}">
+        <cover-view class="loading">{{message}}</cover-view>
+      </block>
       <block wx:if='{{playIndex==idx&&currType==1&&item.status==0}}'>
        <view class='text' wx:if="{{freshHide}}">
           网络出现问题，
@@ -13,9 +16,12 @@
           此视频暂时无法播放，
           <text>请稍后再加载！</text>
        </view>
-       <image src='https://trace.yufengtek.com/orchard/applet/imgs/img.png' />
+       <image src="{{IMG_URL_HEAD+'/imgs/img.png'}}" />
       </block>
-    <image wx:if='{{idx!=playIndex}}' src='https://trace.yufengtek.com/orchard/applet/imgs/img.png' />
+    <image wx:if='{{idx!=playIndex}}' src="{{IMG_URL_HEAD+'/imgs/img.png'}}" />
+    <navigator url="../full/fullplay?url={{item.camera_url}}" wx:if="{{currType==1&&item.status==1&&playIndex==idx&&message==''}}">
+      <cover-image class="full" src="../../resources/images/full.png"></cover-image>
+    </navigator>
     <view class='camera clearfix' wx:if='{{idx!=playIndex}}' data-index="{{idx}}" bindtap='livePlay'>
       <icon class='play' wx:if="{{item.camera_type=='A'}}" iconClass="icon-boxcamera"></icon>
       <icon class='play' wx:if="{{item.camera_type=='B'}}" iconClass="icon-camera"></icon>
@@ -24,14 +30,15 @@
        <text wx:if="{{currType==2}}">查看视频</text>
     </view>
     <view class='name clearfix'>
-      <text>{{item.gardenName}}{{item.gb_name}}</text>{{item.created_time}}</view>
+      <text class="title">{{item.gardenName}}{{item.gb_name}}</text>{{item.created_time}}
+      </view>
     <view class='address'>
       <icon class='mainColor' iconClass="icon-address1"></icon>{{item.address_prov}}{{item.address_city}}{{item.address_town}}{{item.address_village}}</view>
   </view>
 </block>
 <block wx:if="{{empty}}">
   <view class='nodate'>
-    <image src='/resources/images/nodevice.png' />
+    <image src="{{IMG_URL_HEAD+'/images/nodevice.png'}}" />
     <text>暂无数据</text>
   </view>
 </block>

@@ -8,11 +8,11 @@ Page({
    * 页面的初始数据
    */
   data: {
+    IMG_URL_HEAD: app.globalData.IMG_URL_HEAD,
     tabbar: {},
     loading: true,
     isIphoneX: app.globalData.isIphoneX,
     gardenInfo: {},
-    coverImg: handel.imgHeader + "/imgs/orban.png?v=13"
   },
 
   /**
@@ -23,8 +23,8 @@ Page({
   },
   getGardenInfo() {//获取果园信息
     const _this = this;
-    const blockId = app.globalData.blockId;
-    const gardenId = app.globalData.gardenId;
+    const blockId = app.globalData.checkParams.blockId;
+    const gardenId = app.globalData.checkParams.gardenId;
     HTTP.GET({
       url: 'orchard',
       data: { gardenId: gardenId, blockId: blockId }

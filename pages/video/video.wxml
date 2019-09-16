@@ -2,25 +2,25 @@
 <title title="视频"></title>
 <view class="video container {{isIphoneX?'iphoneX':''}}">
   <view class='tab'>
-    <text wx:for="{{videoType}}" wx:key="index" data-type="{{item.type}}" bindtap='handelVideoType' class="{{currType==item.type?'mainColor':''}}">{{item.name}}</text>
+    <text wx:for="{{videoType}}" wx:key="index" data-type="{{item.type}}" bindtap='switchTabPage' class="{{currType==item.type?'mainColor':''}}">{{item.name}}</text>
   </view>
   <view>
-    <swiper class="page-swiper" current="{{currType}}" duration="300" bindchange="switchTabPage" style="height:{{height}}px;">
+    <swiper  class="page-swiper" bindanimationfinish="changeGoodsSwip" current="{{currType}}" duration="300" bindchange="switchTabPage" style="height:{{height}}px;">
       <swiper-item wx:for="{{[0,1,2]}}" wx:for-index="index" wx:key="index" class="tab-content">
         <scroll-view scroll-y="true" id="getheight{{index}}">
-          <block wx:if="{{currType==0&&panoUrl.length>0}}">
-            <web-view src="{{panoUrl}}"></web-view>
+          <block wx:if="{{currType==index&&currType==0&&panoUrl.length>0}}">
+            <web-view src="{{panoUrl}}"/>
           </block>
-          <block wx:if="{{currType==0&&panoUrl.length==0}}">
+          <block wx:if="{{currType==index&&currType==0&&panoUrl.length==0}}">
             <view class='nodate'>
-              <image src='/resources/images/nodevice.png' />
+              <image src="{{IMG_URL_HEAD+'/images/nodevice.png'}}" />
               <text>暂无全景</text>
             </view>
           </block>
           <!-- 直播 -->
-          <videos wx:if="{{currType==1}}" bindmyevent="myevent" isLoading="{{isLoading}}" currType="{{currType}}" empty="{{empty}}" videoData="{{liveData}}" isLoading="{{isLoading}}"> </videos>
+          <videos wx:if="{{currType==index&&currType==1}}" bindmyevent="myevent" isLoading="{{isLoading}}" currType="{{currType}}" empty="{{empty}}" videoData="{{liveData}}"> </videos>
           <!-- 小视频 -->
-          <videos wx:if="{{currType==2}}" currType="{{currType}}" videoData="{{videoData}}" empty="{{empty}}" isLoading="{{isLoading}}"> </videos>
+          <videos wx:if="{{currType==index&&currType==2}}" currType="{{currType}}" videoData="{{videoData}}" empty="{{empty}}" isLoading="{{isLoading}}"> </videos>
         </scroll-view>
       </swiper-item>
     </swiper>

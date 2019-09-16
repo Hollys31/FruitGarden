@@ -1,7 +1,6 @@
 // pages/checking/checking.js
 import HTTP from '../../utils/http.js'
 var handel = require('../../utils/handel.js');
-
 const app = getApp();
 Page({
 
@@ -9,6 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    IMG_URL_HEAD: app.globalData.IMG_URL_HEAD,
     fistPart: true,
     mapPart:false,
     showProduct:false,
@@ -45,9 +45,9 @@ Page({
   },
   getProductInfo(){//获取产品信息
     const _this=this;
-    const qrcodeNum = app.globalData.qrcodeNum;
+    const qrcodeNum = app.globalData.checkParams.qrcodepriNum;
     let Arrs =[{
-      iconPath: '/resources/images/loca.png',
+      iconPath: _this.data.IMG_URL_HEAD+'/images/loca.png',
       id: 0,
       longitude: 113.324520,
       latitude: 23.099994,
@@ -66,13 +66,13 @@ Page({
     }) 
   },
   regionchange(e) {
-    console.log(e.type)
+  
   },
   markertap(e) {
-    console.log(e.markerId)
+ 
   },
   controltap(e) {
-    console.log(e.controlId)
+
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

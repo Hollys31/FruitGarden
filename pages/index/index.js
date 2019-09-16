@@ -10,16 +10,16 @@ Page({
     loading: true,
     tabbar: {},
     isIphoneX: app.globalData.isIphoneX,
+    IMG_URL_HEAD: app.globalData.IMG_URL_HEAD,
+    currType: 0,
     mainInfo: {},
     originInfo: {},
-    modalInfo: {},
+    modalInfo1: {},
+    modalInfo2: {},
+    modalInfo3: {},
+    modalInfo4: {},
     modalHidden: false,
-    coverImg1: handel.imgHeader + '/imgs/origin.png?v=13',
-    coverImg2: handel.imgHeader + '/imgs/indck.png?v=13',
-    coverImg3: handel.imgHeader + '/imgs/indrk.png?v=13',
-    coverImg4: handel.imgHeader + '/imgs/indns.png?v=13',
-    coverImg5: handel.imgHeader + '/imgs/indzz.png?v=13',
-    coverImg6: handel.imgHeader + '/imgs/indcz.png?v=13'
+    origins: [{ id: 0, name: 'warehouse' }, { id: 1, name: 'pluck' }, { id: 2, name: 'farm' }, { id: 3, name: 'plant' }],
   },
 
   /**
@@ -28,9 +28,13 @@ Page({
   onLoad: function (options) {
     const _this = this;
     wx.hideTabBar();
-    handel.editTabbar();
+    handel.editTabbar(app.globalData.tabBar);
     this.getHomeInfo();
     this.getOriginInfo();
+    let types = [['warehouse', 'modalInfo1'], ['pluck', 'modalInfo2'], ['farm', 'modalInfo3'], ['plant', 'modalInfo4']];
+    types.map(item => {
+      this.getModalOriginInfo(item[0], item[1]);
+    })
   },
 
   /**
@@ -45,48 +49,76 @@ Page({
       modalInfo: {}
     })
   },
-  getModalOriginInfo(e) {//溯源流程弹窗信息
+  getModalOriginInfo(type, objname) {//溯源流程弹窗信息
     const _this = this;
-    const type = e.currentTarget.dataset.type;
-    _this.setData({
-      modalHidden: true
-    })
     HTTP.GET({
       url: 'originInfo',
-      data: { type: type, qrcodeNum: app.globalData.qrcodeNum }
+      data: { type: type, qrcodeNum: app.globalData.checkParams.qrcodepriNum }
     }).then(result => {
       let originInfo = result.data.originInfo;
       originInfo.type = type;
+      let name = objname;
+      console.log(name);
       _this.setData({
-        modalInfo: originInfo
+        [name]: originInfo
       })
     })
   },
   getHomeInfo() {//获取首页信息数据
     const _this = this;
-    const qrcodeNum = wx.getStorageSync('qrcodeNum') || '';
     HTTP.GET({
       url: 'homeInfo',
-      data: { qrcodeNum: app.globalData.qrcodeNum}
+      data: { qrcodeNum: app.globalData.checkParams.qrcodepriNum }
     }).then(result => {
       _this.setData({
         mainInfo: result.data
       })
     })
   },
-  
   getOriginInfo() {//获取溯源流程数据信息
     const _this = this;
-    const qrcodeNum = wx.getStorageSync('qrcodeNum') || ''
     HTTP.GET({
       url: 'originFlow',
-      data: {qrcodeNum:app.globalData.qrcodeNum}
+      data: { qrcodeNum: app.globalData.checkParams.qrcodepriNum }
     }).then(result => {
       _this.setData({
         originInfo: result.data,
-        loading:false
+        loading: false
       })
     })
+  },
+  handelModal(e) {//模态框行为
+    const _this = this;
+    const current = e.currentTarget.dataset.current;
+    _this.setData({
+      modalHidden: true,
+      currType: current
+    })
+  },
+  switchTabPage(e) {//弹窗信息切换
+    const curr = e.detail.current;
+    this.setData({
+      currType: curr
+    })
+  },
+  changeGoodsSwip(detail) {//swiper卡顿
+    if (detail.detail.source == "touch") {
+      if (detail.detail.current == 0) {
+        let swiperError = this.data.swiperError;
+        console.log(swiperError);
+        swiperError += 1
+        this.setData({ swiperError: swiperError })
+        if (swiperError >= 3) { //在开关被触发3次以上
+          console.error(this.data.swiperError)
+          this.setData({ currType: 1 });//，重置current为正确索引
+          this.setData({ swiperError: 0 })
+        }
+      } else {//正常轮播时，记录正确页码索引
+        this.setData({ preIndex: detail.detail.current });
+        //将开关重置为0
+        this.setData({ swiperError: 0 })
+      }
+    }
   },
   /**
    * 生命周期函数--监听页面显示

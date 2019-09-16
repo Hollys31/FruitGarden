@@ -1,6 +1,9 @@
 {
   "usingComponents": {
-    "title": "../../components/title/title",
-    "subhead":"../../components/subhead/subhead"
-  }
+    "tabbar": "../../components/caseTabbar/caseTabbar"
+  },
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "产品信息",
+  "navigationStyle": "default"
 }

@@ -7,10 +7,9 @@
   <view class='text'>恭喜！您所查询的水果
     <text>是在最好的环境下生长的！</text>
   </view>
-  <image src='/resources/images/env.png'></image>
+  <image src="{{IMG_URL_HEAD+'/images/env.png'}}"></image>
 </view>
 <view class="menu">
-  <!-- {{hideIdx==index?'hide':''}} -->
   <view class="item {{currType==index?'active':'' }}" data-index="{{index}}" data-type="{{item.type}}" wx:for="{{sorts}}" wx:key="{{index}}" bindtap='handeltype'>
     <view class='icons mainColor '>
       <icon class='{{item.iconClass}}' iconClass="{{item.iconClass}}"></icon>
@@ -18,7 +17,7 @@
     {{item.name}}
   </view>
 </view>
-<swiper interval="{{true}}" class='charts' duration="300" current="{{currType}}" circular bindchange="switchTabPage">
+<swiper interval="{{true}}" bindanimationfinish="changeGoodsSwip"  class='charts' duration="300" current="{{currType}}" circular bindchange="switchTabPage">
   <block wx:for="{{sorts}}" wx:key="{{index}}">
     <swiper-item>
       <view class='chart-wrap' wx:if="{{currType==index}}">
@@ -26,10 +25,10 @@
         <view class='tips' wx:elif="{{dateType=='day'}}">近七天{{item.name}}趋势</view>
         <view class='tips' wx:else>{{item.name}}趋势</view>
         <view class='no-device' wx:if="{{nodata}}">
-          <image src='/resources/images/nodevice.png'></image>
+          <image src="{{IMG_URL_HEAD+'/images/nodevice.png'}}"></image>
           暂无{{item.name}}设备
         </view>
-        <ff-canvas class='chart'  wx:if="{{!nodata}}" canvas-id="{{item.type}}" id="{{item.type}}" ></ff-canvas>
+        <ff-canvas class='chart' opts="{{opts}}"  wx:if="{{!nodata}}" canvas-id="{{item.type}}" id="{{item.type}}" ></ff-canvas>
       </view>
       <view class='data-info' wx:if="{{!nodata}}">
         {{latestInfo.info}}

@@ -1,4 +1,5 @@
 // pages/case/contact.js
+var handel = require('../../utils/handel.js');
 const app = getApp();
 Page({
 
@@ -6,14 +7,17 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    tabbar: {},
+    official:false,
+    IMG_URL_HEAD: app.globalData.IMG_URL_HEAD,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    wx.hideTabBar();
+    handel.editTabbar(app.globalData.caseTabbar);
   },
 
   /**
@@ -22,7 +26,11 @@ Page({
   onReady: function (e) {
    
   },
-
+  focusOfficial(){
+    this.setData({
+      official:true
+    })
+  },
   /**
    * 生命周期函数--监听页面显示
    */
@@ -34,7 +42,9 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    this.setData({
+      official:false
+    })
   },
 
   /**

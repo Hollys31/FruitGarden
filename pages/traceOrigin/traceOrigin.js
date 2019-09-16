@@ -15,7 +15,6 @@ Page({
     currentPage:1,
     nomore:false,
     modalHidden: false,
-    proName:'',
     name: '',
     phone: '',
     advice: '',
@@ -46,28 +45,24 @@ Page({
   onReady: function () {
   
   },
-  handelsScanCode() {//直接扫码
-    let params = {};
-    params.openId = app.globalData.openId;
-    params.phoneNumber = wx.getStorageSync('phoneNumber') || ''; 
-    params = Object.assign(params, app.globalData.address);
+  handelsScanCode() {//再次扫码
     handel.scanCode().then(code => {//扫码
-      params.qrcodepriNum = code;
-      handel.checkCode(params);//验证
+      app.globalData.checkParams.qrcodepriNum = code;
+      handel.checkCode(app.globalData.checkParams);//验证
     });
   },
-  getPhoneNumber(e) {//授权手机后扫码
+  getPhoneNumbers(e) {//未授权手机号先获取手机号码扫码
     const _this = this;
-    let params={};
-    params.openId=app.globalData.openId;
-    params=Object.assign(params, app.globalData.address);
     if (e.detail.iv) {
-      handel.getPhoneNumber(e).then(phone => {//获取手机号
-        params.phoneNumber = phone;
-        handel.scanCode().then(code => {//扫码
-          params.qrcodepriNum = code;
-          handel.checkCode(params);//验证
-        });
+      handel.getOpenId().then(res => {//获取openid
+        app.globalData.checkParams.openId = res.openid;
+        handel.getPhoneNumber(e).then(phone => {//获取手机号
+          app.globalData.checkParams.phoneNumber = phone;
+          handel.scanCode().then(code => {//扫码
+            app.globalData.checkParams.qrcodepriNum = code;
+            handel.checkCode(app.globalData.checkParams);//验证
+          });
+        })
       })
     } else {
       wx.showToast({
@@ -81,13 +76,12 @@ Page({
     HTTP.GET({
       url:'origin',
       data: { 
-        qrcodeNum: app.globalData.qrcodeNum,
+        qrcodeNum: app.globalData.checkParams.qrcodepriNum,
         currentPage: _this.data.currentPage,
         currentSize:6
         }
     }).then(res=>{
       _this.setData({
-        proName: res.data.produceInfo.type,
         loading:false
       })
       let orisechList;
@@ -209,8 +203,8 @@ Page({
         data: {
           odbkContent: e.detail.value.advice,
           odbkTitle: _this.data.proName,
-          qrcodeNum: app.globalData.qrcodeNum,
-          openid: app.globalData.openId,
+          qrcodepriNum: app.globalData.checkParams.qrcodeNum,
+          openid: app.globalData.checkParams.openId,
           name: e.detail.value.name,
           phone: e.detail.value.phone
         }

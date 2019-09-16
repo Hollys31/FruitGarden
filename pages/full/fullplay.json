@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "直播",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "icon": "../../components/icon/icon",
+    "tabbar": "../../components/ctabbarBottom/tabbarBottom",
+    "title": "../../components/ctitle/title"
+  }
+}

@@ -1,6 +1,9 @@
-var api_base_url = "https://trace.yufengtek.com/orchard/applet/api/";
+/* var api_base_url = "http://192.168.2.169:7070/api/applet/v1/";  */
+/* var api_base_url = "http://192.168.2.118:7070/api/applet/v1/"; */
+/* var api_base_url = "https://testorchdbs.yufengtek.com/orchard/applet/api/"; */
+  var api_base_url = "https://trace.yufengtek.com/orchard/applet/api/";  
 var api = require('./api.js');
-function POST(params) {
+function POST(params,errback) {
   let promise = new Promise(function (resolve, reject) {
     wx.request({
       url: api_base_url + api[params.url],
@@ -10,7 +13,7 @@ function POST(params) {
         'content-type': 'application/x-www-form-urlencoded',
       },
       success: function (res) {
-        if (res.data.status == 200) {
+        if (res.data.status == 200 || errback) {
           resolve(res.data);
         }
       },

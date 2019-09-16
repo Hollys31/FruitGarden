@@ -1,4 +1,7 @@
 module.exports= {
+  /*
+  精品码
+  */
   getWXUserInfo:'/getWXUserInfo',
   getOpenid:'getOpenid',//获取openId
   postCheck: '/check',//扫码验证 
@@ -24,4 +27,10 @@ module.exports= {
   smallVideo:'smallVideo',//小视频
 
   environment:'environment',//环境
+
+  /*
+  箱码
+  */
+  TRACEAUTH:'traceAuth',
+  TEACEWEATHER:'traceWeather',
 }

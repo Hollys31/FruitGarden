@@ -1,6 +1,7 @@
 // pages/video/video.js
 import HTTP from '../../utils/http.js'
 var handel = require('../../utils/handel.js');
+const funs = require('../../utils/fun.js')
 const app = getApp();
 Page({
   /**
@@ -8,6 +9,7 @@ Page({
    */
   data: {
     isIphoneX: app.globalData.isIphoneX,
+    IMG_URL_HEAD: app.globalData.IMG_URL_HEAD,
     loading: true,
     tabbar: {},
     currType: 1,//当前视频类型
@@ -22,7 +24,8 @@ Page({
     currentPage: 1,//直播列表当前页
     isLoading: false,
     empty: false,
-    panoUrl: ''
+    panoUrl: '',
+    swiperError: 0,
   },
 
   /**
@@ -30,7 +33,7 @@ Page({
    */
   onLoad: function (options) {
     wx.hideTabBar();
-    handel.editTabbar();
+    handel.editTabbar(app.globalData.tabBar);
     this.getheight('#getheight1');
     this.getLiveList();
   },
@@ -51,28 +54,36 @@ Page({
     })
     this.getLiveList();
   },
-  handelTypeRequest() {//视频类型切换
+  handelTypeRequest(e) {//视频类型切换
+    const types = {
+      '0': [this.getPanoData, ''],
+      '1': [this.getLiveList, 'liveData'],
+      '2': [this.getVideoList, 'videoData'],
+    };
+    const type = types[this.data.currType],
+      data = type[1];
     this.setData({
       empty: false
     })
-    if (this.data.currType == 0) {
-      this.getPanoData();
+    if (data) {
+      this.getheight('#getheight' + this.data.currType);
+      if (this.data[data].length == 0) type[0]();
+    } else {
+      type[0]()
     }
-    if (this.data.currType == 1) {
-      this.getheight('#getheight1');
-      if (this.data.liveData.length == 0) {
-        this.getLiveList();
-      }
+  },
+  switchTabPage(e) {//小视频、直播、全景切换 
+    let currType = '';
+    if (e.type == 'change') {
+      currType = e.detail.current
+    } else {
+      currType = e.currentTarget.dataset.type;
     }
-    if (this.data.currType == 2) {
-      this.getheight('#getheight2');
-      if (this.data.videoData.length == 0) {
-        this.setData({
-          loading: true
-        })
-        this.getVideoList();
-      }
-    }
+    this.setData({
+      currType: currType,
+      playIndex: -1
+    })
+    this.handelTypeRequest();
   },
   /*
    全景
@@ -84,7 +95,8 @@ Page({
       data: { gardenId: app.globalData.gardenId }
     }).then(res => {
       if (res.data.path) {
-        const imgUrl = 'https://trace.yufengtek.com/orchard/applet/minifile/index.html?mm=465611615&url=' + encodeURIComponent(res.data.path);
+        const imgUrl = handel.imgHeader + '/krpano/index.html?mm=465611611&url=' + encodeURIComponent(res.data.path);
+        console.log(imgUrl);
         _this.setData({
           panoUrl: imgUrl
         })
@@ -102,7 +114,7 @@ Page({
     HTTP.GET({
       url: 'live',
       data: {
-        gardenId: app.globalData.gardenId,
+        gardenId: app.globalData.checkParams.gardenId,
         currentPage: _this.data.currentPage,
         currentSize: 3
       }
@@ -119,7 +131,7 @@ Page({
       _this.setData({
         liveData: liveData,
         empty: false,
-        loading:false
+        loading: false
       })
       if (_this.data.liveData.length == 0) {
         _this.setData({
@@ -129,108 +141,111 @@ Page({
       _this.getheight('#getheight1');
     })
   },
-    /*   
-    小视频
-     */
-    getVideoList: function () {//获取小视频列表数据
-      const _this = this;
-      _this.setData({
-        empty: false
-      })
-      HTTP.GET({
-        url: 'smallVideo',
-        data: { gardenId: app.globalData.gardenId }
-      }).then(res => {
-        if (res.length == 0) {
-          _this.setData({
-            empty: true
-          })
-        } else {
-          _this.setData({
-            videoData: res.data,
-            isLoading: true,
-            empty: false,
-            loading:false
-          })
-        }
-        _this.getheight('#getheight2');
-      })
-
-    },
-
-    /*
-    操作
-    */
-    getheight(ele) {//获取高度
-      const _this = this;
-      const query = wx.createSelectorQuery();
-      query.select(ele).boundingClientRect()
-      query.exec(function (res) {
+  /*   
+  小视频
+   */
+  getVideoList: function () {//获取小视频列表数据
+    const _this = this;
+    _this.setData({
+      empty: false
+    })
+    HTTP.GET({
+      url: 'smallVideo',
+      data: { gardenId: app.globalData.checkParams.gardenId }
+    }).then(res => {
+      if (res.data.length == 0) {
         _this.setData({
-          height: res[0].height + 30
+          empty: true,
+          loading: false
         })
-      })
-    },
-    handelVideoType(e) {//点击切换小视频、直播  
-      const currType = e.currentTarget.dataset.type;
-      this.setData({
-        currType: currType,
-        playIndex: -1
-      })
-      this.handelTypeRequest();
-    },
-    switchTabPage(e) {//小视频、直播、全景切换 滑动
-      const currType = e.detail.current;
-      this.setData({
-        currType: currType,
-        playIndex: -1
-      })
-
-      this.handelTypeRequest();
-    },
-    error(e) {
-      console.log(e);
-    },
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function () {
-
-    },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function () {
-      wx.stopPullDownRefresh()
-      wx.hideNavigationBarLoading()
-      this.handelTypeRequest()
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-      if (this.data.currType == 1) {
-        this.setData({
-          currentPage: this.data.currentPage + 1
+      } else {
+        _this.setData({
+          videoData: res.data,
+          isLoading: true,
+          empty: false,
+          loading: false
         })
-        this.getLiveList();
       }
+      _this.getheight('#getheight2');
+    })
 
-    },
+  },
 
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function () {
+  /*
+  操作
+  */
+  getheight(ele) {//获取高度
+    const _this = this;
+    const query = wx.createSelectorQuery();
+    query.select(ele).boundingClientRect()
+    query.exec(function (res) {
+      _this.setData({
+        height: res[0].height + 30
+      })
+    })
+  },
 
+  changeGoodsSwip: function (detail) {//swiper卡死
+    if (detail.detail.source == "touch") {
+      if (detail.detail.current == 0) {
+        let swiperError = this.data.swiperError;
+        swiperError += 1
+        this.setData({ swiperError: swiperError })
+        if (swiperError >= 3) { //在开关被触发3次以上
+          console.error(this.data.swiperError)
+          this.setData({ currType: 1 });//，重置current为正确索引
+          this.setData({ swiperError: 0 })
+        }
+      } else {//正常轮播时，记录正确页码索引
+        this.setData({ preIndex: detail.detail.current });
+        //将开关重置为0
+        this.setData({ swiperError: 0 })
+      }
     }
-  })
+  },
+  error(e) {
+    console.log(e);
+  },
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+    wx.stopPullDownRefresh()
+    wx.hideNavigationBarLoading()
+    this.handelTypeRequest()
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+    if (this.data.currType == 1) {
+      this.setData({
+        currentPage: this.data.currentPage + 1
+      })
+      this.getLiveList();
+    }
+
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+
+  }
+})

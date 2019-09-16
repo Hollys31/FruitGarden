@@ -1,5 +1,6 @@
 /* components/videos/videos.wxss */
 @import '/app.wxss';
+
 .item {
   margin-bottom: 24rpx;
   padding-bottom: 20rpx;
@@ -12,18 +13,29 @@
 .item>view {
   padding: 0 20rpx;
 }
-.item .text{
+
+.item .text {
   width: 100%;
   position: absolute;
   z-index: 99;
   top: 100rpx;
   text-align: center;
-  color: #fff
+  color: #fff;
 }
-.item .text.text1{
+
+.item .loading {
+  position: absolute;
+  color: #fff;
+  top: 50%;
+  left: 50%;
+  margin: -25rpx 0 0 -75rpx;
+}
+
+.item .text.text1 {
   top: 140rpx;
 }
-.item .text .refresh{
+
+.item .text .refresh {
   text-align: center;
   width: 150rpx;
   height: 40rpx;
@@ -31,36 +43,47 @@
   line-height: 40rpx;
   border-radius: 20rpx;
 }
-.item .text text{
-  display: block
-}
- video {
-  width:100%;
-  height: 387rpx;
+
+.item .text text {
+  display: block;
 }
 
- image {
+video {
   width: 100%;
   height: 387rpx;
 }
- .nodate image {
-width:347rpx;
-height:267rpx;
-display:block;
-margin:0 auto;
 
+image {
+  width: 100%;
+  height: 387rpx;
 }
 
- .name {
+.nodate image {
+  width: 347rpx;
+  height: 267rpx;
+  display: block;
+  margin: 0 auto;
+}
+
+.name {
   text-align: right;
   height: 50rpx;
   line-height: 50rpx;
 }
 
-.name text {
+.name .title {
   font-size: 28rpx;
   color: #333;
   float: left;
+}
+
+.item .full {
+  display: block;
+  width: 70rpx;
+  height: 50rpx;
+  position: absolute;
+  right: 10rpx;
+  top: 320rpx;
 }
 
 .item>view.address {
@@ -75,7 +98,7 @@ margin:0 auto;
   top: 0;
 }
 
- .camera {
+.camera {
   color: #fff;
   height: 80rpx;
   line-height: 80rpx;
@@ -88,12 +111,12 @@ margin:0 auto;
   text-align: center;
 }
 
- .camera>text {
+.camera>text {
   position: relative;
   top: -10rpx;
   left: 10rpx;
 }
 
- .play text {
+.play text {
   font-size: 80rpx;
 }

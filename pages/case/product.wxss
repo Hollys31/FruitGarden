@@ -1,30 +1,254 @@
 /* pages/case/product.wxss */
-page{
-  background: #f7a54d
+
+page {
+  background: #ffb15d;
 }
-.product .banner{
-  width: 100%;
-  height: 1016rpx;
+
+swiper {
+  width: 100vw;
+  height: 100vh;
 }
-.product .goods{
+
+swiper-item {
+  width: 100vw;
+}
+
+.one image {
+  display: block;
+}
+
+.bgos {
+  width: 200rpx;
+  height: 430rpx;
+  position: absolute;
+  top: -50rpx;
+  left: -30rpx;
+}
+.active .bgos {
+  animation: bgos 0.6s linear forwards;
+}
+@keyframes bgos{
+  0% {
+    transform: translateX(0rpx);
+  }
+
+  50% {
+    transform: translateX(30rpx);
+  }
+
+  100% {
+    transform: translateX(0rpx);
+  }
+}
+.bgof {
+  width: 200rpx;
+  height: 430rpx;
+  position: absolute;
+  top: -50rpx;
+  right: -30rpx;
+}
+.active .bgof {
+  animation: bgof 0.6s linear forwards;
+}
+@keyframes bgof{
+  0% {
+    transform: translateX(0rpx);
+  }
+
+  50% {
+    transform: translateX(-30rpx);
+  }
+
+  100% {
+    transform: translateX(0rpx);
+  }
+}
+
+.bgofo {
+  width: 750rpx;
+  height: 560rpx;
+  position: absolute;
+  top: -150rpx;
+  z-index: -1;
+}
+
+.bgoz {
+  width: 750rpx;
+  height: 750rpx;
+  position: absolute;
+  z-index: -1;
+  
+}
+.active .bgoz {
+  animation: bgoz 0.5s linear forwards;
+}
+@keyframes bgoz{
+  0% {
+    transform: scale(1);
+    opacity: 0;
+  }
+
+  20% {
+    transform: scale(1.5);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.bgot {
+  width: 750rpx;
+  height: 300rpx;
+  position: absolute;
+  top: 720rpx;
+  z-index: -1;
+}
+.bgon {
+  width: 800rpx;
+  height: 560rpx;
+  position: absolute;
+  top: 380rpx;
+  left: -45rpx;
+  
+}
+.active .bgon {
+  animation: bgon 0.8s linear forwards;
+}
+@keyframes bgon{
+  0% {
+    transform: translateY(-50rpx);
+    opacity: 0;
+  }
+  50%{
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0rpx);
+  }
+}
+.bgoo {
+  width: 330rpx;
+  height: 300rpx;
+  position: absolute;
+  left: 220rpx;
+  top: 60rpx;
+  
+}
+.active .bgoo {
+  animation: bgoo 0.5s linear forwards;
+}
+@keyframes bgoo{
+  0% {
+    transform: scale(2);
+    opacity: 0;
+  }
+
+  50% {
+    transform: scale(0.5);
+    opacity: 0.5
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.buy{
+  display: block;
+  width: 560rpx;
+  height: 110rpx;
+  margin: 50rpx auto;
+}
+.bgoo {
+  width: 330rpx;
+  height: 300rpx;
+  position: absolute;
+  left: 220rpx;
+  top: 60rpx;
+  /* z-index: -1; */
+}
+.goods {
   width: 670rpx;
   height: 492rpx;
   margin: 0 auto;
-  text-align: center;
   position: relative;
+  background-image: url('https://trace.yufengtek.com/orchard/applet/images/bg4.png');
+  background-size: 670rpx 500rpx;
 }
-.product .goods image{
- width: 100%;
- height: 100%;
+.bgotw {
+  width: 124rpx;
+  height: 198rpx;
+  position: absolute;
+  left: 265rpx;
+  top: 50rpx;
+  z-index: 2;
 }
-.product .goods .text{
-  width: 100%;
+.active .bgotw {
+  animation: bgotw 0.6s linear forwards;
+}
+@keyframes bgotw{
+  0% {
+    transform: translateY(40rpx);
+    opacity: 0;
+  }
+  50%{
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0rpx);
+  }
+}
+.bgoe {
+  width: 264rpx;
+  height: 64rpx;
+  position: absolute;
+  left: 195rpx;
+  top: 170rpx;
+  
+}
+.active .bgoe {
+  animation: bgoe 0.5s linear forwards;
+}
+.bgose {
+  width: 264rpx;
+  height: 90rpx;
+  position: absolute;
+  left: 195rpx;
+  top: 210rpx;
+  z-index: 3;
+ 
+}
+.active .bgose {
+   animation: bgoe 0.5s linear forwards;
+}
+.goods .text {
   position: absolute;
   top: 310rpx;
+  left: 195rpx;
   color: #fff;
 }
-.product .goods .comming{
+.active .text {
+   animation: bgoe 0.5s linear forwards;
+}
+@keyframes bgoe{
+  0% {
+    transform: translateY(-40rpx);
+    opacity: 0;
+  }
+  50%{
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0rpx);
+  }
+}
+.goods .comming {
   color: #f66a1c;
   font-size: 36rpx;
   line-height: 3.4em;
+  margin-left: 50rpx;
 }
+
+/* 长屏兼容 */
+

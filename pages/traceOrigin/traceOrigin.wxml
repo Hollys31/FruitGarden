@@ -1,7 +1,7 @@
 <!--pages/traceOrigin/traceOrigin.wxml-->
 <title title="溯源信息"></title>
 <view class='origin-info'>
-  <image class='bg' src='/resources/images/bg1.png'></image>
+  <image class='bg' src='https://trace.yufengtek.com/orchard/applet/images/bg1.png'></image>
   <view class='info'>
     <view class='left'>
       <view class='name'>水果溯源信息</view>
@@ -71,7 +71,7 @@
 <!-- 异常反馈 -->
 <view class='warn-modal' wx:if="{{modalHidden}}" catchtouchmove="ture">
   <view class='modal-inner' style="margin-top:{{marginTop}}">
-    <image src='/resources/images/warnbg.png' catchtouchmove="ture" />
+    <image src='https://trace.yufengtek.com/orchard/applet/images/warnbg.png' catchtouchmove="ture" />
     <form bindsubmit='saveFeedback' report-submit="{{true}}">
       <view class='form-inner clearfix'>
         <view class="section {{nameEmpty==0?'active':''}}">

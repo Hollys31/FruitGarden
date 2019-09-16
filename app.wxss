@@ -5,7 +5,7 @@ page {
   color: #333;
   font-size: 26rpx;
   line-height: 1.6em;
-  padding-bottom: 110rpx;
+  -webkit-overflow-scrolling: touch
 }
 button::after{
     border: 0;

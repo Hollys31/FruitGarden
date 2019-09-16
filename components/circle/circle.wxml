@@ -1,6 +1,6 @@
 <!--components/circle/circle.wxml-->
 <view class='circle-wrap'>
-  <image src='{{imgUrl}}'/>
+  <image src="{{imgUrl||IMG_URL_HEAD+'/images/orange.png'}}"/>
   <view class='circle-inner'>
     <view class='line'>
       <view class='dot'></view>

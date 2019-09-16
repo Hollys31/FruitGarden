@@ -2,66 +2,66 @@
 const app = getApp();
 //获取应用实例
 var handel = require('../../utils/handel.js');
+const funs = require('../../utils/fun.js')
 var qqmapsdk;
 Page({
   data: {
+    IMG_URL_HEAD: app.globalData.IMG_URL_HEAD,
     loading: false,
-    buttonClicked:false,
-    allow:false,
-    params:{}//扫码验证参数
+    buttonClicked: false,
+    allow: false,
   },
-
   onLoad: function () {
-    const _this=this;
-    const phoneNumber = wx.getStorageSync('phoneNumber') || '';
-    if (!phoneNumber){
+    const _this = this;
+    const phoneNumber = wx.getStorageSync('phoneNumber') || '';//判断是否授权获取用户手机号
+    if (!phoneNumber) {
       this.setData({
-        allow:true
+        allow: true
       })
     }
-    handel.getUserAddress().then(res=>{//获取地理位置
-      const params = Object.assign(_this.data.params, res);
-      app.globalData.address=res;
-      _this.setData({
-        params: params
-      });
-    });
-    handel.getOpenId().then(res => {//获取openid
-      let params=_this.data.params;
-      params.openId = res.openid;
-      _this.setData({
-        params: params
-      });
-    })
-   
+    handel.getUserAddress();//获取地理位置
   },
   onReady() {
     // 调用接口
-   
+    const _this = this;
+
+
   },
-  handelsScanCode(){//已授权手机扫码
-    const _this=this;
-    handel.scanCode().then(code => {//扫码
-      let params = _this.data.params;
-      params.qrcodepriNum = code;
-      params.phoneNumber = wx.getStorageSync('phoneNumber') || '';
-      handel.checkCode(params);//验证
-    });
-  }, 
-  getPhoneNumbers(e){//授权手机后扫码
-    const _this=this;
-    if(e.detail.iv){
-      let params = _this.data.params;
-      handel.getPhoneNumber(e).then(phone=>{//获取手机号
-        params.phoneNumber=phone;
-        handel.scanCode().then(code=>{//扫码
-          params.qrcodepriNum=code;
-          handel.checkCode(params);//验证
-        });
+  tofeedback() {//到异常反馈
+    handel.getOpenId().then(() => {
+      wx.navigateTo({
+        url: '/pages/feedback/feedback',
       })
-    }else{
+    })
+  },
+  handelsScanCode: funs.throttle(function(){//已授权手机号扫码
+    const _this = this;
+    handel.getOpenId().then(res => {//获取openid
+      app.globalData.checkParams.openId = res.openid;
+      handel.scanCode().then(code => {//扫码
+        app.globalData.checkParams.qrcodepriNum = code;
+        app.globalData.checkParams.phoneNumber = wx.getStorageSync('phoneNumber') || '';
+        handel.checkCode(app.globalData.checkParams);//验证
+      });
+    })
+  },2000),
+  getPhoneNumbers(e) {//未授权手机号先获取手机号码扫码
+    const _this = this;
+    if (e.detail.iv) {
+      handel.getOpenId().then(res => {//获取openid
+        app.globalData.checkParams.openId = res.openid;
+        handel.getPhoneNumber(e).then(phone => {//获取手机号
+          app.globalData.checkParams.phoneNumber = phone;
+          handel.scanCode().then(code => {//扫码
+            app.globalData.checkParams.qrcodepriNum = code;
+            handel.checkCode(app.globalData.checkParams);//验证
+          });
+        })
+      })
+
+    } else {
       wx.showToast({
-        icon:'none',
+        icon: 'none',
         title: '请先授权获取手机号',
       })
     }

@@ -1,5 +1,9 @@
 {
   "usingComponents": {
-    "title": "../../components/title/title"
-  }
+    "tabbar": "../../components/caseTabbar/caseTabbar"
+  },
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "联系我们",
+  "navigationStyle": "default"
 }

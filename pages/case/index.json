@@ -1,5 +1,10 @@
 {
   "usingComponents": {
-    "title": "../../components/title/title"
-  }
+    "subhead": "../../components/subhead/subhead",
+    "tabbar": "../../components/caseTabbar/caseTabbar"
+  },
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "源地认证",
+  "navigationStyle": "default"
 }

@@ -1,26 +1,27 @@
 // components/videos/videos.js
+const app = getApp();
 Component({
   /**
    * 组件的属性列表
    */
   properties: {
-    videoData:{
-      type:Object,
-      value:[],
-      observer: function (newVal, oldVal, changedPath) {
+    videoData: {
+      type: Object,
+      value: [],
+      observer: function(newVal, oldVal, changedPath) {
         // 属性被改变时执行的函数（可选），也可以写成在methods段中定义的方法名字符串, 如：'_propertyChange'
         // 通常 newVal 就是新设置的数据， oldVal 是旧数据
       }
     },
-    currType:{
-      type:Number,
-      value:1
+    currType: {
+      type: Number,
+      value: 1
     },
     isLoading: {
       type: Boolean,
       value: false
     },
-    empty:{
+    empty: {
       type: Boolean,
       value: false
     }
@@ -32,29 +33,40 @@ Component({
    * 组件的初始数据
    */
   data: {
-    freshHide:true
+    freshHide: true,
+    message: '',
+    IMG_URL_HEAD: app.globalData.IMG_URL_HEAD,
   },
 
   /**
    * 组件的方法列表
    */
+  
   methods: {
-    livePlay(e) {//直播播放
+    livePlay(e) { //直播播放
       var curIdx = e.currentTarget.dataset.index;
       this.setData({
         playIndex: curIdx,
       })
     },
-    refreshVideo(){//刷新加载不在线视频
+    refreshVideo() { //刷新加载不在线视频
       this.setData({
         freshHide: false
       })
       this.triggerEvent('myevent')
     },
-    statechange(){
-      console.log(e);
+    statechange(e) {
+      if (e.detail.code==2007){
+        this.setData({
+          message: e.detail.message
+        })
+      } else if (e.detail.code == 2004){
+        this.setData({
+          message: ''
+        })
+      }
     },
-    error(e){
+    error(e) {
       console.log(e);
     }
   }

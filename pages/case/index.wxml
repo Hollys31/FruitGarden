@@ -1,3 +1,143 @@
 <!--pages/case/index.wxml-->
-<title title="源地认证"></title>
+<swiper vertical='true' current="{{current}}" easing-function='easeInOutCubic' bindchange="switchSwiperItem">
+  <swiper-item class="{{current==0?'active':''}}">
+    <view class="index">
+      <image class='bg' src="/bg.png"></image>
+      <image class='fruit' src="{{IMG_URL_HEAD+'/images/fruit.png'}}"></image>
+      <image class='left left-ani' src="{{IMG_URL_HEAD+'/images/xz4.png'}}"></image>
+      <image class='right right-ani' src="{{IMG_URL_HEAD+'/images/xz5.png'}}"></image>
+      <image class='std std-ani' src="{{IMG_URL_HEAD+'/images/std.png'}}"></image>
+      <image class='xzone xzone-ani' src="{{IMG_URL_HEAD+'/images/xz1.png'}}"></image>
+      <image class='xztwo xzone-ani' src="{{IMG_URL_HEAD+'/images/xz2.png'}}"></image>
+      <image class='xzthree xzthree-ani' src="{{IMG_URL_HEAD+'/images/xz3.png'}}"></image>
+      <image class='fx fx-ani' src="{{IMG_URL_HEAD+'/images/fx.png'}}"></image>
+      <image class='ax ax-ani' src="{{IMG_URL_HEAD+'/images/ax.png'}}"></image>
+    </view>
+  </swiper-item>
+  <swiper-item class="{{current==1?'active':''}}">
+    <view class="info">
+      <view class='product'>
+        <image class='bg' src="{{IMG_URL_HEAD+'/images/probg.png'}}"></image>
+        <image class='pro-img' src="{{IMG_URL_HEAD+'/images/orange.png'}}"></image>
+        <view class='text text-ani'>
+          <view class='data clearfix'>
+            <view> 产品名称：
+              <text>{{productInfo.cropName}}</text>
+            </view>
+            <view>包装：
+              <text>{{productInfo.packageStd}}</text>
+            </view>
+          </view>
+          在智慧的源地，尽享一手的新鲜，奉节脐橙果实色香，果汁丰富，含多量糖分，有机酸，矿物质外，还富含维生素C，营养价值高！（用智慧为每一颗果实赋码）
+        </view>
+      </view>
+      <view class='map-wrap'>
+        <view class='tit text-ani'>来自源地管理员
+          <text>{{productInfo.owner}}</text> 管理片区</view>
+        <view class='map'>
+          <image class='mapbg' src="{{IMG_URL_HEAD+'/images/mapbg.png'}}"></image>
+          <view class='data data-ani'>
+            <image class='databg' src="{{IMG_URL_HEAD+'/images/databg.png'}}"></image>
+            <view class="datatext"> 总株树
+              <text>{{productInfo.cropCount}}颗</text> 总面积
+              <text>{{productInfo.gardenArea}}亩</text>
+            </view>
+          </view>
+          <view class='mark'>
+            <text class="text-ani">{{productInfo.gardenName}}</text>
+            <image class='dot' src="{{IMG_URL_HEAD+'/images/dot.png'}}"></image>
+          </view>
+        </view>
+      </view>
+    </view>
+    <subhead name="源地环境介绍"></subhead>
+  </swiper-item>
+  <swiper-item class="{{current==2?'active':''}}">
+    <view class='environment'>
+      <view class='tab'>
+        <view wx:for="{{tabArr}}" class="{{index==currInd?'active':''}}" wx:key="index" data-index="{{item.id}}" bindtap='getEnvironment'>
+          <text>{{item.name}}</text>
+          <image class='normal' wx:if="{{index!=currInd}}" src="{{IMG_URL_HEAD+'/images/normalbg.png'}}"></image>
+          <image class='active' wx:if="{{index==currInd}}" src="{{IMG_URL_HEAD+'/images/activebg.png'}}"></image>
+        </view>
+      </view>
+      <view class="envwrap">
+        <image class="bg" src="{{IMG_URL_HEAD+'/images/bg3.png'}}" wx:if="{{currInd==0 || currInd==1}}"></image>
+        <image class="bg-short" src="{{IMG_URL_HEAD+'/images/bg3.png'}}" wx:if="{{currInd==2}}"></image>
+        <view class='part' wx:if="{{currInd==0}}">
+          <text class="numone">01</text>
+          <text class="numtwo">02</text>
+          <text class="numthree">03</text>
+          <view class='item'>
+            平均土壤温度
+            <text>{{soilInfo.soiltemp}}°C</text>，地处中亚热带南缘，具有农作物种植的
+            <text>山地资源</text>，土壤温度极度
+            <text>适宜作物生长</text>。
+          </view>
+          <image src="{{IMG_URL_HEAD+'/images/ty1.png'}}" style="height:250rpx;"></image>
+          <image src="{{IMG_URL_HEAD+'/images/ty2.png'}}" class="margin"></image>
+          <view class='item'>
+            平均土壤湿度
+            <text>{{soilInfo.soilmture}}%</text>，由于
+            <text>降雨量充沛</text>，空气湿度饱和，
+            <text>土层深厚</text>达1米多深，
+            <text>疏松透气</text>，所以土壤能够存储丰富水分。
+          </view>
+          <view class='item'>
+            平均土壤盐碱度
+            <text>7.32</text> 具有良好的土壤条件，红壤土具有土层深厚，
+            <text>土质偏酸</text>，
+            <text>有机质含量较低</text>的特点。
+          </view>
+          <image src="{{IMG_URL_HEAD+'/images/ty4.png'}}"></image>
+        </view>
+        <view class="{{flag==true?'part dgr':'part'}}" wx:if="{{currInd==1}}">
+          <text class="numone">01</text>
+          <text class="numtwo">02</text>
+          <text class="numthree">03</text>
+          <view class='item one'>
+            年平均气温
+            <text>{{climateInfo.temp}}°C</text> 地处亚热带季风气候区的赣南地带，
+            <text>四季分明</text>、
+            <text>气候温和</text>，具有作物生长的绝佳环境优势。
+          </view>
+          <image src="{{IMG_URL_HEAD+'/images/ty1.png'}}" style="height:250rpx;" class='two'></image>
+          <image src="{{IMG_URL_HEAD+'/images/ty2.png'}}" class="margin three"></image>
+          <view class='item four'>
+            平均降雨
+            <text> {{climateInfo.rain}}mm</text> 春夏降水集中，
+            <text>雨量充沛</text>，能过为农作物提供丰富的降雨水量，为果蔬
+            <text>糖分积累</text>提供良好气候条件。
+          </view>
+          <view class='item five'>
+            平均光照
+            <text>{{climateInfo.sunlux}}Lux</text> 春早、夏长、秋短、冬暖，
+            <text>光照充足</text>，
+            <text>热量丰富</text>是农作物生长得天独厚的利势。
+          </view>
+          <image src="{{IMG_URL_HEAD+'/images/ty3.png'}}" class='six'></image>
+        </view>
+        <view class='part short' wx:if="{{currInd==2}}">
+          <text class="numone">01</text>
+          <text class="numtwo">02</text>
+          <view class='item'>
+            设备数量
+            <text>共{{supervision.devCount}}台</text> ，同时监控气温、降雨以及土壤温度、湿度、盐碱度，
+            <text>准确率高</text>， 提高了农事效率，规避了有害风
+          </view>
+          <image src="{{IMG_URL_HEAD+'/images/ty5.png'}}" style="height:170rpx;margin-top:50rpx;"></image>
+          <image src="{{IMG_URL_HEAD+'/images/ty6.png'}}" class="margin" style="height:240rpx;"></image>
+          <view class='item'>
+            监测时长
+            <text>{{supervision.monTime}}h</text>，小蜜蜂一号
+            <text>实时监测</text>着果园的气温、降雨、光照、以及土壤温湿度、盐碱度等数据，果农可以以
+            <text>第一时间</text>在后台进行查看。
+          </view>
+        </view>
+      </view>
+    </view>
+  </swiper-item>
+</swiper>
 
+
+<tabbar tabbar="{{tabbar}}"></tabbar>

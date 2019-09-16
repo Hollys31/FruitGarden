@@ -1,11 +1,12 @@
 // pages/network/network.js
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    IMG_URL_HEAD: app.globalData.IMG_URL_HEAD,
   },
 
   /**

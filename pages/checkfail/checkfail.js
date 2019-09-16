@@ -1,4 +1,5 @@
 // pages/checkfail/checkfail.js
+const app = getApp();
 Page({
 
   /**
@@ -7,7 +8,7 @@ Page({
   data: {
     fistPart: true, 
     modalShow:false,
-    imgUrl: '/resources/images/unsure.png'
+    IMG_URL_HEAD: app.globalData.IMG_URL_HEAD,
   },
 
   /**

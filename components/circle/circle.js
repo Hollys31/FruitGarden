@@ -1,4 +1,5 @@
 // components/circle/circle.js
+const app = getApp();
 Component({
   /**
    * 组件的属性列表
@@ -6,7 +7,7 @@ Component({
   properties: {
     imgUrl: {
       type: String,
-      value: '/resources/images/orange.png',
+      value: '',
     }
   },
 
@@ -14,7 +15,8 @@ Component({
    * 组件的初始数据
    */
   data: {
-    count: 0
+    count: 0,
+    IMG_URL_HEAD: app.globalData.IMG_URL_HEAD,
   },
   lifetimes: {
     attached() {

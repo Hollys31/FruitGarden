@@ -1,0 +1,3 @@
+<title title="直播"></title>
+<live-player class='fullp' src='{{URL}}' orientation='horizontal' mode='live' autoplay='{{flag}}'></live-player>
+<tabbar tabbar="{{tabbar}}"></tabbar>

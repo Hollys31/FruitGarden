@@ -1,8 +1,117 @@
 /* pages/case/origin.wxss */
-page{
-  background: #f7a54d
+page {
+  background: #ffb15d;
 }
-.origin image{
-  width: 750rpx;
-  height: 2229rpx;
+swiper {
+  width: 100vw;
+  height: 100vh;
+}
+swiper-item{
+  width: 100vw;
+}
+.headimg{
+  width: 830rpx;
+  height: 380rpx;
+  margin: -70rpx 0 0 -40rpx;
+}
+.bgimg{
+  width: 670rpx;
+  height: 400rpx;
+  position: absolute;
+  z-index: -2;
+  /* margin: 0 auto; */
+}
+.linkimg{
+  width: 472rpx;
+  height: 108rpx;
+  position: absolute;
+  z-index: -1;
+  top: -70rpx;
+  left: 100rpx;
+}
+.item{
+  width: 670rpx;
+  height: 400rpx;
+  margin: 30rpx auto 0 auto;
+  position: relative;
+}
+.one{
+  margin: -50rpx auto 0 auto;
+}
+
+.item .step{
+  color: #f66a1c;
+  font-size: 34rpx;
+  padding: 50rpx 0 50rpx 60rpx;
+}
+
+.item .text{
+  color: #fff;
+  font-size: 26rpx;
+  padding:0 0 40rpx 30rpx; 
+}
+.item .text text{
+  display: inline-block;
+  margin-right: 10rpx;
+  color: #f66a1c;
+  font-size: 120rpx;
+  line-height: 36rpx;
+  vertical-align: -75%;
+}
+.item .imgone{
+  width: 280rpx;
+  height: 280rpx;
+  position: absolute;
+  top: 50rpx;
+  right: 30rpx;
+}
+.item .wraptwo{
+  position: absolute;
+  right: 30rpx;
+}
+.item .imgtwo{
+  width: 280rpx;
+  height: 280rpx;
+  position: absolute;
+  top: 50rpx;
+  left: 30rpx;
+}
+.item .imgthree{
+  width: 280rpx;
+  height: 280rpx;
+  position: absolute;
+  top: 50rpx;
+  right: 30rpx;
+}
+.item .wrapfour{
+  position: absolute;
+  right: 30rpx;
+  width: 350rpx;
+  word-wrap: wrap;
+}
+.item .imgfour{
+  width: 280rpx;
+  height: 280rpx;
+  position: absolute;
+  top: 50rpx;
+  left: 30rpx;
+}
+.item .wrapfour .text view{
+  margin-left: 35rpx;
+}
+.scanCode{
+  display: block;
+  width: 310rpx;
+  height: 100rpx;
+  margin: 72rpx auto 0 auto;
+}
+/* 短屏兼容 */
+
+@media screen and (max-height: 650px) {
+  .item {
+    height: 380rpx;
+  }
+  .bgimg {
+    height: 380rpx;
+  }
 }
