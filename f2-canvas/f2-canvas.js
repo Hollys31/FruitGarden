@@ -84,9 +84,9 @@ Component({
       console.log(query);
       query.select('.f2-canvas').boundingClientRect(res => {
         if (typeof callback === 'function') {
-          this.chart = callback(canvas, 355, 240);
+          this.chart = callback(canvas, res.width,res.height);
         } else if (this.data.opts && this.data.opts.onInit) {
-          this.chart = this.data.opts.onInit(canvas,355,240);
+          this.chart = this.data.opts.onInit(canvas, res.width, res.height);
         }
       }).exec();
     },

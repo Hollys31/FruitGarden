@@ -92,11 +92,10 @@ Page({
     const _this = this;
     HTTP.GET({
       url: "pano",
-      data: { gardenId: app.globalData.gardenId }
+      data: { gardenId: app.globalData.checkParams.gardenId }
     }).then(res => {
       if (res.data.path) {
-        const imgUrl = handel.imgHeader + '/krpano/index.html?mm=465611611&url=' + encodeURIComponent(res.data.path);
-        console.log(imgUrl);
+        const imgUrl = app.globalData.IMG_URL_HEAD+ '/krpano/index.html?mm=465611611&url=' + encodeURIComponent(res.data.path);
         _this.setData({
           panoUrl: imgUrl
         })

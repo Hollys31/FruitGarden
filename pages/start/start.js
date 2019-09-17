@@ -43,7 +43,6 @@ Page({
     if (e.detail.iv) {
       Promise.all([handel.getUserAddress(), handel.getOpenId()]).then(res => {
         handel.getPhoneNumber(e).then(res => {
-          console.log(app.globalData.checkParams);
           handel.checkCode(app.globalData.checkParams);//验证
         })
       })

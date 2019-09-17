@@ -2,7 +2,7 @@
 <title title="果园信息"></title>
 <view class="teaPlantation">
   <view class='part  garden'>
-    <image class='img' src="{{coverImg}}" lazy-load='true' />
+    <image class='img' src="{{IMG_URL_HEAD+'/imgs/orban.png'}}" lazy-load='true' />
     <image class='identifystate' src="{{IMG_URL_HEAD+'/images/identifystate.png'}}" />
     <view class='name'>{{gardenInfo.gardenInfo.gardenName}}</view>
     <view class='charge'>
