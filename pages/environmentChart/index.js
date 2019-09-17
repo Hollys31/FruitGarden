@@ -79,17 +79,19 @@ Page({
       this.setData({
         nodata: true
       })
+    }else{
+      const actions = {
+        '1': ['temp', '℃'],
+        '2': ['humid', '%'],
+        '3': ['sunlux', 'Lux'],
+        '4': ['rain', 'mm'],
+      }
+      let action = actions[currIdx],
+        name = action[0],
+        unit = action[1];
+      this.getChartData(name, unit);
     }
-    const actions = {
-      '1': ['temp', '℃'],
-      '2': ['humid', '%'],
-      '3': ['sunlux', 'Lux'],
-      '4': ['rain', 'mm'],
-    }
-    let action = actions[currIdx],
-      name = action[0],
-      unit=action[1];
-    this.getChartData(name, unit);
+    
   },
 
   chartDataRequest(type,unit){//环境数据信息请求
