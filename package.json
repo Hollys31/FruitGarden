@@ -1,0 +1,26 @@
+{
+  "name": "fruitgarden",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "@antv/f2-canvas": "^1.0.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hollys31/fruitGarden.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hollys31/fruitGarden/issues"
+  },
+  "homepage": "https://github.com/Hollys31/fruitGarden#readme"
+}

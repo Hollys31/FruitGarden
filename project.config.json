@@ -9,7 +9,8 @@
 		"postcss": true,
 		"minified": true,
 		"newFeature": true,
-		"nodeModules": false,
+		"coverView": true,
+		"nodeModules": true,
 		"autoAudits": true,
 		"uglifyFileName": true,
 		"checkInvalidKey": true,
@@ -22,7 +23,7 @@
 		}
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.6.6",
+	"libVersion": "2.8.2",
 	"appid": "wx748194974cd03430",
 	"projectname": "fruitGarden",
 	"debugOptions": {

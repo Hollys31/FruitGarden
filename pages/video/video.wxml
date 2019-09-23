@@ -8,10 +8,10 @@
     <swiper  class="page-swiper" bindanimationfinish="changeGoodsSwip" current="{{currType}}" duration="300" bindchange="switchTabPage" style="height:{{height}}px;">
       <swiper-item wx:for="{{[0,1,2]}}" wx:for-index="index" wx:key="index" class="tab-content">
         <scroll-view scroll-y="true" id="getheight{{index}}">
-          <block wx:if="{{currType==index&&currType==0&&panoUrl.length>0}}">
-            <web-view src="{{panoUrl}}"/>
+          <block wx:if="{{currType==index&&currType==0&&panoUrl}}">
+            <web-view  src="{{IMG_URL_HEAD+'/krpano/index.html?mm=4656116331&url='+panoUrl}}"/>
           </block>
-          <block wx:if="{{currType==index&&currType==0&&panoUrl.length==0}}">
+          <block wx:if="{{currType==index&&currType==0&&!panoUrl}}">
             <view class='nodate'>
               <image src="{{IMG_URL_HEAD+'/images/nodevice.png'}}" />
               <text>暂无全景</text>

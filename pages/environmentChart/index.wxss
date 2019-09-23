@@ -202,12 +202,20 @@ page{
   color: #666;
   display: block;
 }
-
 .charts {
   width: 100%;
   height: 740rpx;
 }
-
+.chart{
+  width: 100%;
+  height: 500rpx;
+}
+.chart.hide{
+  display: none;
+}
+.chart.show{
+  display: block;
+}
 .no-device {
   text-align: center;
   color: #999;

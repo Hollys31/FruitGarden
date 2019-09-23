@@ -95,7 +95,7 @@ Page({
       data: { gardenId: app.globalData.checkParams.gardenId }
     }).then(res => {
       if (res.data.path) {
-        const imgUrl = app.globalData.IMG_URL_HEAD+ '/krpano/index.html?mm=465611611&url=' + encodeURIComponent(res.data.path);
+        const imgUrl =encodeURIComponent(res.data.path);
         _this.setData({
           panoUrl: imgUrl
         })

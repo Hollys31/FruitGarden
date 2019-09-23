@@ -18,9 +18,8 @@
   </view>
 </view>
 <swiper interval="{{true}}" bindanimationfinish="changeGoodsSwip"  class='charts' duration="300" current="{{currType}}" circular bindchange="switchTabPage">
-  <block wx:for="{{sorts}}" wx:key="{{index}}">
-    <swiper-item>
-      <view class='chart-wrap' wx:if="{{currType==index}}">
+    <swiper-item wx:for="{{sorts}}" wx:key="{{index}}">
+      <view class="chart-wrap" >
         <view class='tips' wx:if="{{dateType=='month'}}">近六个月{{item.name}}趋势</view>
         <view class='tips' wx:elif="{{dateType=='day'}}">近七天{{item.name}}趋势</view>
         <view class='tips' wx:else>{{item.name}}趋势</view>
@@ -28,15 +27,13 @@
           <image src="{{IMG_URL_HEAD+'/images/nodevice.png'}}"></image>
           暂无{{item.name}}设备
         </view>
-        <ff-canvas class='chart' opts="{{opts}}"  wx:if="{{!nodata}}" canvas-id="{{item.type}}" id="{{item.type}}" ></ff-canvas>
+        <ff-canvas class="chart {{nodata?'hide':'show'}}" opts="{{opts}}"   canvas-id="{{item.type}}" id="{{item.type}}" ></ff-canvas>
       </view>
       <view class='data-info' wx:if="{{!nodata}}">
         {{latestInfo.info}}
         <text>实时数据更新  {{latestInfo.date}}</text>
       </view>
     </swiper-item>
-  </block>
-
 </swiper>
 <tabbar tabbar="{{tabbar}}"></tabbar>
 <Loading wx:if="{{loading}}"></Loading>

@@ -81,7 +81,6 @@ Component({
       this.canvas = canvas;
 
       const query = wx.createSelectorQuery().in(this);
-      console.log(query);
       query.select('.f2-canvas').boundingClientRect(res => {
         if (typeof callback === 'function') {
           this.chart = callback(canvas, res.width,res.height);

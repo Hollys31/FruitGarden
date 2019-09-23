@@ -1,5 +1,6 @@
 {
   "pages": [
+   
     "pages/scanQRCode/scanQRCode",
     "pages/index/index",
     "pages/logs/logs",

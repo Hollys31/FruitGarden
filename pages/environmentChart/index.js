@@ -7,7 +7,9 @@ Page({
     IMG_URL_HEAD: app.globalData.IMG_URL_HEAD,
     loading: true,
     tabbar: {},
-    opts:{},
+    opts:{
+      lazyLoad:true
+    },
     isIphoneX: app.globalData.isIphoneX,
     dateType: "",
     sorts: [{
@@ -47,6 +49,12 @@ Page({
       'type': 'sf',
       'iconClass': 'icon-chart6',
     }],
+    actions : {
+      '1': ['temp', '℃', { count: 0 }],
+      '2': ['humid', '%', { count: 0 }],
+      '3': ['sunlux', 'Lux', { count: 0 }],
+      '4': ['rain', 'mm', { count: 0 }],
+    },
     chartData: {},
     nodata: false,
     currType: 2,
@@ -80,18 +88,16 @@ Page({
         nodata: true
       })
     }else{
-      const actions = {
-        '1': ['temp', '℃'],
-        '2': ['humid', '%'],
-        '3': ['sunlux', 'Lux'],
-        '4': ['rain', 'mm'],
-      }
-      let action = actions[currIdx],
+      let action = _this.data.actions[currIdx],
         name = action[0],
-        unit = action[1];
-      this.getChartData(name, unit);
+        unit = action[1],
+        count = action[2].count;
+      if (count==0){
+        _this.data.actions[currIdx][2].count=1;
+        this.getChartData(name, unit);
+      }
+      
     }
-    
   },
 
   chartDataRequest(type,unit){//环境数据信息请求
@@ -104,24 +110,31 @@ Page({
         let chartList = [];
         let latestInfo = {};
         let dateType = "";
-        if (Object.keys(res.data).length > 0 && res.data.envDatas && res.data.envDatas.length > 0) {
-          chartList = res.data.envDatas
-          dateType = res.data.envDatas[0].dataType;
-          const type = res.data.envDatas[0].type
-          latestInfo.info = "当前" + type + " " + (res.data.latestEnvDatas.data || 0) + '' + unit
-          latestInfo.date = res.data.latestEnvDatas.updateTime;
-        }
-        if (type == 'humid' && res.data.humidEnvDatas && res.data.humidEnvDatas.length > 0) {
-          chartList = res.data.humidEnvDatas
-          dateType = res.data.humidEnvDatas[0].dataType;
-          latestInfo.info = "当前空气湿度：" + (res.data.humidLatestEnvDatas.data || 0) + "% " + "当前土壤湿度：" + (res.data.soilHumidLatestEnvDatas.data || 0) + unit;
-          latestInfo.date = res.data.humidLatestEnvDatas.updateTime || '0000-00-00'
-        }
-        if (type == 'temp' && res.data.tempEnvDatas && res.data.tempEnvDatas.length > 0) {
-          chartList = res.data.tempEnvDatas
-          dateType = res.data.tempEnvDatas[0].dataType;
-          latestInfo.info = "当前空气温度：" + (res.data.tempLatestEnvDatas.data || 0) + "% " + "当前土壤温度：" + (res.data.soilTempLatestEnvDatas.data || 0) + unit;
-          latestInfo.date = res.data.tempLatestEnvDatas.updateTime
+        switch (type){
+          case 'humid':
+            if (res.data.humidEnvDatas && res.data.humidEnvDatas.length > 0) {
+              chartList = res.data.humidEnvDatas
+              dateType = res.data.humidEnvDatas[0].dataType;
+              latestInfo.info = "当前空气湿度：" + (res.data.humidLatestEnvDatas.data || 0) + "% " + "当前土壤湿度：" + (res.data.soilHumidLatestEnvDatas.data || 0) + unit;
+              latestInfo.date = res.data.humidLatestEnvDatas.updateTime || '0000-00-00'
+            }
+          break;
+          case 'temp':
+            if (res.data.tempEnvDatas && res.data.tempEnvDatas.length > 0) {
+              chartList = res.data.tempEnvDatas
+              dateType = res.data.tempEnvDatas[0].dataType;
+              latestInfo.info = "当前空气温度：" + (res.data.tempLatestEnvDatas.data || 0) + "% " + "当前土壤温度：" + (res.data.soilTempLatestEnvDatas.data || 0) + unit;
+              latestInfo.date = res.data.tempLatestEnvDatas.updateTime
+            }
+            break;
+            default:
+            if (Object.keys(res.data).length > 0 && res.data.envDatas && res.data.envDatas.length > 0) {
+              chartList = res.data.envDatas
+              dateType = res.data.envDatas[0].dataType;
+              const type = res.data.envDatas[0].type
+              latestInfo.info = "当前" + type + " " + (res.data.latestEnvDatas.data || 0) + '' + unit
+              latestInfo.date = res.data.latestEnvDatas.updateTime;
+            }
         }
         if (chartList.length > 0) {
           _this.setData({
@@ -143,9 +156,9 @@ Page({
   },
   getChartData(type, unit) {
     const _this = this;
+    const id = '#' + type;
+    _this.chartComponent = _this.selectComponent(id);
     this.chartDataRequest(type,unit).then(res=>{
-      const id = '#' + type;
-      _this.chartComponent = _this.selectComponent(id);
       _this.chartComponent.init((canvas, width, height) => {
         chartInit(canvas, width, height, res, {
           'color': '#1adee2',

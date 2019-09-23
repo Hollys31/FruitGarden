@@ -5,12 +5,11 @@ App({
     const path = options.path;
     wx.hideTabBar();
     this.getSystemInfo();
-    /*  wx.removeStorage({key: 'qrcodepriNum'}) */
-    if (options.scene != 1011 && options.scene != 1012 && path != 'pages/scanQRCode/scanQRCode') {
-      /* wx.reLaunch({
-        url: '/pages/scanQRCode/scanQRCode',
-      }) */
-    }
+    // if (options.scene != 1011 && options.scene != 1012 && path != 'pages/scanQRCode/scanQRCode') {
+    //    wx.reLaunch({
+    //     url: '/pages/scanQRCode/scanQRCode',
+    //   }) 
+    // }
   },
   globalData: {
     IMG_URL_HEAD: 'https://trace.yufengtek.com/orchard/applet',
